@@ -5,11 +5,11 @@
 
 <h2>Quản lý cửa hàng</h2>
 
-<button id="btnManagerProduct" class="form-control">Quản lý sản phẩm</button>
-<button id="btnOther" class="form-control">Hành động khác</button>
+<button id="btnManagerProduct" class="btn btn-primary mb-2 ml-2">Quản lý sản phẩm</button>
+<button id="btnOther" class="btn btn-primary mb-2 ml-2">Hành động khác</button>
 
 <h2>Danh sách sản phẩm</h2>
-<button id="btnAdd" class="form-control">Thêm sản phẩm mới</button>
+<button id="btnAdd" class="btn btn-primary mb-2 ml-2">Thêm sản phẩm mới</button>
 <form method="get" action="@Url.Action("ProductManage", "ShopManager")">
     <label>Chọn loại sản phẩm: </label>
     <select name="productType" onchange="this.form.submit()" class="form-control">

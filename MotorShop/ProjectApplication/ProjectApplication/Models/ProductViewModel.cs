@@ -10,8 +10,9 @@ namespace ProjectApplication.Models
         // Thuộc tính chung Product
         public int Id { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
+        public long Price { get; set; }
 
+        public int BrandId { get; set; }
         // Phân biệt loại
         public int number { get; set; }
         public string ProductType { get; set; }
@@ -28,6 +29,7 @@ namespace ProjectApplication.Models
         public String spareDescription { get; set; }
 
         public String TypeProduct {  get; set; }
+        public String BrandName { get; set; }
 
         public virtual ICollection<Vehicle> SuitableVehicles { get; set; }
     }

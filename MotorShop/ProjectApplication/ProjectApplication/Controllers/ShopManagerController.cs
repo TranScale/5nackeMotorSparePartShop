@@ -105,6 +105,7 @@ namespace ProjectApplication.Controllers
                     fuelCapacity = vehicle.fuelCapacity,
                     weight = vehicle.weight,
                     Color = vehicle.Color,
+                    BrandId = vehicle.BrandId,
                     description = vehicle.description,
                     ProductType = "Vehicle"
                 };
@@ -117,6 +118,7 @@ namespace ProjectApplication.Controllers
                     Name = part.spareName,
                     Price = part.price,
                     number = part.number,
+                    BrandId = part.BrandId,
                     description = part.spareDescription,
                     CompatibleModel = part.SuitableVehicles,
                     ProductType = "SparePart"
@@ -126,6 +128,11 @@ namespace ProjectApplication.Controllers
             {
                 return HttpNotFound(); // không tìm thấy sản phẩm
             }
+
+            if (vm.BrandId == 1)
+                vm.BrandName = "Yamaha";
+            else if (vm.BrandId == 2)
+                vm.BrandName = "Honda";
 
             return View(vm); // ✅ Truyền đúng ProductViewModel
         }
@@ -184,16 +191,40 @@ namespace ProjectApplication.Controllers
         // GET: ShopManager/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            var product = db.Products.Find(id);
+            if (product == null) HttpNotFound();
+
+            var viewModel = new ProductViewModel
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
+                Id = product.ProductId,
+                Price = product.price,
+                BrandId = product.BrandId,
+                number = product.number,
+            };
+
+            var vehicle = product as Vehicle;
+            if(vehicle != null)
             {
-                return HttpNotFound();
+                viewModel.ProductType = "Vehicle";
+                viewModel.Name = vehicle.vehicleName;
+                viewModel.Engine = vehicle.Displacement;
+                viewModel.fuelCapacity = vehicle.fuelCapacity;
+                viewModel.weight = vehicle.weight;
+                viewModel.BrandId = vehicle.BrandId;
+                viewModel.Color = vehicle.Color;
+                viewModel.description = vehicle.description;
             }
-            return View(product);
+            var spare = product as SparePart;
+            if (spare != null)
+            {
+                viewModel.ProductType = "SparePart";
+                viewModel.Name = spare.TypeProduct;
+                viewModel.BrandId = spare.BrandId;
+                viewModel.spareDescription = spare.spareDescription;
+                viewModel.CompatibleModel = spare.SuitableVehicles; // nếu có
+            }
+
+            return View(viewModel);
         }
 
         // POST: ShopManager/Edit/5
@@ -201,16 +232,43 @@ namespace ProjectApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,TypeProduct,BrandId,price,number")] Product product)
+        public ActionResult Edit(ProductViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(model); // trả lại form nếu lỗi
             }
-            return View(product);
+
+            var product = db.Products.Find(model.Id);
+            if (product == null) return HttpNotFound();
+
+            // cập nhật field chung
+            product.BrandId = model.BrandId;
+            product.price = model.Price;
+            product.number = model.number;
+
+            if (product is Vehicle vehicle && model.ProductType == "Vehicle")
+            {
+                vehicle.vehicleName = model.Name;
+                vehicle.Displacement = model.Engine;
+                vehicle.fuelCapacity = model.fuelCapacity;
+                vehicle.weight = model.weight;
+                vehicle.Color = model.Color;
+                vehicle.description = model.description;
+            }
+            else if (product is SparePart spare && model.ProductType == "SparePart")
+            {
+                spare.TypeProduct = model.Name;
+                spare.spareDescription = model.spareDescription;
+                spare.SuitableVehicles = model.CompatibleModel;
+            }
+
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("productmanage"); // hoặc Index tuỳ bạn
         }
+
 
         // GET: ShopManager/Delete/5
         public ActionResult Delete(int id)
@@ -239,6 +297,7 @@ namespace ProjectApplication.Controllers
                 viewModel.Engine = vehicle.Displacement;
                 viewModel.fuelCapacity = vehicle.fuelCapacity;
                 viewModel.weight = vehicle.weight;
+                viewModel.BrandId = vehicle.BrandId;
                 viewModel.Color = vehicle.Color;
                 viewModel.description = vehicle.description;
             }
@@ -249,6 +308,7 @@ namespace ProjectApplication.Controllers
             {
                 viewModel.ProductType = "SparePart";
                 viewModel.Name = spare.TypeProduct;
+                viewModel.BrandId = spare.BrandId;
                 viewModel.spareDescription = spare.spareDescription;
                 viewModel.CompatibleModel = spare.SuitableVehicles; // nếu có
             }
@@ -318,7 +378,6 @@ namespace ProjectApplication.Controllers
                         Id = part.ProductId,
                         Name = part.spareName,
                         Price = part.price,
-                        number = part.number,
                         CompatibleModel = part.SuitableVehicles,
                         ProductType = "SparePart"
                     };
