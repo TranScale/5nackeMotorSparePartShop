@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Thay bằng layout của bạn
+}
+
+<h2>Quản lý cửa hàng</h2>
+
+<button id="btnManagerProduct">Quản lý sản phẩm</button>
+<button id="btnOther">Hành động khác</button>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Điều hướng đến productmanage khi nhấn nút
+            $("#btnManagerProduct").click(function () {
+                window.location.href = '@Url.Action("productmanage", "ShopManager")';
+            });
+
+            // Điều hướng khi chọn loại sản phẩm
+            $("#ddlProductType").change(function () {
+                var type = $(this).val();
+                window.location.href = '@Url.Action("productmanage", "ShopManager")' + '?productType=' + type;
+            });
+        });
+    </script>
+}

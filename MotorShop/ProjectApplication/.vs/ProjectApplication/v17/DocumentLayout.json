@@ -1,0 +1,357 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\views\\shopmanager\\productmanage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\shopmanager\\productmanage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|d:\\webapplicationproject\\motorshop\\projectapplication\\projectapplication\\views\\shopmanager\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\shopmanager\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\controllers\\shopmanagercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\controllers\\shopmanagercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\views\\shopmanager\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\shopmanager\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|d:\\webapplicationproject\\motorshop\\projectapplication\\projectapplication\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\models\\sparepart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\sparepart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\models\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\views\\shopmanager\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\shopmanager\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|d:\\webapplicationproject\\motorshop\\projectapplication\\projectapplication\\views\\shopmanager\\sparepartform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\shopmanager\\sparepartform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|d:\\webapplicationproject\\motorshop\\projectapplication\\projectapplication\\views\\shopmanager\\vehicleform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\shopmanager\\vehicleform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\data\\shopinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\data\\shopinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\models\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|d:\\webapplicationproject\\motorshop\\projectapplication\\projectapplication\\views\\shopmanager\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\shopmanager\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\data\\dbmotorshop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\data\\dbmotorshop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\views\\shopmanager\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\shopmanager\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\projectapplication\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "productmanage.cshtml",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\productmanage.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\ShopManager\\productmanage.cshtml",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\productmanage.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\ShopManager\\productmanage.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-04T13:19:35.658Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ShopInitializer.cs",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Data\\ShopInitializer.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Data\\ShopInitializer.cs",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Data\\ShopInitializer.cs",
+              "RelativeToolTip": "ProjectApplication\\Data\\ShopInitializer.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAArwEMAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-04T04:16:06.106Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-06T06:44:27.749Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ShopManagerController.cs",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Controllers\\ShopManagerController.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Controllers\\ShopManagerController.cs",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Controllers\\ShopManagerController.cs",
+              "RelativeToolTip": "ProjectApplication\\Controllers\\ShopManagerController.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAkwK8AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-04T04:53:33.902Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ProductViewModel.cs",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Models\\ProductViewModel.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Models\\ProductViewModel.cs",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Models\\ProductViewModel.cs",
+              "RelativeToolTip": "ProjectApplication\\Models\\ProductViewModel.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAA5wBMAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-04T13:48:45.641Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\Create.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\ShopManager\\Create.cshtml",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\Create.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\ShopManager\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-06T03:24:10.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Vehicle.cs",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Models\\Vehicle.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Models\\Vehicle.cs",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Models\\Vehicle.cs",
+              "RelativeToolTip": "ProjectApplication\\Models\\Vehicle.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAwBIAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-04T05:34:30.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\Details.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\ShopManager\\Details.cshtml",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\Details.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\ShopManager\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAUwBoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-04T05:18:24.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Models\\Product.cs",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Models\\Product.cs",
+              "RelativeToolTip": "ProjectApplication\\Models\\Product.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-04T05:11:01.955Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\Delete.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\ShopManager\\Delete.cshtml",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\Delete.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\ShopManager\\Delete.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAC8AAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-05T01:14:39.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "SparePartForm.cshtml",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\SparePartForm.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\ShopManager\\SparePartForm.cshtml",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\SparePartForm.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\ShopManager\\SparePartForm.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-06T03:31:43.884Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SparePart.cs",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Models\\SparePart.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Models\\SparePart.cs",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Models\\SparePart.cs",
+              "RelativeToolTip": "ProjectApplication\\Models\\SparePart.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-04T03:50:53.261Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "VehicleForm.cshtml",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\VehicleForm.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\ShopManager\\VehicleForm.cshtml",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\VehicleForm.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\ShopManager\\VehicleForm.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAGYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-06T03:30:55.061Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\Index.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\ShopManager\\Index.cshtml",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\Index.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\ShopManager\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-04T04:53:40.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-04T13:27:08.835Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DBMotorShop.cs",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Data\\DBMotorShop.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Data\\DBMotorShop.cs",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Data\\DBMotorShop.cs",
+              "RelativeToolTip": "ProjectApplication\\Data\\DBMotorShop.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAADwvx0AAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-04T04:07:34.266Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\Edit.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\ShopManager\\Edit.cshtml",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Views\\ShopManager\\Edit.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\ShopManager\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-04T14:38:08.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Admin.cs",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Models\\Admin.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Models\\Admin.cs",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Models\\Admin.cs",
+              "RelativeToolTip": "ProjectApplication\\Models\\Admin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-04T03:56:37.747Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Web.config",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Web.config",
+              "RelativeDocumentMoniker": "ProjectApplication\\Web.config",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Web.config",
+              "RelativeToolTip": "ProjectApplication\\Web.config",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAEUAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-10-04T04:13:12.903Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\WebApplicationProject\\MotorShop\\ProjectApplication\\ProjectApplication\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "ProjectApplication\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-04T03:56:20.246Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

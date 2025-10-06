@@ -1,0 +1,59 @@
+﻿@model ProjectApplication.Models.ProductViewModel
+
+@{
+    ViewBag.Title = "Xóa sản phẩm";
+}
+
+<h2>Xóa sản phẩm</h2>
+
+<h3>Bạn có chắc chắn muốn xóa sản phẩm này không?</h3>
+
+<div>
+    <h4>Thông tin sản phẩm</h4>
+    <hr />
+
+    <p><b>Mã:</b> @Model.Id</p>
+    <p><b>Tên:</b> @Model.Name</p>
+    <p><b>Giá:</b> @Model.Price</p>
+    <p><b>Loại:</b> @Model.ProductType</p>
+    <p><b>Số lượng:</b> @Model.number</p>
+
+    @if (Model.ProductType == "Vehicle")
+    {
+        <p><b>Động cơ:</b> @Model.Engine</p>
+        <p><b>Dung tích nhiên liệu:</b> @Model.fuelCapacity</p>
+        <p><b>Trọng lượng:</b> @Model.weight</p>
+        <p><b>Màu:</b> @Model.Color</p>
+        <p><b>Mô tả:</b> @Model.description</p>
+    }
+    else if (Model.ProductType == "SparePart")
+    {
+        <p><b>Mô tả:</b> @Model.spareDescription</p>
+        <p>
+            <b>Phù hợp với:</b>
+            @if (Model.CompatibleModel != null && Model.CompatibleModel.Any())
+            {
+                foreach (var vehicle in Model.CompatibleModel)
+                {
+                    @vehicle.vehicleName <br />
+                }
+            }
+            else
+            {
+                @:Không có dữ liệu
+            }
+        </p>
+    }
+
+    @using (Html.BeginForm("Delete", "ShopManager", new { id = Model.Id }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+
+        <div class="form-actions no-color" style="margin-top:20px;">
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            |
+            @Html.ActionLink("Quay lại danh sách", "productmanage")
+        </div>
+    }
+</div>
