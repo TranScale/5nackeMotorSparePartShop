@@ -257,6 +257,31 @@ public class HomeController : Controller
     {
         return View();
     }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult UpdateCartItem(int productId, int newQuantity)
+    {
+        if (newQuantity <= 0)
+        {
+            return RedirectToAction("RemoveFromCart", new { productId = productId });
+        }
+
+        var cart = GetCart();
+        var cartItem = cart.FirstOrDefault(i => i.ProductId == productId);
+
+        if (cartItem != null)
+        {
+            cartItem.Quantity = newQuantity;
+
+            TempData["SuccessMessage"] = $"Đã cập nhật số lượng sản phẩm '{cartItem.ProductName}' thành {newQuantity}.";
+        }
+        else
+        {
+            TempData["ErrorMessage"] = "Sản phẩm không còn trong giỏ hàng.";
+        }
+
+        return RedirectToAction("Cart");
+    }
 
     //---------------------------------------------------------
     // Phương thức dọn dẹp
