@@ -127,6 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DiscountManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ShopManagerController.cs" />
     <Compile Include="Data\DBMotorShop.cs" />
@@ -135,8 +136,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Basediscount.cs" />
+    <Compile Include="Models\Coupon.cs" />
+    <Compile Include="Models\DiscountType.cs" />
+    <Compile Include="Models\DiscountValueType.cs" />
+    <Compile Include="Models\DiscountViewModel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\Promotion.cs" />
     <Compile Include="Models\SparePart.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\vehicleColor.cs" />
@@ -201,6 +208,11 @@
     <Content Include="Views\ShopManager\productmanage.cshtml" />
     <Content Include="Views\ShopManager\VehicleForm.cshtml" />
     <Content Include="Views\ShopManager\SparePartForm.cshtml" />
+    <Content Include="Views\DiscountManager\Create.cshtml" />
+    <Content Include="Views\DiscountManager\Delete.cshtml" />
+    <Content Include="Views\DiscountManager\Details.cshtml" />
+    <Content Include="Views\DiscountManager\Edit.cshtml" />
+    <Content Include="Views\DiscountManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

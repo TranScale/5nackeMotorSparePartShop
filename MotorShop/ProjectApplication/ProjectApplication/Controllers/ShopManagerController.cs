@@ -91,6 +91,7 @@ namespace ProjectApplication.Controllers
         {
             var product = db.Products.Find(id);
 
+
             ProductViewModel vm;
 
             if (product is Vehicle vehicle)

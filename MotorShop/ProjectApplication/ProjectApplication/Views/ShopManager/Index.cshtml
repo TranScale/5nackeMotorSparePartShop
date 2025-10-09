@@ -5,7 +5,7 @@
 <h2>Quản lý cửa hàng</h2>
 
 <button id="btnManagerProduct" class="btn btn-primary mb-2 ml-2">Quản lý sản phẩm</button>
-<button id="btnOther" class="btn btn-primary mb-2 ml-2">Hành động khác</button>
+<button id="btnCoupon" class="btn btn-primary mb-2 ml-2">Chương trình khuyến mãi/Mã giảm giá</button>
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -21,6 +21,7 @@
                 var type = $(this).val();
                 window.location.href = '@Url.Action("productmanage", "ShopManager")' + '?productType=' + type;
             });
+            $("#btnCoupon").click(function () { window.location.href = '@Url.Action("Index","DiscountManager")'; });
         });
     </script>
 }

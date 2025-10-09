@@ -9,7 +9,7 @@ namespace ProjectApplication.Data
     {
         protected override void Seed(ShopDbContext context)
         {
-            // ===== 1️⃣ Admin =====
+            // ===== 1️ Admin =====
             var admins = new List<Admin>
             {
                 new Admin
@@ -24,7 +24,7 @@ namespace ProjectApplication.Data
             admins.ForEach(a => context.Admins.Add(a));
             context.SaveChanges();
 
-            // ===== 2️⃣ Vehicles =====
+            // ===== 2️ Vehicles =====
             var vehicles = new List<Vehicle>
             {
                 new Vehicle
@@ -59,7 +59,7 @@ namespace ProjectApplication.Data
             vehicles.ForEach(v => context.Vehicles.Add(v));
             context.SaveChanges();
 
-            // ===== 3️⃣ SpareParts =====
+            // ===== 3️ SpareParts =====
             var spareParts = new List<SparePart>
             {
                 new SparePart
@@ -84,7 +84,7 @@ namespace ProjectApplication.Data
             spareParts.ForEach(s => context.SpareParts.Add(s));
             context.SaveChanges();
 
-            // ===== 4️⃣ Gán SparePart cho Vehicle =====
+            // ===== 4️ Gán SparePart cho Vehicle =====
             vehicles[0].CompatibleSpareParts = new List<SparePart> { spareParts[0] };
             vehicles[1].CompatibleSpareParts = new List<SparePart> { spareParts[1] };
 

@@ -26,5 +26,7 @@ namespace ProjectApplication.Models
         [Display(Name = "Miêu tả")]
         public String description { get; set; }
         public virtual ICollection<SparePart> CompatibleSpareParts { get; set; }
+
+        //public virtual Product product { get; set; }
     }
 }

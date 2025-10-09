@@ -16,6 +16,9 @@ namespace ProjectApplication.Models
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<SparePart> SpareParts { get; set; }
         public DbSet<Admin> Admins { get; set; }
+        public DbSet<Basediscount> Basediscounts { get; set; }
+        public DbSet<Coupon> Coupons {  get; set; }
+        public DbSet<Promotion> Promotions { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -41,6 +44,6 @@ namespace ProjectApplication.Models
                 });
         }
 
-
+        public System.Data.Entity.DbSet<ProjectApplication.Models.DiscountViewModel> DiscountViewModels { get; set; }
     }
 }

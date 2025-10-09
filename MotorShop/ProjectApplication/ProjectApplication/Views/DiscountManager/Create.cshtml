@@ -1,0 +1,140 @@
+﻿@model ProjectApplication.Models.DiscountViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>DiscountViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <!-- Tên chương trình giảm giá -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Ngày bắt đầu -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.dateStart, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.dateStart, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.dateStart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Ngày kết thúc -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.dateEnd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.dateEnd, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.dateEnd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Chọn loại giảm giá -->
+        <div class="form-group">
+            <label class="control-label col-md-2">Chọn loại giảm giá:</label>
+            <div class="col-md-10">
+                <select id="discountType" name="discountType" class="form-control">
+                    <option value="Promotion">Chương trình khuyến mãi</option>
+                    <option value="Coupon">Mã giảm giá</option>
+                </select>
+            </div>
+        </div>
+        <!-- Kiểu giá trị giảm -->
+        <div class="form-group">
+            <label class="control-label col-md-2">Kiểu giảm:</label>
+            <div class="col-md-10">
+                <select id="discountValueType" name="discountValueType" class="form-control">
+                    <option value="Directly">Giảm theo số tiền</option>
+                    <option value="Percent">Giảm theo phần trăm</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Giá trị giảm -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.discountValue, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 d-flex align-items-center">
+                @Html.TextBoxFor(model => model.discountValue, new { @class = "form-control", id = "discountValueInput", style = "display:inline-block; width:90%;" })
+                <span id="discountUnit" style="margin-left:10px; font-weight:bold;">₫</span>
+                @Html.ValidationMessageFor(model => model.discountValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Field Coupon Code -->
+        <div id="couponField" class="form-group">
+            @Html.LabelFor(model => model.couponCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.couponCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.couponCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Field Promotion Description -->
+        <div id="promotionField" class="form-group">
+            @Html.LabelFor(model => model.promotionDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.promotionDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.promotionDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Nút Create -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function toggleDiscountFields() {
+            var type = $("#discountType").val();
+            if (type === "Coupon") {
+                $("#couponField").show();
+                $("#promotionField").hide();
+            } else {
+                $("#couponField").hide();
+                $("#promotionField").show();
+            }
+        }
+
+        function updateDiscountUnit() {
+            var valueType = $("#discountValueType").val();
+            if (valueType === "Percent") {
+                $("#discountUnit").text("%");
+                $("#discountValueInput").attr("placeholder", "Nhập phần trăm giảm (VD: 10)");
+            } else {
+                $("#discountUnit").text("₫");
+                $("#discountValueInput").attr("placeholder", "Nhập số tiền giảm (VD: 100000)");
+            }
+        }
+
+        $(document).ready(function () {
+            toggleDiscountFields();
+            updateDiscountUnit();
+
+            $("#discountType").change(toggleDiscountFields);
+            $("#discountValueType").change(updateDiscountUnit);
+        });
+    </script>
+}

@@ -9,20 +9,20 @@
 
 
     <div class="form-group">
-        @Html.LabelFor(model => model.BrandId, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="form-horizontal">
             <h4>Vehicle</h4>
             <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <select id="BrandId" class="form-control">
-                    <option value="">--Chọn loại --</option>
-                    <option value="2">Honda</option>
-                    <option value="1">Yamaha</option>
-                </select>
+            @Html.LabelFor(model => model.BrandId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <select id="BrandId" class="form-control">
+                        <option value="">--Chọn loại --</option>
+                        <option value="2">Honda</option>
+                        <option value="1">Yamaha</option>
+                    </select>
+                </div>
             </div>
         </div>
-    </div>
     <div class="form-group">
         @Html.LabelFor(model => model.vehicleName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">

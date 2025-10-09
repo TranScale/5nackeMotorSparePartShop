@@ -1,0 +1,104 @@
+﻿@model IEnumerable<ProjectApplication.Models.DiscountViewModel>
+
+@{
+    ViewBag.Title = "Discount List";
+}
+
+<h2>Quản lý cửa hàng</h2>
+
+<button id="btnManagerProduct" class="btn btn-primary mb-2 ml-2">Quản lý sản phẩm</button>
+<button id="btnCoupon" class="btn btn-primary mb-2 ml-2">Chương trình khuyến mãi/Mã giảm giá</button>
+
+<h2>Danh sách giảm giá</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create", "DiscountManager", null, new { @class = "btn btn-primary" })
+</p>
+
+<!-- 🔽 Combo box lọc theo loại giảm giá -->
+<form method="get" action="@Url.Action("Index", "DiscountManager")" class="mb-3">
+    <label for="discountTypeFilter" class="form-label fw-bold">Lọc theo loại khuyến mãi:</label>
+    <select id="discountTypeFilter" name="discountType" onchange="this.form.submit()" class="form-select" style="width:250px; display:inline-block;">
+        <option value="All" @(Request["discountType"] == "All" || string.IsNullOrEmpty(Request["discountType"]) ? "selected" : "")>Tất cả</option>
+        <option value="Coupon" @(Request["discountType"] == "Coupon" ? "selected" : "")>Mã giảm giá</option>
+        <option value="Promotion" @(Request["discountType"] == "Promotion" ? "selected" : "")>Khuyến mãi</option>
+    </select>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.dateStart)</th>
+            <th>@Html.DisplayNameFor(model => model.dateEnd)</th>
+            <th>@Html.DisplayNameFor(model => model.discountType)</th>
+            <th>@Html.DisplayNameFor(model => model.isActive)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <!-- Tên giảm giá là link đến trang Details -->
+                <td>
+                    @Html.ActionLink(item.Name, "Details", "DiscountManager", new { id = item.Id }, new { @class = "text-decoration-none fw-bold" })
+                </td>
+
+                <td>@item.dateStart.ToString("dd/MM/yyyy")</td>
+                <td>@item.dateEnd.ToString("dd/MM/yyyy")</td>
+
+                <!-- Giá trị giảm hiển thị rõ loại -->
+                @*<td>
+                    @if (item.discountValueType == ProjectApplication.Models.DiscountValueType.Percent)
+                    {
+                        @($"{item.discountValue}%")
+                    }
+                    else
+                    {
+                        @($"{item.discountValue:N0} ₫")
+                    }
+                </td>*@
+
+                <td>
+                    @if (item.discountType == ProjectApplication.Models.DiscountType.Coupon)
+                    {
+                        <span class="badge bg-info text-dark">Mã giảm giá</span>
+                    }
+                    else if (item.discountType == ProjectApplication.Models.DiscountType.Promotion)
+                    {
+                        <span class="badge bg-success">Khuyến mãi</span>
+                    }
+                </td>
+                <!-- Trạng thái -->
+                <td>
+                    @if (item.isActive)
+                    {
+                        <span class="badge bg-success">Đang hoạt động</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Ngừng hoạt động</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Điều hướng đến productmanage khi nhấn nút
+            $("#btnManagerProduct").click(function () {
+                window.location.href = '@Url.Action("productmanage", "ShopManager")';
+            });
+
+            //Khi chọn btnAdd (thêm sản phẩm)
+            $("#btnAdd").click(function () {
+                window.location.href = '@Url.Action("Create", "DiscountManager")';
+            });
+            $("#btnCoupon").click(function () { window.location.href = '@Url.Action("Index","DiscountManager")'; });
+        });
+    </script>
+}
