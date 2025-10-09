@@ -1,0 +1,35 @@
+{
+  "79": {
+    "name": "Thành phố Hồ Chí Minh",
+    "districts": {
+      "769": {
+        "name": "Quận 1",
+        "wards": {
+          "26731": "Phường Bến Nghé",
+          "26734": "Phường Bến Thành",
+          "26737": "Phường Cầu Kho"
+        }
+      },
+      "770": {
+        "name": "Quận Bình Thạnh",
+        "wards": {
+          "26845": "Phường 1",
+          "26848": "Phường 2",
+          "26851": "Phường 3"
+        }
+      }
+    }
+  },
+  "01": {
+    "name": "Thành phố Hà Nội",
+    "districts": {
+      "001": {
+        "name": "Quận Ba Đình",
+        "wards": {
+          "00001": "Phường Phúc Xá",
+          "00004": "Phường Trúc Bạch"
+        }
+      }
+    }
+  }
+}

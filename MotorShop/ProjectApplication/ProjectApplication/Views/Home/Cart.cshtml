@@ -37,7 +37,7 @@
                         </td>
                         <td class="text-right">@string.Format("{0:N0}", item.Price)</td>
 
-                        
+
                         <td class="text-center">
                             @using (Html.BeginForm("UpdateCartItem", "Home", FormMethod.Post, new { @class = "d-inline-flex" }))
                             {
@@ -105,10 +105,10 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Tỉnh/Thành <span class="text-danger">*</span></label>
+                <label class="col-sm-3 col-form-label">Tỉnh/Thành Phố<span class="text-danger">*</span></label>
                 <div class="col-sm-9">
                     <select name="province" class="form-control" required>
-                        <option value="">Vui lòng chọn Tỉnh/Thành</option>
+                        <option value="">Vui lòng chọn Tỉnh/Thành Phố</option>
                     </select>
                 </div>
             </div>
@@ -147,7 +147,7 @@
 
             <div class="form-group row mt-4">
                 <div class="col-sm-9 offset-sm-3">
-                    <button type="submit" class="btn btn-success btn-lg">
+                    <button type="submit" class="btn btn-info">
                         GỬI ĐƠN HÀNG
                     </button>
                     @Html.ActionLink("Tiếp tục mua sắm", "Index", "Home", null, new { @class = "btn btn-info" })
@@ -160,7 +160,7 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            // Logic Toast (đã sửa lỗi delay)
+            // --- TOAST --- THÔNG BÁO ---
             var successMessage = '@TempData["SuccessMessage"]';
 
             if (successMessage && successMessage.length > 0) {
@@ -178,6 +178,69 @@
                     delay: 1500
                 }).toast('show');
             }
+
+            // --- AJAX ĐỊA CHỈ (Tỉnh/Huyện/Xã) ---
+
+            var provinceSelect = $('select[name="province"]');
+            var districtSelect = $('select[name="district"]');
+            var wardSelect = $('select[name="ward"]');
+
+            // Hàm tải dữ liệu chung
+            function loadData(url, parentId, targetSelect, defaultOptionText) {
+                targetSelect.empty().append('<option value="">' + defaultOptionText + '</option>').prop('disabled', true);
+
+                var shouldLoad = !parentId || (parentId && url.includes('GetDistricts')) || (parentId && url.includes('GetWards'));
+
+                if (url.includes('GetProvinces') || parentId) {
+
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        data: parentId ? { parentId: parentId } : null,
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data && data.length > 0) {
+                                if (data[0].Id === "Error") {
+                                    targetSelect.append($('<option></option>').attr('value', data[0].Id).text(data[0].Name));
+                                } else {
+                                    $.each(data, function (key, entry) {
+                                        targetSelect.append($('<option></option>').attr('value', entry.Id).text(entry.Name));
+                                    });
+                                }
+                            }
+                            targetSelect.prop('disabled', false);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Không thể tải dữ liệu từ: " + url, error);
+                            targetSelect.prop('disabled', false);
+                        }
+                    });
+                }
+            }
+
+            // A. Tải Tỉnh/Thành khi trang load
+            loadData('@Url.Action("GetProvinces", "Home")', null, provinceSelect, 'Vui lòng chọn Tỉnh/Thành');
+
+            // B. Xử lý khi chọn Tỉnh/Thành
+            provinceSelect.change(function () {
+                var provinceId = $(this).val();
+                wardSelect.empty().append('<option value="">Vui lòng chọn Phường/Xã</option>').prop('disabled', true);
+                if (provinceId) {
+                    loadData('@Url.Action("GetDistricts", "Home")', provinceId, districtSelect, 'Vui lòng chọn Quận/Huyện');
+                } else {
+                    districtSelect.prop('disabled', true);
+                }
+            });
+
+            // C. Xử lý khi chọn Quận/Huyện
+            districtSelect.change(function () {
+                var districtId = $(this).val();
+                if (districtId) {
+                    loadData('@Url.Action("GetWards", "Home")', districtId, wardSelect, 'Vui lòng chọn Phường/Xã');
+                } else {
+                    wardSelect.prop('disabled', true);
+                }
+            });
         });
     </script>
 }

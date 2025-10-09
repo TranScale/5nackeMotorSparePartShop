@@ -31,12 +31,14 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 50px;">
-        <div style="position: fixed; top: 10px; left: 0; right: 0; z-index: 9999; display: flex; justify-content: center;">
 
-            <div id="toast-container">
-            </div>
-        </div>
+    <div id="toast-container" aria-live="polite" aria-atomic="true"
+         style="position: fixed !important;
+            top: 20px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            z-index: 1050 !important;
+            min-width: 300px !important;">
     </div>
 
     @Scripts.Render("~/bundles/jquery")
