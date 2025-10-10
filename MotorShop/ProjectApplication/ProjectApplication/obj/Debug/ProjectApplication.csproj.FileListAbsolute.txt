@@ -81,7 +81,6 @@ D:\WebApplicationProject\MotorShop\ProjectApplication\ProjectApplication\obj\Deb
 D:\WebApplicationProject\MotorShop\ProjectApplication\ProjectApplication\obj\Debug\ProjectA.5848F03B.Up2Date
 D:\WebApplicationProject\MotorShop\ProjectApplication\ProjectApplication\obj\Debug\ProjectApplication.dll
 D:\WebApplicationProject\MotorShop\ProjectApplication\ProjectApplication\obj\Debug\ProjectApplication.pdb
-D:\GitHub\5nackeMotorSparePartShop\MotorShop\ProjectApplication\ProjectApplication\bin\roslyn\System.Text.Encoding.CodePages.dll
 D:\GitHub\5nackeMotorSparePartShop\MotorShop\ProjectApplication\ProjectApplication\bin\ProjectApplication.dll.config
 D:\GitHub\5nackeMotorSparePartShop\MotorShop\ProjectApplication\ProjectApplication\bin\ProjectApplication.dll
 D:\GitHub\5nackeMotorSparePartShop\MotorShop\ProjectApplication\ProjectApplication\bin\ProjectApplication.pdb
@@ -122,6 +121,7 @@ D:\GitHub\5nackeMotorSparePartShop\MotorShop\ProjectApplication\ProjectApplicati
 D:\GitHub\5nackeMotorSparePartShop\MotorShop\ProjectApplication\ProjectApplication\bin\roslyn\System.Security.Cryptography.Encoding.dll
 D:\GitHub\5nackeMotorSparePartShop\MotorShop\ProjectApplication\ProjectApplication\bin\roslyn\System.Security.Cryptography.Primitives.dll
 D:\GitHub\5nackeMotorSparePartShop\MotorShop\ProjectApplication\ProjectApplication\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\GitHub\5nackeMotorSparePartShop\MotorShop\ProjectApplication\ProjectApplication\bin\roslyn\System.Text.Encoding.CodePages.dll
 D:\GitHub\5nackeMotorSparePartShop\MotorShop\ProjectApplication\ProjectApplication\bin\roslyn\System.Threading.Tasks.Extensions.dll
 D:\GitHub\5nackeMotorSparePartShop\MotorShop\ProjectApplication\ProjectApplication\bin\roslyn\System.ValueTuple.dll
 D:\GitHub\5nackeMotorSparePartShop\MotorShop\ProjectApplication\ProjectApplication\bin\roslyn\System.Xml.ReaderWriter.dll
