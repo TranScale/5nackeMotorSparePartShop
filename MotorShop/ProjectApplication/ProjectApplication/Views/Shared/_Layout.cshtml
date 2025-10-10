@@ -32,6 +32,15 @@
         </footer>
     </div>
 
+    <div id="toast-container" aria-live="polite" aria-atomic="true"
+         style="position: fixed !important;
+            top: 20px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            z-index: 1050 !important;
+            min-width: 300px !important;">
+    </div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
