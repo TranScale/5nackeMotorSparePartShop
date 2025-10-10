@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -69,30 +70,7 @@ namespace ProjectApplication.Controllers
             {
                 return HttpNotFound();
             }
-
-            DiscountViewModel discountView = new DiscountViewModel
-            {
-                Id = discount.BasediscountId,
-                Name = discount.BasediscountName,
-                dateStart = discount.dateStart,
-                dateEnd = discount.dateEnd,
-                discountType = discount.discountType,
-                discountValue = discount.discountValue,
-                discountValueType = discount.discountValueType,
-                isActive = discount.dateStart <= DateTime.Now && discount.dateEnd >= DateTime.Now
-            };
-
-            // Nếu là Coupon
-            if (discount is Coupon coupon)
-            {
-                coupon = db.Coupons.FirstOrDefault(c => c.BasediscountId == id);
-                discountView.couponCode = coupon.couponCode;
-            }
-            // Nếu là Promotion
-            else if (discount is Promotion promotion)
-            {
-                discountView.promotionDescription = promotion.promotionDescription;
-            }
+            DiscountViewModel discountView = GetViewModel(discount);
 
             return View(discountView);
         }
@@ -164,16 +142,24 @@ namespace ProjectApplication.Controllers
         // GET: DiscountManager/Edit/5
         public ActionResult Edit(int? id)
         {
+            DiscountViewModel viewModel;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DiscountViewModel discountViewModel = db.DiscountViewModels.Find(id);
-            if (discountViewModel == null)
+            var discount = db.Basediscounts.Find(id);
+            if(discount is Coupon coupon)
             {
-                return HttpNotFound();
+                viewModel = GetViewModel(coupon);
             }
-            return View(discountViewModel);
+            else if(discount is Promotion promotion)
+            {
+                viewModel = GetViewModel(promotion);
+            }
+            else
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            return View(viewModel);
         }
 
         // POST: DiscountManager/Edit/5
@@ -181,16 +167,69 @@ namespace ProjectApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,dateStart,dateEnd,discountType,discountValue,couponCode,promotionDescription")] DiscountViewModel discountViewModel)
+        public ActionResult Edit(DiscountViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(discountViewModel).State = EntityState.Modified;
+                Basediscount discount = db.Basediscounts.Find(viewModel.Id);
+
+                if (discount == null)
+                    return HttpNotFound();
+
+                if (discount is Coupon && viewModel.discountType == DiscountType.Coupon || discount is Promotion && viewModel.discountType == DiscountType.Promotion)
+                {
+                    discount.BasediscountName = viewModel.Name;
+                    discount.dateStart = viewModel.dateStart;
+                    discount.dateEnd = viewModel.dateEnd;
+                    discount.discountValue = viewModel.discountValue;
+
+                    if (discount is Coupon coupon)
+                        coupon.couponCode = viewModel.couponCode;
+                    else if (discount is Promotion promotion)
+                        promotion.promotionDescription = viewModel.promotionDescription;
+                }
+                else
+                {
+                    // Loại đổi → xóa entity cũ
+                    if (discount is Coupon oldCoupon)
+                        db.Coupons.Remove(oldCoupon);
+                    else if (discount is Promotion oldPromotion)
+                        db.Promotions.Remove(oldPromotion);
+
+                    // Tạo entity mới
+                    Basediscount newDiscount;
+                    if (viewModel.discountType == DiscountType.Coupon)
+                    {
+                        newDiscount = new Coupon
+                        {
+                            BasediscountName = viewModel.Name,
+                            dateStart = viewModel.dateStart,
+                            dateEnd = viewModel.dateEnd,
+                            discountValue = viewModel.discountValue,
+                            couponCode = viewModel.couponCode
+                        };
+                    }
+                    else // Promotion
+                    {
+                        newDiscount = new Promotion
+                        {
+                            BasediscountName = viewModel.Name,
+                            dateStart = viewModel.dateStart,
+                            dateEnd = viewModel.dateEnd,
+                            discountValue = viewModel.discountValue,
+                            promotionDescription = viewModel.promotionDescription
+                        };
+                    }
+
+                    db.Basediscounts.Add(newDiscount);
+                }
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(discountViewModel);
+            return View(viewModel);
         }
+
 
         public ActionResult Delete(int id)
         {
@@ -200,26 +239,7 @@ namespace ProjectApplication.Controllers
             {
                 return HttpNotFound();
             }
-            viewModel = new DiscountViewModel
-            {
-                Id = discount.BasediscountId,
-                Name = discount.BasediscountName,
-                dateStart = discount.dateStart,
-                dateEnd = discount.dateEnd,
-                discountType = discount.discountType,
-                discountValue = discount.discountValue,
-                discountValueType = discount.discountValueType,
-                isActive = discount.dateStart <= DateTime.Now && discount.dateEnd >= DateTime.Now
-            };
-
-            if(discount is Coupon coupon)
-            {
-                viewModel.couponCode = coupon.couponCode;
-            }
-            if(discount is Promotion promotion)
-            {
-                viewModel.promotionDescription = promotion.promotionDescription;
-            }
+            viewModel = GetViewModel(discount);
 
 
 
@@ -255,6 +275,32 @@ namespace ProjectApplication.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public DiscountViewModel GetViewModel(Basediscount discount)
+        {
+            DiscountViewModel viewModel = new DiscountViewModel()
+            {
+                Id = discount.BasediscountId,
+                Name = discount.BasediscountName,
+                dateStart = discount.dateStart,
+                dateEnd = discount.dateEnd,
+                discountType = discount.discountType,
+                discountValue = discount.discountValue,
+                discountValueType = discount.discountValueType,
+                isActive = discount.dateStart <= DateTime.Now && discount.dateEnd >= DateTime.Now
+            };
+
+            if (discount is Coupon coupon)
+            {
+                viewModel.couponCode = coupon.couponCode;
+            }
+            if (discount is Promotion promotion)
+            {
+                viewModel.promotionDescription = promotion.promotionDescription;
+            }
+
+            return viewModel;
         }
     }
 }
