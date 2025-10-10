@@ -21,9 +21,7 @@ namespace ProjectApplication.Models
 
         public DateTime dateStart { get; set; }
         [DataType(DataType.Date)]
-        public DateTime dateEnd { get; set; }
-
-      
+        public DateTime dateEnd { get; set; } 
         public bool isActive {  get; set; }
 
         public virtual Coupon coupon { get; set; }

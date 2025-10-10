@@ -1,66 +1,78 @@
-﻿@model ProjectApplication.Models.Product
+﻿@model ProjectApplication.Models.ProductViewDetail
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết sản phẩm";
 }
 
-<h2>Details</h2>
+<h2 class="mb-3">Chi tiết sản phẩm</h2>
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.BrandId)
-        </dt>
+<div class="card shadow-sm p-4">
+    <dl class="row mb-0">
+        <dt class="col-sm-3 fw-bold">Mã sản phẩm</dt>
+        <dd class="col-sm-9">@Model.ProductId</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.BrandId)
+        <dt class="col-sm-3 fw-bold">Tên sản phẩm</dt>
+        <dd class="col-sm-9">@Model.ProductName</dd>
+
+        <dt class="col-sm-3 fw-bold">Hãng</dt>
+        <dd class="col-sm-9">@Model.BrandName</dd>
+
+        <dt class="col-sm-3 fw-bold">Giá</dt>
+        <dd class="col-sm-9">@($"{Model.ProductPrice:N0} ₫")</dd>
+
+        <dt class="col-sm-3 fw-bold">Loại sản phẩm</dt>
+        <dd class="col-sm-9">
+            <span class="badge bg-info text-dark">@Model.ProductType</span>
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
+        <dt class="col-sm-3 fw-bold">Mô tả sản phẩm</dt>
+        <dd class="col-sm-9">@Model.ProductDescription</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
+        <dt class="col-sm-3 fw-bold">Số lượng còn lại</dt>
+        <dd class="col-sm-9">@Model.ProductQuantity</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductType)
-        </dt>
+        @if (Model.ProductType == "Vehicle" || Model.VehicleType != null)
+        {
+            <hr class="my-3" />
+            <h5 class="text-primary fw-bold">Thông tin xe</h5>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductType)
-        </dd>
+            <dt class="col-sm-3 fw-bold">Loại xe</dt>
+            <dd class="col-sm-9">@Model.VehicleType</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+            <dt class="col-sm-3 fw-bold">Động cơ</dt>
+            <dd class="col-sm-9">@($"{Model.Engine} cc")</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+            <dt class="col-sm-3 fw-bold">Dung tích xăng</dt>
+            <dd class="col-sm-9">@($"{Model.FuelCapacity}l")</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductDescription)
-        </dd>
-
+            <dt class="col-sm-3 fw-bold">Màu xe</dt>
+            <dd class="col-sm-9">@Model.Color</dd>
+        }
+        @if(Model.ProductType == "SparePart")
+        { }
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="mt-3">
+    @using (Html.BeginForm("DeleteConfirmed", "ProductManager", FormMethod.Post, new { id = "deleteForm" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("id",Model.ProductId)
+        <button type="button" class="btn btn-danger" onclick="confirmDelete()">
+            🗑️ Xóa
+        </button>
+    }
+
+    @Html.ActionLink("✏️ Chỉnh sửa", "Edit", new { id = Model.ProductId }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("⬅️ Quay lại", "Index", null, new { @class = "btn btn-secondary ms-2" })
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDelete() {
+            if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
+                document.getElementById("deleteForm").submit();
+            }
+        }
+    </script>
+}

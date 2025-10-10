@@ -17,6 +17,7 @@ namespace ProjectApplication.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<SparePart> SpareParts { get; set; }
+        public DbSet<Brand> Brands { get; set; }
 
         public DbSet<Basediscount> Basediscounts { get; set; }
         public DbSet<Coupon> Coupons {  get; set; }

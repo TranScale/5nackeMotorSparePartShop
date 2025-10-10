@@ -67,10 +67,10 @@
 </div>
 
 <div class="mt-3">
-    @using (Html.BeginForm("DeleteConfirmed", "DiscountManager", FormMethod.Post, new { id = Model.Id }))
+    @using (Html.BeginForm("DeleteConfirmed", "DiscountManager", FormMethod.Post, new { id = "deleteForm" }))
     {
         @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.Id)
+        @Html.Hidden("id",Model.Id)
         <button type="button" class="btn btn-danger" onclick="confirmDelete()">
             🗑️ Xóa
         </button>
@@ -85,7 +85,7 @@
     <script>
         function confirmDelete() {
             if (confirm("Bạn có chắc chắn muốn xóa chương trình này không?")) {
-                document.getElementById(@Model.Id).submit();
+                document.getElementById("deleteForm").submit();
             }
         }
     </script>

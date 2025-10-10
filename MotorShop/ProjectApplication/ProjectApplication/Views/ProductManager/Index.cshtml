@@ -1,63 +1,65 @@
-﻿@model IEnumerable<ProjectApplication.Models.Product>
+﻿@model IEnumerable<ProjectApplication.Models.ProductViewIndex>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý sản phẩm";
 }
 
-<h2>Index</h2>
+<h2>Quản lý cửa hàng</h2>
+
+<button id="btnManagerProduct" class="btn btn-primary mb-2 ml-2">Quản lý sản phẩm</button>
+<button id="btnCoupon" class="btn btn-primary mb-2 ml-2">Chương trình khuyến mãi/Mã giảm giá</button>
+
+<h2>Danh sách sản phẩm</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Tạo mới", "Create", "ProductManager", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BrandId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductDescription)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BrandId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductDescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
-        </td>
-    </tr>
-}
+<!-- 🔽 (Tùy chọn) Bộ lọc loại sản phẩm -->
+<form method="get" action="@Url.Action("Index", "ProductManager")" class="mb-3">
+    <label for="productTypeFilter" class="form-label fw-bold">Lọc theo loại sản phẩm:</label>
+    <select id="productTypeFilter" name="productType" onchange="this.form.submit()" class="form-select" style="width:250px; display:inline-block;">
+        <option value="All" @(Request["productType"] == "All" || string.IsNullOrEmpty(Request["productType"]) ? "selected" : "")>Tất cả</option>
+        <option value="Vehicle" @(Request["productType"] == "Vehicle" ? "selected" : "")>Xe</option>
+        <option value="SparePart" @(Request["productType"] == "SparePart" ? "selected" : "")>Phụ tùng</option>
+    </select>
+</form>
 
+<table class="table table-bordered table-striped align-middle">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ProductName)</th>
+            <th>@Html.DisplayNameFor(model => model.ProductPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.ProductQuantity)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <!-- Tên sản phẩm là link đến trang Details -->
+                <td>
+                    @Html.ActionLink(item.ProductName, "Details", "ProductManager", new { id = item.ProductId }, new { @class = "text-decoration-none fw-bold" })
+                </td>
+                <td>@item.ProductPrice.ToString("N0") ₫</td>
+                <td>@item.ProductQuantity</td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Nút điều hướng
+            $("#btnManagerProduct").click(function () {
+                window.location.href = '@Url.Action("Index", "ProductManager")';
+            });
+
+            $("#btnCoupon").click(function () {
+                window.location.href = '@Url.Action("Index", "DiscountManager")';
+            });
+        });
+    </script>
+}

@@ -15,6 +15,7 @@ namespace ProjectApplication.Models
         public int Quantity { get; set; } //Số lượng còn lại trong kho của sản phẩm
         public string ProductDescription { get; set; } //Mô tả của sản phẩm 
 
+        public virtual Brand brand { get; set; }
         //public Vehicle vehicle { get; set; }
         //public SparePart sparepart { get; set; }
     }

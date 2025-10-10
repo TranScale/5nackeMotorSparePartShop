@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProjectApplication.Models;
+using ProjectApplication.Service;
 
 namespace ProjectApplication.Controllers
 {
@@ -15,10 +16,10 @@ namespace ProjectApplication.Controllers
         private ShopDbContext db = new ShopDbContext();
 
         // GET: ProductManager
-        public ActionResult Index()
+        public ActionResult Index(string productType)
         {
-            var product = db.Products.ToList();
-            var viewModel = ProductViewIndex.GetListIndex(product); 
+            var products = ProductManagerService.SearchProductType(productType);
+            var viewModel = ProductViewService.GetListIndex(products);
             return View(viewModel);
         }
 
@@ -30,11 +31,8 @@ namespace ProjectApplication.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
+            var viewModel = ProductViewService.GetDetail(product);
+            return View(viewModel);
         }
 
         // GET: ProductManager/Create
@@ -44,20 +42,28 @@ namespace ProjectApplication.Controllers
         }
 
         // POST: ProductManager/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,BrandId,ProductName,ProductType,Price,Quantity,ProductDescription")] Product product)
+        public ActionResult Create([Bind(Include = "ProductId,BrandId,ProductName,ProductType,ProductPrice,ProductQuantity,ProductDescription,Engine,VehicleType,FuelCapacity,Color")] ProductViewDetail viewModel)
         {
-            if (ModelState.IsValid)
+            if (viewModel.ProductType == "Vehicle")
             {
+                var vehicle = ProductManagerService.GetVehicle(viewModel);
+                db.Vehicles.Add(vehicle);
+            }
+            else if (viewModel.ProductType == "SparePart")
+            {
+                var sparePart = ProductManagerService.GetSparePart(viewModel);
+                db.SpareParts.Add(sparePart);
+            }
+            else
+            {
+                var product = ProductManagerService.GetProduct(viewModel);
                 db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
             }
 
-            return View(product);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: ProductManager/Edit/5
@@ -67,28 +73,30 @@ namespace ProjectApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
+            var product = db.Products.Find(id);
+            var viewModel = ProductViewService.GetDetail(product);
+            return View(viewModel);
         }
 
         // POST: ProductManager/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,BrandId,ProductName,ProductType,Price,Quantity,ProductDescription")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductId,BrandId,ProductName,ProductType,Price,Quantity,ProductDescription")] ProductViewDetail viewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                if (viewModel.ProductType == "Vehicle")
+                {
+                    var vehicle = ProductManagerService.GetVehicle(viewModel);
+                }
+                else if (viewModel.ProductType == "SparePart")
+                {
+                    var sparePart = ProductManagerService.GetSparePart(viewModel);
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(product);
+            return View(viewModel);
         }
 
         // GET: ProductManager/Delete/5
@@ -107,12 +115,21 @@ namespace ProjectApplication.Controllers
         }
 
         // POST: ProductManager/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteConfirmed")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            if(product is Vehicle vehicle)
+            {
+                vehicle = db.Vehicles.Find(id);
+                db.Vehicles.Remove(vehicle);
+            }
+            if (product is SparePart spare)
+            {
+                spare = db.SpareParts.Find(id);
+                db.SpareParts.Remove(spare);
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
