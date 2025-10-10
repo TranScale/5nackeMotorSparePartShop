@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "Giỏ Hàng Của Bạn";
     decimal cartTotal = Model?.Sum(item => item.SubTotal) ?? 0;
+
+    // KIỂM TRA SESSION CỜ
+    bool hasDiscountedItem = (Session["HasDiscountedItem"] as bool?) ?? false;
 }
 <div class="container mt-4">
     <h2><i class="fas fa-shopping-cart"></i> Giỏ Hàng</h2>
@@ -77,6 +80,34 @@
                 </tr>
             </tfoot>
         </table>
+
+        <div class="card p-3 mb-4 border-info">
+            <h5 class="card-title text-info mb-3"><i class="fas fa-tag"></i> Mã giảm giá (Coupon)</h5>
+
+            @if (hasDiscountedItem)
+            {
+                <div class="alert alert-warning">
+                    Sản phẩm trong giỏ đã có giá khuyến mãi, không áp dụng thêm Mã giảm giá.
+                </div>
+            }
+
+            <div class="input-group">
+                <input type="text"
+                       id="couponCode"
+                       class="form-control"
+                       placeholder="Nhập mã giảm giá"
+                       @if (hasDiscountedItem) { <text> disabled</text> } /> <div class="input-group-append">
+                    <button class="btn btn-primary"
+                            type="button"
+                            id="applyCouponBtn"
+                            @if (hasDiscountedItem) { <text> disabled</text> }>
+                        Kiểm tra & Áp dụng
+                    </button>
+                </div>
+            </div>
+            <div id="couponMessage" class="mt-2" style="font-size: 0.9rem;">
+            </div>
+        </div>
 
         using (Html.BeginForm("PlaceOrder", "Home", FormMethod.Post, new { @class = "form-checkout mt-5" }))
         {
@@ -161,7 +192,6 @@
             var successMessage = '@TempData["SuccessMessage"]';
 
             // --- AJAX ĐỊA CHỈ ---
-
             var provinceSelect = $('select[name="province"]');
 
             function loadData(url, targetSelect, defaultOptionText) {
@@ -192,6 +222,70 @@
                 }
             }
             loadData('@Url.Action("GetProvinces", "Home")', provinceSelect, 'Vui lòng chọn Tỉnh/Thành');
+
+             // --- LOGIC MÃ GIẢM GIÁ ---
+            $('#applyCouponBtn').click(function () {
+                var couponCode = $('#couponCode').val();
+                var btn = $(this);
+
+                if (couponCode.length === 0) {
+                    $('#couponMessage').html('<span class="text-danger">Vui lòng nhập mã giảm giá.</span>');
+                    updateDisplay(0); // Đảm bảo xóa giảm giá nếu ô trống
+                    return;
+                }
+
+                btn.prop('disabled', true).text('Đang kiểm tra...');
+
+                $.ajax({
+                    url: '@Url.Action("ApplyCoupon", "Home")',
+                    type: 'POST',
+                    data: { code: couponCode },
+                    dataType: 'json',
+                    headers: {
+                        '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() // Thêm token CSRF
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $('#couponMessage').html('<span class="text-success">' + response.message + '</span>');
+                        } else {
+                            $('#couponMessage').html('<span class="text-danger">' + response.message + '</span>');
+                        }
+                        // Cập nhật giao diện dù thành công hay thất bại
+                        updateDisplay(response.discount);
+                    },
+                    error: function () {
+                        $('#couponMessage').html('<span class="text-danger">Có lỗi xảy ra khi kiểm tra mã.</span>');
+                        updateDisplay(0);
+                    },
+                    complete: function () {
+                        btn.prop('disabled', false).text('Kiểm tra & Áp dụng');
+                    }
+                });
+            });
+
+            // Hàm định dạng số tiền (Ví dụ: 120000 -> 120.000)
+            function formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+
+            // Hàm cập nhật hiển thị Tổng tiền và Giảm giá
+            function updateDisplay(discountValue) {
+                var cartTotal = parseFloat('@cartTotal'); // Lấy tổng tiền ban đầu từ Razor
+
+                // Nếu không có giảm giá (hoặc giảm giá = 0)
+                if (discountValue <= 0) {
+                    $('#discountRow').hide();
+                    $('#finalTotalRow').hide();
+                } else {
+                    var finalTotal = cartTotal - discountValue;
+
+                    $('#discountAmount').text('-' + formatNumber(discountValue) + ' VNĐ');
+                    $('#finalTotalAmount').text(formatNumber(finalTotal) + ' VNĐ');
+
+                    $('#discountRow').show();
+                    $('#finalTotalRow').show();
+                }
+            }
         });
     </script>
 }

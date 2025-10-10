@@ -13,8 +13,9 @@ namespace ProjectApplication.Models
         public decimal Price { get; set; }
 
         // Phân biệt loại
+        public String ProductType { get; set; }  // Vehicle / SparePart
         public int number { get; set; }
-        public string ProductType { get; set; }
+
         public int Engine { get; set; }
 
         public virtual ICollection<Vehicle> CompatibleModel { get; set; }
@@ -27,7 +28,8 @@ namespace ProjectApplication.Models
 
         public String spareDescription { get; set; }
 
-        public String TypeProduct {  get; set; }
+        public String TypeProduct { get; set; }
+        public bool HasDiscount { get; set; }
 
         public virtual ICollection<Vehicle> SuitableVehicles { get; set; }
     }

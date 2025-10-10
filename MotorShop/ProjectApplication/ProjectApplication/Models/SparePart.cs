@@ -14,8 +14,10 @@ namespace ProjectApplication.Models
         public String spareName { get; set; }
         [Display(Name = "Mô tả phụ kiện")]
         public String spareDescription { get; set; }
-
-        public virtual ICollection<Vehicle> SuitableVehicles {  get; set; }
+        public decimal? DiscountedPrice { get; set; }
+        public DateTime? DiscountStartDate { get; set; }
+        public DateTime? DiscountEndDate { get; set; }
+        public virtual ICollection<Vehicle> SuitableVehicles { get; set; }
 
     }
 }
