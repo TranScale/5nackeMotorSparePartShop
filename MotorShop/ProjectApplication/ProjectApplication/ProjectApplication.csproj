@@ -129,7 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DiscountManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ShopManagerController.cs" />
+    <Compile Include="Controllers\ProductManagerController.cs" />
     <Compile Include="Data\DBMotorShop.cs" />
     <Compile Include="Data\ShopInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -137,12 +137,12 @@
     </Compile>
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Basediscount.cs" />
+    <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Coupon.cs" />
     <Compile Include="Models\DiscountType.cs" />
     <Compile Include="Models\DiscountValueType.cs" />
     <Compile Include="Models\DiscountViewModel.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\Promotion.cs" />
     <Compile Include="Models\SparePart.cs" />
     <Compile Include="Models\Vehicle.cs" />
@@ -200,19 +200,16 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\ShopManager\Create.cshtml" />
-    <Content Include="Views\ShopManager\Delete.cshtml" />
-    <Content Include="Views\ShopManager\Details.cshtml" />
-    <Content Include="Views\ShopManager\Edit.cshtml" />
-    <Content Include="Views\ShopManager\Index.cshtml" />
-    <Content Include="Views\ShopManager\productmanage.cshtml" />
-    <Content Include="Views\ShopManager\VehicleForm.cshtml" />
-    <Content Include="Views\ShopManager\SparePartForm.cshtml" />
     <Content Include="Views\DiscountManager\Create.cshtml" />
     <Content Include="Views\DiscountManager\Delete.cshtml" />
     <Content Include="Views\DiscountManager\Details.cshtml" />
     <Content Include="Views\DiscountManager\Edit.cshtml" />
     <Content Include="Views\DiscountManager\Index.cshtml" />
+    <Content Include="Views\ProductManager\Create.cshtml" />
+    <Content Include="Views\ProductManager\Delete.cshtml" />
+    <Content Include="Views\ProductManager\Details.cshtml" />
+    <Content Include="Views\ProductManager\Edit.cshtml" />
+    <Content Include="Views\ProductManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

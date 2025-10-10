@@ -12,10 +12,12 @@ namespace ProjectApplication.Models
         {
         }
 
+        public DbSet<Admin> Admins { get; set; }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<SparePart> SpareParts { get; set; }
-        public DbSet<Admin> Admins { get; set; }
+
         public DbSet<Basediscount> Basediscounts { get; set; }
         public DbSet<Coupon> Coupons {  get; set; }
         public DbSet<Promotion> Promotions { get; set; }
@@ -24,26 +26,7 @@ namespace ProjectApplication.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Product>()
-            //    .Map<Vehicle>(m => m.Requires("TypeProduct").HasValue("1"))
-            //    .Map<SparePart>(m => m.Requires("TypeProduct").HasValue("2"));
-
-            modelBuilder.Entity<Product>().ToTable("Products");
-            modelBuilder.Entity<Vehicle>().ToTable("Vehicles");
-            modelBuilder.Entity<SparePart>().ToTable("SpareParts");
-
-            // many-to-many mapping stays the same (EF will generate VehicleSparePart table)
-            modelBuilder.Entity<Vehicle>()
-                .HasMany(v => v.CompatibleSpareParts)
-                .WithMany(s => s.SuitableVehicles)
-                .Map(cs =>
-                {
-                    cs.MapLeftKey("VehicleId");
-                    cs.MapRightKey("SparePartId");
-                    cs.ToTable("VehicleSparePart");
-                });
         }
 
-        public System.Data.Entity.DbSet<ProjectApplication.Models.DiscountViewModel> DiscountViewModels { get; set; }
     }
 }
