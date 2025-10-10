@@ -8,16 +8,13 @@ namespace ProjectApplication.Models
 {
     public class Vehicle : Product
     {
-        public int ProductId { get; set; }
-        public int VehicleId { get; set; }
-        public string VehicleName { get; set; }
-        public int Engine {  get; set; }
-        public string VehicleType { get; set; }
-        public int FuelCapacity { get; set; }
-        public string VehicleDescription { get; set; }
-        public vehicleColor Color { get; set; }
+        public int VehicleId { get; set; } //Khóa chính của xe 
+        public int Engine {  get; set; } //Động cơ xe (vd: 110cc, 125cc,150cc,...)
+        public string VehicleType { get; set; } //Loại xe (vd: Xe số, xe tay ga, Xe côn)
+        public float FuelCapacity { get; set; } //Dung tích xăng (vd: 4.5l,5.5l,...)
+        public vehicleColor Color { get; set; } //Màu của xe
 
-        //Nhiều spare phù hợp với xe...
+        //các spare phù hợp với xe...
         public virtual ICollection<SparePart> spareParts { get; set; }
 
 

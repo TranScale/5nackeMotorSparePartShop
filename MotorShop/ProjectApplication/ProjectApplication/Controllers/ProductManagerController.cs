@@ -17,7 +17,9 @@ namespace ProjectApplication.Controllers
         // GET: ProductManager
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            var product = db.Products.ToList();
+            var viewModel = ProductViewIndex.GetListIndex(product); 
+            return View(viewModel);
         }
 
         // GET: ProductManager/Details/5

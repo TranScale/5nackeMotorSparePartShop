@@ -7,15 +7,15 @@ namespace ProjectApplication.Models
 {
     public class Product
     {
-        public int ProductId { get; set; }
-        public int BrandId { get; set; }
-        public string ProductName { get; set; }
-        public string ProductType { get; set; }
-        public string Price { get; set; }
-        public int Quantity { get; set; }
-        public string ProductDescription { get; set; }
+        public int ProductId { get; set; } // Khóa chính của sản phẩm
+        public int BrandId { get; set; } //Khóa chính của hãng 
+        public string ProductName { get; set; } //Tên sản phẩm
+        public string ProductType { get; set; } //Loại sản phẩm (Vehicle,SparePart)
+        public decimal Price { get; set; } // Giá tiền của sản phẩm
+        public int Quantity { get; set; } //Số lượng còn lại trong kho của sản phẩm
+        public string ProductDescription { get; set; } //Mô tả của sản phẩm 
 
-        public Vehicle vehicle { get; set; }
-        public SparePart sparepart { get; set; }
+        //public Vehicle vehicle { get; set; }
+        //public SparePart sparepart { get; set; }
     }
 }

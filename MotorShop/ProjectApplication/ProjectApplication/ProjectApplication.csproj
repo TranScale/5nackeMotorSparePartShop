@@ -143,6 +143,7 @@
     <Compile Include="Models\DiscountValueType.cs" />
     <Compile Include="Models\DiscountViewModel.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductViewIndex.cs" />
     <Compile Include="Models\Promotion.cs" />
     <Compile Include="Models\SparePart.cs" />
     <Compile Include="Models\Vehicle.cs" />

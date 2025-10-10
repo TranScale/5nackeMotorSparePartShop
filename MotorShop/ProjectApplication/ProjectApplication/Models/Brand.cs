@@ -7,9 +7,9 @@ namespace ProjectApplication.Models
 {
     public class Brand
     {
-        public int BrandId { get; set; }
-        public string BrandName { get; set; }
-        public string BrandDescription { get; set; }
+        public int BrandId { get; set; } // Khóa chính của hãng
+        public string BrandName { get; set; } // Tên hãng
+        public string BrandDescription { get; set; } // Mô tả của hãng 
 
     }
 }
