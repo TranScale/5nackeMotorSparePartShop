@@ -51,6 +51,13 @@
 
     @if (Model.ProductType == "Vehicle")
     {
+        <select id="typeVehicle" name="typeVehicle" class="form-control">
+            <option value="">-- Chọn loại xe --</option>
+            <option value="Xe số" @(Model.typeVehicle == "Xe số" ? "selected" : "")>Xe số</option>
+            <option value="Xe tay ga" @(Model.typeVehicle == "Xe tay ga" ? "selected" : "")>Xe tay ga</option>
+            <option value="Xe côn tay" @(Model.typeVehicle == "Xe côn tay" ? "selected" : "")>Xe côn tay</option>
+        </select>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Engine, new { @class = "control-label col-md-2" })
             <div class="col-md-10">

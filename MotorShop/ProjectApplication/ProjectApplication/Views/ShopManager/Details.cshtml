@@ -1,11 +1,18 @@
 ﻿@model ProjectApplication.Models.ProductViewModel
 
 <h2>Chi tiết sản phẩm</h2>
-<p><b>Mã</b> @Model.Id</p>
+<p><b>Mã:</b> @Model.Id</p>
 <p><b>Tên:</b> @Model.Name</p>
 <p><b>Giá:</b> @Model.Price</p>
 <p><b>Loại:</b> @Model.ProductType</p>
-<p><b>Hãng</b> @Model.BrandName</p>
+@if (@Model.BrandId == 1)
+{
+    <p><b>Hãng:</b> Yamaha</p>
+}
+@if (@Model.BrandId == 2)
+{
+    <p><b>Hãng:</b> Honda</p>
+}
 
 
 
@@ -23,7 +30,7 @@ else if (Model.ProductType == "SparePart")
     <p><b>Phù hợp với:</b> @Model.CompatibleModel</p>
 }
 
-<button id ="btnEdit" class="btn btn-primary mb-2 ml-2">Chỉnh sửa</button>
+<button id="btnEdit" class="btn btn-primary mb-2 ml-2">Chỉnh sửa</button>
 <button onclick="window.history.back()" class="btn btn-primary mb-2 ml-2">Quay lại</button>
 <button id="btnDelete" class="btn btn-danger">Xóa sản phẩm</button>
 

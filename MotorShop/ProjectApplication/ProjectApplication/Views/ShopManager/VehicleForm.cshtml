@@ -15,11 +15,12 @@
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    <select id="BrandId" class="form-control">
+                    <select id="BrandId" name="BrandId" class="form-control">
                         <option value="">--Chọn loại --</option>
                         <option value="2">Honda</option>
                         <option value="1">Yamaha</option>
                     </select>
+
                 </div>
             </div>
         </div>
@@ -48,10 +49,13 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.typeVehicle, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.typeVehicle, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.typeVehicle, "", new { @class = "text-danger" })
-        </div>
+        <select id="typeVehicle" name="typeVehicle" class="form-control">
+            <option value="">-- Chọn loại xe --</option>
+            <option value="Xe số">Xe số</option>
+            <option value="Xe tay ga">Xe tay ga</option>
+            <option value="Xe côn tay">Xe côn tay</option>
+        </select>
+        @Html.ValidationMessageFor(model => model.typeVehicle, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
