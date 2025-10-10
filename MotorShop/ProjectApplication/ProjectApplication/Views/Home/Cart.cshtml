@@ -116,20 +116,17 @@
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Quận/Huyện <span class="text-danger">*</span></label>
                 <div class="col-sm-9">
-                    <select name="district" class="form-control" required>
-                        <option value="">Vui lòng chọn Quận/Huyện</option>
-                    </select>
+                    <input type="text" name="district" class="form-control" placeholder="Nhập tên Quận/Huyện" required />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Phường/Xã <span class="text-danger">*</span></label>
                 <div class="col-sm-9">
-                    <select name="ward" class="form-control" required>
-                        <option value="">Vui lòng chọn Phường/Xã</option>
-                    </select>
+                    <input type="text" name="ward" class="form-control" placeholder="Nhập tên Phường/Xã" required />
                 </div>
             </div>
+
 
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Địa chỉ (số nhà, đường) <span class="text-danger">*</span></label>
@@ -160,43 +157,20 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            // --- TOAST --- THÔNG BÁO ---
+            // --- TOAST ---
             var successMessage = '@TempData["SuccessMessage"]';
 
-            if (successMessage && successMessage.length > 0) {
-                successMessage = successMessage.replace(/&quot;/g, '"').replace(/&#39;/g, "'");
-
-                var toastHtml = `
-                    <div class="toast bg-success text-white text-center" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1500">
-                        <div class="toast-body">
-                            <strong>Thành công!</strong> ${successMessage}
-                        </div>
-                    </div>`;
-                $('#toast-container').append(toastHtml);
-                var newToast = $('#toast-container').find('.toast:last');
-                newToast.toast({
-                    delay: 1500
-                }).toast('show');
-            }
-
-            // --- AJAX ĐỊA CHỈ (Tỉnh/Huyện/Xã) ---
+            // --- AJAX ĐỊA CHỈ ---
 
             var provinceSelect = $('select[name="province"]');
-            var districtSelect = $('select[name="district"]');
-            var wardSelect = $('select[name="ward"]');
 
-            // Hàm tải dữ liệu chung
-            function loadData(url, parentId, targetSelect, defaultOptionText) {
+            function loadData(url, targetSelect, defaultOptionText) {
                 targetSelect.empty().append('<option value="">' + defaultOptionText + '</option>').prop('disabled', true);
 
-                var shouldLoad = !parentId || (parentId && url.includes('GetDistricts')) || (parentId && url.includes('GetWards'));
-
-                if (url.includes('GetProvinces') || parentId) {
-
+                if (url.includes('GetProvinces')) {
                     $.ajax({
                         url: url,
                         type: 'GET',
-                        data: parentId ? { parentId: parentId } : null,
                         dataType: 'json',
                         success: function (data) {
                             if (data && data.length > 0) {
@@ -211,36 +185,13 @@
                             targetSelect.prop('disabled', false);
                         },
                         error: function (xhr, status, error) {
-                            console.error("Không thể tải dữ liệu từ: " + url, error);
+                            console.error("Không thể tải dữ liệu Tỉnh/Thành: " + url, error);
                             targetSelect.prop('disabled', false);
                         }
                     });
                 }
             }
-
-            // A. Tải Tỉnh/Thành khi trang load
-            loadData('@Url.Action("GetProvinces", "Home")', null, provinceSelect, 'Vui lòng chọn Tỉnh/Thành');
-
-            // B. Xử lý khi chọn Tỉnh/Thành
-            provinceSelect.change(function () {
-                var provinceId = $(this).val();
-                wardSelect.empty().append('<option value="">Vui lòng chọn Phường/Xã</option>').prop('disabled', true);
-                if (provinceId) {
-                    loadData('@Url.Action("GetDistricts", "Home")', provinceId, districtSelect, 'Vui lòng chọn Quận/Huyện');
-                } else {
-                    districtSelect.prop('disabled', true);
-                }
-            });
-
-            // C. Xử lý khi chọn Quận/Huyện
-            districtSelect.change(function () {
-                var districtId = $(this).val();
-                if (districtId) {
-                    loadData('@Url.Action("GetWards", "Home")', districtId, wardSelect, 'Vui lòng chọn Phường/Xã');
-                } else {
-                    wardSelect.prop('disabled', true);
-                }
-            });
+            loadData('@Url.Action("GetProvinces", "Home")', provinceSelect, 'Vui lòng chọn Tỉnh/Thành');
         });
     </script>
 }

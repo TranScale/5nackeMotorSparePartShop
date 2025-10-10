@@ -1,4 +1,5 @@
 ﻿using ProjectApplication.Models;
+using ProjectApplication.Data;
 using System;
 using System.Web;
 using System.Collections.Generic;
@@ -7,7 +8,9 @@ using System.Linq;
 using System.Net;
 using System.Web.Hosting;
 using System.Web.Mvc;
+using System.Globalization;
 using System.Web.Script.Serialization;
+
 
 //----------------------------------------------------------------
 // ---------------- Model Địa lý qua JSON ----------------
@@ -22,7 +25,7 @@ public class HomeController : Controller
     private static dynamic _geoDataCache;
 
     //----------------------------------------------------------------
-    // ---------------- LOAD FROM JSON (Đã sửa lỗi) ----------------
+    // ---------------- LOAD FROM JSON ----------------
     //----------------------------------------------------------------
     private dynamic LoadGeoData()
     {
@@ -83,72 +86,6 @@ public class HomeController : Controller
         }
 
         return Json(provinces.OrderBy(p => p.Name).ToList(), JsonRequestBehavior.AllowGet);
-    }
-    // 2. Lấy Quận/Huyện dựa trên Tỉnh/Thành (parentId)
-    [HttpGet]
-    public ActionResult GetDistricts(string parentId)
-    {
-        var data = LoadGeoData();
-        var districts = new List<GeoModel>();
-
-        IDictionary<string, object> dictionaryData = data as IDictionary<string, object>;
-
-        if (dictionaryData != null && dictionaryData.ContainsKey(parentId))
-        {
-            if (dictionaryData[parentId] is IDictionary<string, object> province)
-            {
-                if (province.ContainsKey("districts") && province["districts"] is IDictionary<string, object> districtsData)
-                {
-                    foreach (var item in districtsData)
-                    {
-                        if (item.Value is IDictionary<string, object> districtDetail)
-                        {
-                            districts.Add(new GeoModel { Id = item.Key, Name = (string)districtDetail["name"] });
-                        }
-                    }
-                }
-            }
-        }
-
-        return Json(districts.OrderBy(d => d.Name).ToList(), JsonRequestBehavior.AllowGet);
-    }
-
-    // 3. Lấy Phường/Xã dựa trên Quận/Huyện (parentId)
-    [HttpGet]
-    public ActionResult GetWards(string parentId)
-    {
-        var data = LoadGeoData();
-        var wards = new List<GeoModel>();
-
-        if (data is IDictionary<string, object> dictionaryData)
-        {
-            // Phải duyệt qua tất cả tỉnh để tìm quận/huyện tương ứng
-            foreach (var provinceEntry in dictionaryData.Values)
-            {
-                if (provinceEntry is IDictionary<string, object> province && province.ContainsKey("districts"))
-                {
-                    if (province["districts"] is IDictionary<string, object> districts)
-                    {
-                        if (districts.ContainsKey(parentId))
-                        {
-                            if (districts[parentId] is IDictionary<string, object> district)
-                            {
-                                if (district.ContainsKey("wards") && district["wards"] is IDictionary<string, object> wardsData)
-                                {
-                                    // Wards là Dictionary<string, string>, key=Mã, value=Tên
-                                    foreach (var item in wardsData)
-                                    {
-                                        wards.Add(new GeoModel { Id = item.Key, Name = (string)item.Value });
-                                    }
-                                    return Json(wards.OrderBy(w => w.Name).ToList(), JsonRequestBehavior.AllowGet); // Đã tìm thấy, thoát ngay
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return Json(wards, JsonRequestBehavior.AllowGet);
     }
 
     private ShopDbContext db = new ShopDbContext();
@@ -371,14 +308,14 @@ public class HomeController : Controller
         {
             return RedirectToAction("Cart");
         }
-        return View(new OrderModel());
+        return View(new Order());
     }
     //----------------------------------------------------------------
     // ---------------- POST: Home/Checkout - Xử lý ----------------
     //----------------------------------------------------------------
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Checkout(OrderModel model)
+    public ActionResult Checkout(Order model)
     {
         var cart = GetCart();
         if (cart.Count == 0)
@@ -425,6 +362,68 @@ public class HomeController : Controller
         }
 
         return RedirectToAction("Cart");
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult PlaceOrder(string customerName, string phone, string province, string district, string ward, string addressDetail, string notes)
+    {
+        // 1. Lấy giỏ hàng hiện tại
+        List<CartItemModel> cart = Session["Cart"] as List<CartItemModel>;
+
+        if (cart == null || cart.Count == 0)
+        {
+            TempData["ErrorMessage"] = "Giỏ hàng trống. Vui lòng thêm sản phẩm trước khi đặt hàng.";
+            return RedirectToAction("Cart");
+        }
+
+        // 2. Tính tổng tiền
+        decimal cartTotal = cart.Sum(item => item.SubTotal);
+
+        using (var db = new ShopDbContext()) // Khởi tạo DbContext
+        {
+            // 3. TẠO ĐƠN HÀNG (Order)
+            var newOrder = new Order
+            {
+                CustomerName = customerName,
+                Phone = phone,
+                Province = province,
+                District = district,
+                Ward = ward,
+                AddressDetail = addressDetail,
+                Notes = notes,
+                OrderDate = DateTime.Now,
+                TotalAmount = cartTotal,
+                Status = "Pending" // Trạng thái ban đầu
+            };
+
+            db.Orders.Add(newOrder);
+            db.SaveChanges(); // Lưu Order trước để lấy OrderId
+
+            // 4. TẠO CHI TIẾT ĐƠN HÀNG (OrderDetails)
+            foreach (var item in cart)
+            {
+                var detail = new OrderDetail
+                {
+                    OrderId = newOrder.OrderId, // Sử dụng OrderId vừa được tạo
+                    ProductId = item.ProductId,
+                    ProductName = item.ProductName,
+                    Quantity = item.Quantity,
+                    Price = item.Price
+                };
+                db.OrderDetails.Add(detail);
+            }
+
+            db.SaveChanges(); // Lưu tất cả OrderDetails
+
+            // 5. Xóa Giỏ hàng và Trả về thông báo
+            Session["Cart"] = null; // Xóa giỏ hàng sau khi đặt hàng thành công
+        }
+
+        // Thiết lập TempData để hiển thị thông báo thành công trên trang Cart
+        TempData["SuccessMessage"] = "Đơn hàng của bạn đã được đặt thành công! Chúng tôi sẽ liên hệ lại sớm.";
+
+        return RedirectToAction("Index"); // Chuyển hướng về trang giỏ hàng (hiện tại sẽ hiển thị giỏ hàng trống và thông báo)
     }
 
     // Phương thức dọn dẹp
