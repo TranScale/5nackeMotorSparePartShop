@@ -1,4 +1,4 @@
-﻿@model ProjectApplication.Models.DiscountViewModel
+﻿@model ProjectApplication.Models.DiscountViewDetails
 
 @{
     ViewBag.Title = "Chi tiết giảm giá";
@@ -9,52 +9,56 @@
 <div class="card shadow-sm p-4">
     <dl class="row mb-0">
         <dt class="col-sm-3 fw-bold">Tên chương trình</dt>
-        <dd class="col-sm-9">@Model.Name</dd>
+        <dd class="col-sm-9">@(Model.Name ?? "Chưa có tên")</dd>
 
         <dt class="col-sm-3 fw-bold">Ngày bắt đầu</dt>
-        <dd class="col-sm-9">@Model.dateStart.ToString("dd/MM/yyyy")</dd>
+        <dd class="col-sm-9">@Model.DateStart.ToString("dd/MM/yyyy")</dd>
 
         <dt class="col-sm-3 fw-bold">Ngày kết thúc</dt>
-        <dd class="col-sm-9">@Model.dateEnd.ToString("dd/MM/yyyy")</dd>
+        <dd class="col-sm-9">@Model.DateEnd.ToString("dd/MM/yyyy")</dd>
 
         <dt class="col-sm-3 fw-bold">Loại khuyến mãi</dt>
         <dd class="col-sm-9">
-            @if (Model.discountType == ProjectApplication.Models.DiscountType.Coupon)
+            @if (Model.DiscountType == "Coupon")
             {
                 <span class="badge bg-info text-dark">Mã giảm giá</span>
             }
-            else
+            else if (Model.DiscountType == "Promotion")
             {
                 <span class="badge bg-success">Khuyến mãi</span>
+            }
+            else
+            {
+                <span class="badge bg-secondary">Áp dụng với: </span>
             }
         </dd>
 
         <dt class="col-sm-3 fw-bold">Giá trị khuyến mãi</dt>
         <dd class="col-sm-9">
-            @if (Model.discountValueType == ProjectApplication.Models.DiscountValueType.Percent)
+            @if (Model.DiscountValueType == ProjectApplication.Models.DiscountValueType.Percent)
             {
-                @($"{Model.discountValue}%")
+                @($"{Model.DiscountValue}%")
             }
             else
             {
-                @($"{Model.discountValue:N0} ₫")
+                @($"{Model.DiscountValue:N0} ₫")
             }
         </dd>
 
-        @if (Model.discountType == ProjectApplication.Models.DiscountType.Coupon)
+        @if (Model.DiscountType == "Coupon")
         {
             <dt class="col-sm-3 fw-bold">Mã giảm giá</dt>
-            <dd class="col-sm-9">@Model.couponCode</dd>
+            <dd class="col-sm-9">@(Model.CouponCode ?? "Không có mã")</dd>
         }
-        else if (Model.discountType == ProjectApplication.Models.DiscountType.Promotion)
+        else if (Model.DiscountType == "Promotion")
         {
             <dt class="col-sm-3 fw-bold">Mô tả khuyến mãi</dt>
-            <dd class="col-sm-9">@Model.promotionDescription</dd>
+            <dd class="col-sm-9">@(Model.PromotionDescription ?? "Không có mô tả")</dd>
         }
 
         <dt class="col-sm-3 fw-bold">Trạng thái</dt>
         <dd class="col-sm-9">
-            @if (Model.isActive)
+            @if (Model.IsActive)
             {
                 <span class="badge bg-success">Đang hoạt động</span>
             }
@@ -70,12 +74,11 @@
     @using (Html.BeginForm("DeleteConfirmed", "DiscountManager", FormMethod.Post, new { id = "deleteForm" }))
     {
         @Html.AntiForgeryToken()
-        @Html.Hidden("id",Model.Id)
+        @Html.HiddenFor(model => model.Id)
         <button type="button" class="btn btn-danger" onclick="confirmDelete()">
             🗑️ Xóa
         </button>
     }
-
 
     @Html.ActionLink("✏️ Chỉnh sửa", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
     @Html.ActionLink("⬅️ Quay lại", "Index", null, new { @class = "btn btn-secondary ms-2" })

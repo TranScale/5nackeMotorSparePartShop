@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace ProjectApplication.Models
 {
-    public class Coupon : Basediscount
+    public class Coupon : Discount 
     {
-        public string couponCode { get; set; }
+        //[Required]
+        public string CouponCode { get; set; } // Mã của coupon 
     }
 }

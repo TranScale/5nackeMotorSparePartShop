@@ -41,6 +41,19 @@ namespace ProjectApplication.Service
             return part;
         }
 
+        //Update SparePart
+        public static void UpdateSparePart(ProductViewDetail viewModel, SparePart part)
+        {
+            part.ProductId = viewModel.ProductId;
+            part.ProductName = viewModel.ProductName;
+            part.ProductType = viewModel.ProductType;
+            part.Price = viewModel.ProductPrice;
+            part.BrandId = viewModel.BrandId;
+            part.Quantity = viewModel.ProductQuantity;
+            part.ProductDescription = viewModel.ProductDescription;
+
+        }
+
         public static Vehicle GetVehicle(ProductViewDetail viewModel)
         {
             var vehicle = new Vehicle();
@@ -59,6 +72,23 @@ namespace ProjectApplication.Service
             return vehicle;
         }
 
+        //Update Vehicle
+        public static void UpdateVehicle(ProductViewDetail viewModel, Vehicle vehicle)
+        {
+            vehicle.ProductId = viewModel.ProductId;
+            vehicle.ProductName = viewModel.ProductName;
+            vehicle.ProductType = viewModel.ProductType;
+            vehicle.Price = viewModel.ProductPrice;
+            vehicle.BrandId = viewModel.BrandId;
+            vehicle.Quantity = viewModel.ProductQuantity;
+            vehicle.ProductDescription = viewModel.ProductDescription;
+            vehicle.Engine = viewModel.Engine;
+            vehicle.VehicleType = viewModel.VehicleType;
+            vehicle.FuelCapacity = viewModel.FuelCapacity;
+            vehicle.Color = viewModel.Color;
+
+        }
+
         //Lấy Product từ ViewModel 
         public static Product GetProduct(ProductViewDetail viewModel)
         {
@@ -75,6 +105,8 @@ namespace ProjectApplication.Service
 
 
         }
+
+        //Update 
 
     }
 }

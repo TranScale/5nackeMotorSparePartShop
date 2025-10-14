@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjectApplication.Models.DiscountViewModel>
+﻿@model IEnumerable<ProjectApplication.Models.DiscountViewIndex>
 
 @{
     ViewBag.Title = "Discount List";
@@ -29,10 +29,11 @@
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.dateStart)</th>
-            <th>@Html.DisplayNameFor(model => model.dateEnd)</th>
-            <th>@Html.DisplayNameFor(model => model.discountType)</th>
-            <th>@Html.DisplayNameFor(model => model.isActive)</th>
+            <th>@Html.DisplayNameFor(model => model.DateStart)</th>
+            <th>@Html.DisplayNameFor(model => model.DateEnd)</th>
+            <th>@Html.DisplayNameFor(model => model.DiscountType)</th>
+            <th>@Html.DisplayNameFor(model => model.DiscountValue)</th>
+            <th>@Html.DisplayNameFor(model => model.IsActive)</th>
         </tr>
     </thead>
     <tbody>
@@ -44,34 +45,35 @@
                     @Html.ActionLink(item.Name, "Details", "DiscountManager", new { id = item.Id }, new { @class = "text-decoration-none fw-bold" })
                 </td>
 
-                <td>@item.dateStart.ToString("dd/MM/yyyy")</td>
-                <td>@item.dateEnd.ToString("dd/MM/yyyy")</td>
+                <td>@item.DateStart.ToString("dd/MM/yyyy")</td>
+                <td>@item.DateEnd.ToString("dd/MM/yyyy")</td>
+                <td>@item.DiscountType</td>
 
                 <!-- Giá trị giảm hiển thị rõ loại -->
-                @*<td>
-                    @if (item.discountValueType == ProjectApplication.Models.DiscountValueType.Percent)
+                <td>
+                    @if (item.DiscountValueType == ProjectApplication.Models.DiscountValueType.Percent)
                     {
-                        @($"{item.discountValue}%")
+                        @($"{item.DiscountValue}%")
                     }
                     else
                     {
-                        @($"{item.discountValue:N0} ₫")
+                        @($"{item.DiscountValue:N0} ₫")
                     }
-                </td>*@
+                </td>
 
                 <td>
-                    @if (item.discountType == ProjectApplication.Models.DiscountType.Coupon)
+                    @if (item.DiscountType == "Coupon")
                     {
                         <span class="badge bg-info text-dark">Mã giảm giá</span>
                     }
-                    else if (item.discountType == ProjectApplication.Models.DiscountType.Promotion)
+                    else if (item.DiscountType == "Promotion")
                     {
                         <span class="badge bg-success">Khuyến mãi</span>
                     }
                 </td>
                 <!-- Trạng thái -->
                 <td>
-                    @if (item.isActive)
+                    @if (item.IsActive)
                     {
                         <span class="badge bg-success">Đang hoạt động</span>
                     }
@@ -91,7 +93,7 @@
         $(document).ready(function () {
             // Điều hướng đến productmanage khi nhấn nút
             $("#btnManagerProduct").click(function () {
-                window.location.href = '@Url.Action("productmanage", "ShopManager")';
+                window.location.href = '@Url.Action("Index", "ProductManager")';
             });
 
             //Khi chọn btnAdd (thêm sản phẩm)

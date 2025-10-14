@@ -85,13 +85,14 @@ namespace ProjectApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (viewModel.ProductType == "Vehicle")
+                var product = db.Products.Find(viewModel.ProductId);
+                if (product is Vehicle vehicle)
                 {
-                    var vehicle = ProductManagerService.GetVehicle(viewModel);
+                    ProductManagerService.UpdateVehicle(viewModel, vehicle);
                 }
-                else if (viewModel.ProductType == "SparePart")
+                else if (product is SparePart part)
                 {
-                    var sparePart = ProductManagerService.GetSparePart(viewModel);
+                    ProductManagerService.UpdateSparePart(viewModel, part);
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
