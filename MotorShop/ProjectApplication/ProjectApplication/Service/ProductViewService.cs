@@ -69,6 +69,7 @@ namespace ProjectApplication.Service
                 ProductType = product.ProductType,
                 BrandId = product.BrandId,
                 BrandName = product.brand != null ? product.brand.BrandName : "Unknown"
+
             };
             if (product is Vehicle vehicle)
             {

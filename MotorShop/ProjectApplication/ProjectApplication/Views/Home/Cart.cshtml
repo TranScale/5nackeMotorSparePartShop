@@ -6,190 +6,226 @@
     // KIỂM TRA SESSION CỜ
     bool hasDiscountedItem = (Session["HasDiscountedItem"] as bool?) ?? false;
 }
-<div class="container mt-4">
-    <h2><i class="fas fa-shopping-cart"></i> Giỏ Hàng</h2>
-    <hr />
-
-    @if (Model == null || Model.Count == 0)
-    {
-        <div class="alert alert-warning text-center" role="alert">
-            Giỏ hàng của bạn hiện đang trống! 🛒
-        </div>
-        <p class="text-center">
-            @Html.ActionLink("Quay lại mua sắm", "Index", "Home", null, new { @class = "btn btn-info" })
-        </p>
-    }
-    else
-    {
-        <table class="table table-bordered table-hover">
-            <thead class="thead-light">
-                <tr>
-                    <th>Sản phẩm</th>
-                    <th class="text-right">Giá (VNĐ)</th>
-                    <th class="text-center">Số lượng</th>
-                    <th class="text-right">Tổng cộng (VNĐ)</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.ActionLink(item.ProductName, "Details", "Home", new { id = item.ProductId }, null)
-                        </td>
-                        <td class="text-right">@string.Format("{0:N0}", item.Price)</td>
+               <div class="container mt-4">
+                   <h2><i class="fas fa-shopping-cart"></i> Giỏ Hàng</h2>
+                   <hr />
 
 
-                        <td class="text-center">
-                            @using (Html.BeginForm("UpdateCartItem", "Home", FormMethod.Post, new { @class = "d-inline-flex" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                <input type="hidden" name="productId" value="@item.ProductId" />
+                   @if (Model == null || Model.Count == 0)
+                   {
+                   <div class="alert alert-warning text-center" role="alert">
+                       Giỏ hàng của bạn hiện đang trống! 🛒
+                   </div>
+                   <p class="text-center">
+                       @Html.ActionLink("Quay lại mua sắm", "Index", "Home", null, new { @class = "btn btn-info" })
+                   </p>
+                   }
+                   else
+                   {
+                   <table class="table table-bordered table-hover">
+                       <thead class="thead-light">
+                           <tr>
+                               <th>Sản phẩm</th>
+                               <th class="text-right">Giá (VNĐ)</th>
+                               <th class="text-center">Số lượng</th>
+                               <th class="text-right">Tổng cộng (VNĐ)</th>
+                               <th></th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           @foreach (var item in Model)
+                           {
+                           <tr>
+                               <td>
+                                   @Html.ActionLink(item.ProductName, "Details", "Home", new { id = item.ProductId }, null)
+                               </td>
+                               <td class="text-right">@string.Format("{0:N0}", item.Price)</td>
 
-                                <div class="input-group input-group-sm" style="width: 100px;">
-                                    <input type="number"
-                                           name="newQuantity"
-                                           value="@item.Quantity"
-                                           min="1"
-                                           class="form-control text-center"
-                                           onchange="this.form.submit()" />
-                                </div>
-                            }
-                        </td>
 
-                        <td class="text-right">@string.Format("{0:N0}", item.SubTotal)</td>
+                               <td class="text-center">
+                                   @using (Html.BeginForm("UpdateCartItem", "Home", FormMethod.Post, new { @class = "d-inline-flex" }))
+                                   {
+                                   @Html.AntiForgeryToken()
+                                   <input type="hidden" name="productId" value="@item.ProductId" />
 
-                        <td>
-                            <a href="@Url.Action("RemoveFromCart", "Home", new { productId = item.ProductId })" class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash-alt"></i> Xóa
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3" class="text-right">
-                        <strong>Tổng tiền giỏ hàng:</strong>
-                    </td>
-                    <td class="text-right">
-                        <strong>@string.Format("{0:N0}", cartTotal) VNĐ</strong>
-                    </td>
-                    <td></td>
-                </tr>
-            </tfoot>
-        </table>
+                                   <div class="input-group input-group-sm" style="width: 100px;">
+                                       <input type="number"
+                                              name="newQuantity"
+                                              value="@item.Quantity"
+                                              min="1"
+                                              class="form-control text-center"
+                                              onchange="this.form.submit()" />
+                                   </div>
+                                   }
+                               </td>
 
-        <div class="card p-3 mb-4 border-info">
-            <h5 class="card-title text-info mb-3"><i class="fas fa-tag"></i> Mã giảm giá (Coupon)</h5>
+                               <td class="text-right">@string.Format("{0:N0}", item.SubTotal)</td>
 
-            @if (hasDiscountedItem)
-            {
-                <div class="alert alert-warning">
-                    Sản phẩm trong giỏ đã có giá khuyến mãi, không áp dụng thêm Mã giảm giá.
-                </div>
-            }
+                               <td>
+                                   <a href="@Url.Action("RemoveFromCart", "Home" , new { productId=item.ProductId })" class="btn btn-danger btn-sm">
+                                       <i class="fas fa-trash-alt"></i> Xóa
+                                   </a>
+                               </td>
+                           </tr>
+                           }
+                       </tbody>
+                       <tfoot>
+                           <tr>
+                               <td colspan="3" class="text-right">
+                                   <strong>Tổng tiền giỏ hàng:</strong>
+                               </td>
+                               <td class="text-right">
+                                   <strong id="cartTotal">@string.Format("{0:N0}", cartTotal) VNĐ</strong>
+                               </td>
+                               <td></td>
+                           </tr>
 
-            <div class="input-group">
-                <input type="text"
-                       id="couponCode"
-                       class="form-control"
-                       placeholder="Nhập mã giảm giá"
-                       @if (hasDiscountedItem) { <text> disabled</text> } /> <div class="input-group-append">
-                    <button class="btn btn-primary"
-                            type="button"
-                            id="applyCouponBtn"
-                            @if (hasDiscountedItem) { <text> disabled</text> }>
+                           <!-- Hàng hiển thị giảm giá (ẩn mặc định) -->
+                           <tr id="discountRow" style="display:none;">
+                               <td colspan="3" class="text-right text-success">
+                                   <strong>Giảm giá:</strong>
+                               </td>
+                               <td class="text-right text-success">
+                                   <strong id="discountAmount">-0 VNĐ</strong>
+                               </td>
+                               <td></td>
+                           </tr>
+
+                           <!-- Hàng hiển thị tổng tiền sau khi giảm -->
+                           <tr id="finalTotalRow" style="display:none;">
+                               <td colspan="3" class="text-right text-primary">
+                                   <strong>Tổng sau giảm:</strong>
+                               </td>
+                               <td class="text-right text-primary">
+                                   <strong id="finalTotalAmount">0 VNĐ</strong>
+                               </td>
+                               <td></td>
+                           </tr>
+                       </tfoot>
+
+                   </table>
+
+                   <div class="card p-3 mb-4 border-info">
+                       <h5 class="card-title text-info mb-3"><i class="fas fa-tag"></i> Mã giảm giá (Coupon)</h5>
+
+                       @if (hasDiscountedItem)
+                       {
+                       <div class="alert alert-warning">
+                           Sản phẩm trong giỏ đã có giá khuyến mãi, không áp dụng thêm Mã giảm giá.
+                       </div>
+                       }
+
+                       <div class="input-group">
+                           <input type="text"
+                                  id="couponCode"
+                                  class="form-control"
+                                  placeholder="Nhập mã giảm giá"
+                                  @if (hasDiscountedItem) { <text> disabled</text> } /> <div class="input-group-append">
+                               <button class="btn btn-primary"
+                                       type="button"
+                                       id="applyCouponBtn"
+                                       @if (hasDiscountedItem) { <text> disabled</text> }>
                         Kiểm tra & Áp dụng
                     </button>
-                </div>
-            </div>
-            <div id="couponMessage" class="mt-2" style="font-size: 0.9rem;">
-            </div>
-        </div>
+                           </div>
+                       </div>
+                       <div id="couponMessage" class="mt-2" style="font-size: 0.9rem;">
+                       </div>
+                   </div>
 
-        using (Html.BeginForm("PlaceOrder", "Home", FormMethod.Post, new { @class = "form-checkout mt-5" }))
-        {
-            @Html.AntiForgeryToken()
+                   using (Html.BeginForm("PlaceOrder", "Home", FormMethod.Post, new { @class = "form-checkout mt-5" }))
+                   {
+                   @Html.AntiForgeryToken()
 
-            <h4 class="mb-4" style="color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px;">
-                THÔNG TIN GIAO HÀNG
-            </h4>
+                   <h4 class="mb-4" style="color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px;">
+                       THÔNG TIN GIAO HÀNG
+                   </h4>
 
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Họ và tên <span class="text-danger">*</span></label>
-                <div class="col-sm-9">
-                    <input type="text" name="customerName" class="form-control" placeholder="Nguyễn Văn A" required />
-                </div>
-            </div>
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Họ và tên <span class="text-danger">*</span></label>
+                       <div class="col-sm-9">
+                           <input type="text" name="customerName" class="form-control" placeholder="Nguyễn Văn A" required />
+                       </div>
+                   </div>
 
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Số điện thoại <span class="text-danger">*</span></label>
-                <div class="col-sm-9">
-                    <input type="tel" name="phone" class="form-control"
-                           placeholder="0901 234 567"
-                           pattern="[0-9]{10,12}"
-                           title="Số điện thoại phải chứa 10-12 chữ số"
-                           required />
-                </div>
-            </div>
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Số điện thoại <span class="text-danger">*</span></label>
+                       <div class="col-sm-9">
+                           <input type="tel" name="phone" class="form-control"
+                                  placeholder="0901 234 567"
+                                  pattern="[0-9]{10,12}"
+                                  title="Số điện thoại phải chứa 10-12 chữ số"
+                                  required />
+                       </div>
+                   </div>
 
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Tỉnh/Thành Phố<span class="text-danger">*</span></label>
-                <div class="col-sm-9">
-                    <select name="province" class="form-control" required>
-                        <option value="">Vui lòng chọn Tỉnh/Thành Phố</option>
-                    </select>
-                </div>
-            </div>
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Tỉnh/Thành Phố<span class="text-danger">*</span></label>
+                       <div class="col-sm-9">
+                           <select name="province" class="form-control" required>
+                               <option value="">Vui lòng chọn Tỉnh/Thành Phố</option>
+                           </select>
+                       </div>
+                   </div>
 
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Quận/Huyện <span class="text-danger">*</span></label>
-                <div class="col-sm-9">
-                    <input type="text" name="district" class="form-control" placeholder="Nhập tên Quận/Huyện" required />
-                </div>
-            </div>
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Quận/Huyện <span class="text-danger">*</span></label>
+                       <div class="col-sm-9">
+                           <input type="text" name="district" class="form-control" placeholder="Nhập tên Quận/Huyện" required />
+                       </div>
+                   </div>
 
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Phường/Xã <span class="text-danger">*</span></label>
-                <div class="col-sm-9">
-                    <input type="text" name="ward" class="form-control" placeholder="Nhập tên Phường/Xã" required />
-                </div>
-            </div>
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Phường/Xã <span class="text-danger">*</span></label>
+                       <div class="col-sm-9">
+                           <input type="text" name="ward" class="form-control" placeholder="Nhập tên Phường/Xã" required />
+                       </div>
+                   </div>
 
 
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Địa chỉ (số nhà, đường) <span class="text-danger">*</span></label>
-                <div class="col-sm-9">
-                    <input type="text" name="addressDetail" class="form-control" placeholder="(số nhà, tên đường/ngõ...)" required />
-                </div>
-            </div>
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Địa chỉ (số nhà, đường) <span class="text-danger">*</span></label>
+                       <div class="col-sm-9">
+                           <input type="text" name="addressDetail" class="form-control" placeholder="(số nhà, tên đường/ngõ...)" required />
+                       </div>
+                   </div>
 
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Ghi chú</label>
-                <div class="col-sm-9">
-                    <textarea name="notes" class="form-control" rows="3" placeholder="Ghi chú thêm nếu có"></textarea>
-                </div>
-            </div>
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Ghi chú</label>
+                       <div class="col-sm-9">
+                           <textarea name="notes" class="form-control" rows="3" placeholder="Ghi chú thêm nếu có"></textarea>
+                       </div>
+                   </div>
 
-            <div class="form-group row mt-4">
-                <div class="col-sm-9 offset-sm-3">
-                    <button type="submit" class="btn btn-info">
-                        GỬI ĐƠN HÀNG
-                    </button>
-                    @Html.ActionLink("Tiếp tục mua sắm", "Index", "Home", null, new { @class = "btn btn-info" })
-                </div>
-            </div>
-        }
-    }
-</div>
+                   <div class="form-group row mt-4">
+                       <div class="col-sm-9 offset-sm-3">
+                           <button type="submit" class="btn btn-info">
+                               GỬI ĐƠN HÀNG
+                           </button>
+                           @Html.ActionLink("Tiếp tục mua sắm", "Index", "Home", null, new { @class = "btn btn-info" })
+                       </div>
+                   </div>
+                   }
+                   }
+               </div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
             // --- TOAST ---
             var successMessage = '@TempData["SuccessMessage"]';
+            if (successMessage && successMessage.length > 0) {
+                successMessage = successMessage.replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+                var toastHtml = `
+            <div class="toast bg-success text-white text-center" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1500">
+                <div class="toast-body">
+                    <strong>Thành công!</strong> ${successMessage}
+                </div>
+            </div>`;
+                $('#toast-container').append(toastHtml);
+                var newToast = $('#toast-container').find('.toast:last');
+                newToast.toast({ delay: 1500 }).toast('show');
+            }
 
             // --- AJAX ĐỊA CHỈ ---
             var provinceSelect = $('select[name="province"]');
@@ -286,6 +322,23 @@
                     $('#finalTotalRow').show();
                 }
             }
+            function updateDisplay(discountValue) {
+                var cartTotal = parseFloat('@cartTotal'); // tổng tiền gốc
+
+                if (discountValue <= 0) {
+                    $('#discountRow').hide();
+                    $('#finalTotalRow').hide();
+                    $('#cartTotal').text(formatNumber(cartTotal) + ' VNĐ');
+                } else {
+                    var finalTotal = cartTotal - discountValue;
+                    $('#discountAmount').text('-' + formatNumber(discountValue) + ' VNĐ');
+                    $('#finalTotalAmount').text(formatNumber(finalTotal) + ' VNĐ');
+
+                    $('#discountRow').show();
+                    $('#finalTotalRow').show();
+                }
+            }
+
         });
     </script>
 }

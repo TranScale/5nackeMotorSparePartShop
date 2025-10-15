@@ -16,6 +16,10 @@ namespace ProjectApplication.Models
         [Display(Name = "Còn lại")]
         public int ProductQuantity { get; set; }
 
+        [Display(Name = "Giá gốc")]
+        public decimal? OriginalPrice { get; set; } // chỉ hiển thị nếu có giảm
+
+        public bool HasDiscount { get; set; } // có đang được khuyến mãi không
 
     }
 }

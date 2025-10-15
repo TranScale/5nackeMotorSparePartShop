@@ -1,4 +1,4 @@
-﻿@model List<ProjectApplication.Models.ProductViewModel>
+﻿@model List<ProjectApplication.Models.ProductViewIndex>  
 @{
     ViewBag.Title = "Cửa Hàng";
 }
@@ -31,36 +31,40 @@
             <tr>
                 <th>Tên</th>
                 <th>Giá</th>
-                <th>Loại</th>
-                <th>Thông tin</th>
+                <th>Còn lại</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @if (Model.Any())
+            @if (Model != null && Model.Any())
             {
                 foreach (var item in Model)
                 {
                     <tr>
                         <td>
-                            @Html.ActionLink(item.Name, "Details", "Home", new { id = item.Id }, null)
+                            @Html.ActionLink(item.ProductName, "Details", "Home", new { id = item.ProductId }, null)
                         </td>
-                        <td>@string.Format("{0:N0}", item.Price) VNĐ</td>
-                        <td>@item.ProductType</td>
                         <td>
-                            @if (item.ProductType == "Vehicle")
+                            @if (item.HasDiscount)
                             {
-                                <span>Động cơ: @item.Engine cc</span>
+                                <span style="text-decoration:line-through; color:gray;">
+                                    @string.Format("{0:N0}", item.OriginalPrice) VNĐ
+                                </span><br />
+                                <span style="color:red; font-weight:bold;">
+                                    @string.Format("{0:N0}", item.ProductPrice) VNĐ
+                                </span>
                             }
-                            else if (item.ProductType == "SparePart")
+                            else
                             {
+                                <span>@string.Format("{0:N0}", item.ProductPrice) VNĐ</span>
                             }
                         </td>
+                        <td>@item.ProductQuantity</td>
                         <td>
                             @using (Html.BeginForm("AddToCart", "Home", FormMethod.Post))
                             {
                                 @Html.AntiForgeryToken()
-                                <input type="hidden" name="productId" value="@item.Id" />
+                                <input type="hidden" name="productId" value="@item.ProductId" />
                                 <input type="hidden" name="quantity" value="1" />
                                 <button type="submit" class="btn btn-sm btn-success">Thêm vào giỏ</button>
                             }
@@ -71,23 +75,20 @@
             else
             {
                 <tr>
-                    <td colspan="5" class="text-center">Không tìm thấy sản phẩm nào.</td>
+                    <td colspan="4" class="text-center">Không tìm thấy sản phẩm nào.</td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
 
+
 @section Scripts {
     <script>
         $(document).ready(function () {
-
             var successMessage = '@TempData["SuccessMessage"]';
-
             if (successMessage && successMessage.length > 0) {
-
                 successMessage = successMessage.replace(/&quot;/g, '"').replace(/&#39;/g, "'");
-
                 var toastHtml = `
                     <div class="toast bg-success text-white text-center" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1500">
                         <div class="toast-body">
@@ -96,9 +97,7 @@
                     </div>`;
                 $('#toast-container').append(toastHtml);
                 var newToast = $('#toast-container').find('.toast:last');
-                newToast.toast({
-                    delay: 1500
-                }).toast('show');
+                newToast.toast({ delay: 1500 }).toast('show');
             }
         });
     </script>

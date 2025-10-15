@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ProjectApplication.Models
 {
-    public class Coupon : Discount 
+    public class Coupon : Discount
     {
         //[Required]
         public string CouponCode { get; set; } // Mã của coupon 

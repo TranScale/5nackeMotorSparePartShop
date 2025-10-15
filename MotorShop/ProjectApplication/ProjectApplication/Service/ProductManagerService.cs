@@ -27,6 +27,19 @@ namespace ProjectApplication.Service
             return list;
         }
 
+        //Tìm kiếm theo chuỗi string 
+        public static List<Product> SearchProductString(string key)
+        {
+            ShopDbContext db = new ShopDbContext();
+            var products = db.Products.ToList();
+            var list = new List<Product>();
+            foreach (var product in products)
+            {
+                if (product.ProductName.ToLower().Contains(key.ToLower())) { list.Add(product); }
+            }
+            return list;
+        }
+
         public static SparePart GetSparePart(ProductViewDetail viewModel)
         {
             var part = new SparePart();
@@ -106,7 +119,7 @@ namespace ProjectApplication.Service
 
         }
 
-        //Update 
+        
 
     }
 }

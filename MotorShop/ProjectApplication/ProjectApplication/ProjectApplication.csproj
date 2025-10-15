@@ -144,7 +144,6 @@
     <Compile Include="Models\DiscountViewDetails.cs" />
     <Compile Include="Models\DiscountViewIndex.cs" />
     <Compile Include="Models\CartItemModel.cs" />
-    <Compile Include="Models\Coupon.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Product.cs" />
@@ -219,6 +218,7 @@
     <Content Include="Views\DiscountManager\Details.cshtml" />
     <Content Include="Views\DiscountManager\Edit.cshtml" />
     <Content Include="Views\DiscountManager\Index.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

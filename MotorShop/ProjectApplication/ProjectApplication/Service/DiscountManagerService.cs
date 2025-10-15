@@ -45,6 +45,7 @@ namespace ProjectApplication.Service
             coupon.DiscountValueType = viewModel.DiscountValueType;
             coupon.DiscountValue = viewModel.DiscountValue;
             coupon.CouponCode = viewModel.CouponCode;
+            coupon.isActive = DiscountManagerService.IsActive(coupon.DateStart, coupon.DateEnd);
             return coupon;
         }
 
@@ -61,6 +62,7 @@ namespace ProjectApplication.Service
             promotion.DiscountValue = viewModel.DiscountValue;
             promotion.PromotionDescription = viewModel.PromotionDescription;
             promotion.Condition = viewModel.DiscountCondition;
+            promotion.isActive = DiscountManagerService.IsActive(promotion.DateStart, promotion.DateEnd);
             return promotion;
         }
 
