@@ -143,6 +143,10 @@
     <Compile Include="Models\DiscountValueType.cs" />
     <Compile Include="Models\DiscountViewDetails.cs" />
     <Compile Include="Models\DiscountViewIndex.cs" />
+    <Compile Include="Models\CartItemModel.cs" />
+    <Compile Include="Models\Coupon.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductViewDetail.cs" />
     <Compile Include="Models\ProductViewIndex.cs" />
@@ -182,6 +186,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Data\vietnam_data.json" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -204,8 +209,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\ProductManager\Create.cshtml" />
     <Content Include="Views\ProductManager\Details.cshtml" />
