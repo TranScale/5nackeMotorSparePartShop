@@ -210,11 +210,12 @@ public class HomeController : Controller
         // 1️⃣ Lấy toàn bộ sản phẩm
         var products = db.Products.ToList();
 
-        // 2️⃣ Lấy Promotion đang active
-        var activePromotion = db.Promotions
-            .FirstOrDefault(p => p.isActive &&
-                                 today >= p.DateStart &&
-                                 today <= p.DateEnd);
+        // 2️⃣ Lấy tất cả Promotion đang active
+        var activePromotions = db.Promotions
+            .Where(p => p.isActive &&
+                        today >= p.DateStart &&
+                        today <= p.DateEnd)
+            .ToList();
 
         // 3️⃣ Tính giá sau giảm (nếu có)
         var productList = products.Select(p =>
@@ -223,19 +224,28 @@ public class HomeController : Controller
             bool hasDiscount = false;
             decimal? originalPrice = null;
 
-            if (activePromotion != null &&
-                (activePromotion.Condition == p.ProductType || activePromotion.Condition == "All"))
+            // ✅ Lọc các promotion áp dụng cho sản phẩm này
+            var applicablePromotions = activePromotions
+                .Where(promo => promo.Condition == p.ProductType || promo.Condition == "All")
+                .ToList();
+
+            if (applicablePromotions.Any())
             {
                 hasDiscount = true;
                 originalPrice = p.Price;
 
-                if (activePromotion.DiscountValueType == DiscountValueType.Percent)
+                // ✅ Chọn khuyến mãi mạnh nhất (DiscountValue lớn nhất)
+                var bestPromotion = applicablePromotions
+                    .OrderByDescending(promo => promo.DiscountValue)
+                    .First();
+
+                if (bestPromotion.DiscountValueType == DiscountValueType.Percent)
                 {
-                    finalPrice = p.Price - (p.Price * activePromotion.DiscountValue / 100);
+                    finalPrice = p.Price - (p.Price * bestPromotion.DiscountValue / 100);
                 }
-                else // directly (giảm theo số tiền)
+                else // Giảm theo số tiền
                 {
-                    finalPrice = p.Price - activePromotion.DiscountValue;
+                    finalPrice = p.Price - bestPromotion.DiscountValue;
                 }
 
                 if (finalPrice < 0) finalPrice = 0; // tránh âm giá
@@ -276,6 +286,7 @@ public class HomeController : Controller
 
         return View(productList);
     }
+
 
 
     //----------------------------------------------------------------

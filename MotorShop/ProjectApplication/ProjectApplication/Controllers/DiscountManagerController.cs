@@ -88,7 +88,7 @@ namespace ProjectApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,DateStart,DateEnd,DiscountType,DiscountValue,DiscountValueType")]DiscountViewDetails viewModel)
+        public ActionResult Edit([Bind(Include = "Id,Name,DateStart,DateEnd,DiscountType,DiscountValue,DiscountValueType,DiscountCondition,PromotionDescription")]DiscountViewDetails viewModel)
         {
             if (ModelState.IsValid)
             {
