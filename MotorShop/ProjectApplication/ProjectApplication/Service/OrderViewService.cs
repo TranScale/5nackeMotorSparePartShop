@@ -27,5 +27,31 @@ namespace ProjectApplication.Service
             return list;
         }
 
+        public static OrderViewDetails GetDetails (Order order)
+        {
+            var detail = new OrderViewDetails
+            {
+                OrderId = order.OrderId,
+                CustomerName = order.CustomerName,
+                Phone = order.Phone,
+                Province = order.Province,
+                District = order.District,
+                Ward = order.Ward,
+                AddressDetail = order.AddressDetail,
+                Notes = order.Notes,
+                OrderDate = order.OrderDate,
+                TotalAmount = order.TotalAmount,
+                Status = order.Status,
+                Item = order.OrderDetails.Select(d => new OrderDetailItem
+                {
+                    ProductId = d.ProductId,
+                    ProductName = d.ProductName,
+                    Quantity = d.Quantity,
+                    Price = d.Price
+                }).ToList()
+            };
+            return detail;
+        }
+
     }
 }

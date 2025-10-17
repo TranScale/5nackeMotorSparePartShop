@@ -48,7 +48,7 @@
             <dt class="col-sm-3 fw-bold">Màu xe</dt>
             <dd class="col-sm-9">@Model.Color</dd>
         }
-        @if(Model.ProductType == "SparePart")
+        @if (Model.ProductType == "SparePart")
         { }
     </dl>
 </div>
@@ -57,15 +57,58 @@
     @using (Html.BeginForm("DeleteConfirmed", "ProductManager", FormMethod.Post, new { id = "deleteForm" }))
     {
         @Html.AntiForgeryToken()
-        @Html.Hidden("id",Model.ProductId)
+        @Html.Hidden("id", Model.ProductId)
         <button type="button" class="btn btn-danger" onclick="confirmDelete()">
             🗑️ Xóa
         </button>
     }
 
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addItemModal">
+        ➕ Thêm hàng
+    </button>
+
     @Html.ActionLink("✏️ Chỉnh sửa", "Edit", new { id = Model.ProductId }, new { @class = "btn btn-warning" })
+
     @Html.ActionLink("⬅️ Quay lại", "Index", null, new { @class = "btn btn-secondary ms-2" })
 </div>
+
+<!-- Modal Thêm hàng -->
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addItemModalLabel">Thêm hàng cho sản phẩm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+
+            @using (Html.BeginForm("AddItem", "ProductManager", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("productId", Model.ProductId)
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Số lượng muốn thêm</label>
+                        <input type="number" name="quantity" id="quantityInput" class="form-control" value="1" min="1" required />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Giá sản phẩm</label>
+                        <p>@($"{Model.ProductPrice:N0} ₫")</p>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Tổng giá</label>
+                        <p id="totalPrice" class="fw-bold text-primary">@($"{Model.ProductPrice:N0} ₫")</p>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-success">Xác nhận</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
 
 @section Scripts {
     <script>
@@ -74,5 +117,13 @@
                 document.getElementById("deleteForm").submit();
             }
         }
+        const price = @Model.ProductPrice;
+        const qtyInput = document.getElementById('quantityInput');
+        const totalPrice = document.getElementById('totalPrice');
+
+        qtyInput.addEventListener('input', () => {
+            const qty = parseInt(qtyInput.value) || 0;
+            totalPrice.textContent = (price * qty).toLocaleString('vi-VN') + ' ₫';
+        });
     </script>
 }

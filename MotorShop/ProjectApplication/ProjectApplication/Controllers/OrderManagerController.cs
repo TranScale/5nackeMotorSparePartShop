@@ -22,6 +22,7 @@ namespace ProjectApplication.Controllers
             var viewModel = OrderViewService.GetListIndexView(orders);
             return View(viewModel);
         }
+
         // 🚚 Xác nhận đã giao hàng (Processing → Delivered)
         [HttpPost]
         public ActionResult MarkAsDelivered(int id)
@@ -33,12 +34,13 @@ namespace ProjectApplication.Controllers
             if (order.Status == "Processing")
             {
                 order.Status = "Delivered";
+                ProductManagerService.Restock(id, db);
                 db.SaveChanges();
             }
 
             return RedirectToAction("Index");
         }
-
+        // 🚚 Xác nhận đơn hàng (Pending → Processing)
         [HttpPost]
         public ActionResult MarkAsProcessing(int id)
         {
@@ -54,19 +56,33 @@ namespace ProjectApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult CancelOrder(int id)
+        {
+            var order = db.Orders.Find(id);
+            if (order != null)
+            {
+                order.Status = "Cancelled";
+                db.SaveChanges();
+                TempData["Message"] = "Đơn hàng đã được hủy thành công.";
+            }
+            return RedirectToAction("Index");
+        }
+
         // GET: OrderManager/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Order order = db.Orders.Find(id);
-            if (order == null)
-            {
                 return HttpNotFound();
-            }
-            return View(order);
+
+            var order = db.Orders.Include("OrderDetails").FirstOrDefault(o => o.OrderId == id);
+
+            if(order == null) 
+                return HttpNotFound();
+
+            var viewModel = OrderViewService.GetDetails(order);
+
+            return View(viewModel);
         }
 
         // GET: OrderManager/Create
@@ -76,8 +92,6 @@ namespace ProjectApplication.Controllers
         }
 
         // POST: OrderManager/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OrderId,CustomerName,Phone,Province,District,Ward,AddressDetail,Notes,OrderDate,TotalAmount,Status")] Order order)
@@ -108,8 +122,6 @@ namespace ProjectApplication.Controllers
         }
 
         // POST: OrderManager/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "OrderId,CustomerName,Phone,Province,District,Ward,AddressDetail,Notes,OrderDate,TotalAmount,Status")] Order order)

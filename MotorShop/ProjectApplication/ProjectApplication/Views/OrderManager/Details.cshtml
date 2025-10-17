@@ -1,98 +1,115 @@
-﻿@model ProjectApplication.Models.Order
+﻿@model ProjectApplication.Models.OrderViewDetails
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết đơn hàng";
 }
 
-<h2>Details</h2>
+<h2 class="mb-3">Chi tiết đơn hàng #@Model.OrderId</h2>
 
-<div>
-    <h4>Order</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerName)
-        </dt>
+<div class="card shadow-sm p-4">
+    <dl class="row mb-0">
+        <dt class="col-sm-3 fw-bold">Tên khách hàng</dt>
+        <dd class="col-sm-9">@Model.CustomerName</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.CustomerName)
+        <dt class="col-sm-3 fw-bold">Số điện thoại</dt>
+        <dd class="col-sm-9">@Model.Phone</dd>
+
+        <dt class="col-sm-3 fw-bold">Địa chỉ</dt>
+        <dd class="col-sm-9">
+            @($"{Model.AddressDetail}, {Model.Ward}, {Model.District}, {Model.Province}")
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
+        <dt class="col-sm-3 fw-bold">Ghi chú</dt>
+        <dd class="col-sm-9">@(string.IsNullOrEmpty(Model.Notes) ? "(Không có)" : Model.Notes)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
+        <dt class="col-sm-3 fw-bold">Ngày đặt hàng</dt>
+        <dd class="col-sm-9">@Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Province)
-        </dt>
+        <dt class="col-sm-3 fw-bold">Tổng tiền</dt>
+        <dd class="col-sm-9 fw-bold text-danger">@($"{Model.TotalAmount:N0} ₫")</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Province)
-        </dd>
+        <dt class="col-sm-3 fw-bold">Trạng thái</dt>
+        <dd class="col-sm-9">
+            @{
+                var badgeClass = "bg-secondary";
 
-        <dt>
-            @Html.DisplayNameFor(model => model.District)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.District)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ward)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ward)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AddressDetail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AddressDetail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Notes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Notes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.OrderDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OrderDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalAmount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotalAmount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
+                if (Model.Status == "Pending")
+                {
+                    badgeClass = "bg-warning text-dark";
+                }
+                else if (Model.Status == "Processing")
+                {
+                    badgeClass = "bg-info text-dark";
+                }
+                else if (Model.Status == "Delivered")
+                {
+                    badgeClass = "bg-success";
+                }
+            }
+            <span class="badge @badgeClass">@Model.Status</span>
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<hr />
+
+<h4 class="mt-4">Danh sách sản phẩm</h4>
+<table class="table table-bordered table-striped mt-2">
+    <thead class="table-light">
+        <tr>
+            <th>Mã SP</th>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Đơn giá (₫)</th>
+            <th>Thành tiền (₫)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Item)
+        {
+            <tr>
+                <td>@item.ProductId</td>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.Price.ToString("N0")</td>
+                <td class="fw-bold">@item.SubTotal.ToString("N0")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="mt-3">
+    @if (Model.Status == "Pending")
+    {
+        <form action="@Url.Action("MarkAsProcessing", "OrderManager", new { id = Model.OrderId })" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-success me-1">✅ Xác nhận đơn</button>
+        </form>
+
+        <form action="@Url.Action("CancelOrder", "OrderManager", new { id = Model.OrderId })" method="post" style="display:inline;" onsubmit="return confirmCancel();">
+            <button type="submit" class="btn btn-danger">❌ Hủy</button>
+        </form>
+    }
+    else if (Model.Status == "Processing")
+    {
+        <form action="@Url.Action("MarkAsDelivered", "OrderManager", new { id = Model.OrderId })" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-primary">📦 Đánh dấu đã giao</button>
+        </form>
+    }
+    else if (Model.Status == "Cancelled")
+    {
+        <span class="badge bg-danger me-2">Đơn hàng đã bị hủy</span>
+    }
+
+    @Html.ActionLink("⬅️ Quay lại", "Index", null, new { @class = "btn btn-secondary ms-2" })
+</div>
+
+@section Scripts {
+    <script>
+        function confirmCancel() {
+            return confirm("Bạn có chắc chắn muốn hủy đơn hàng này không?");
+        }
+    </script>
+}
+
+

@@ -6,8 +6,11 @@
 
 <h2>Quản lý cửa hàng</h2>
 
-<button id="btnManagerProduct" class="btn btn-primary mb-2 ml-2">Quản lý sản phẩm</button>
-<button id="btnCoupon" class="btn btn-primary mb-2 ml-2">Chương trình khuyến mãi/Mã giảm giá</button>
+<div class="mb-3">
+    <button id="btnManagerProduct" class="btn btn-primary me-2">Quản lý sản phẩm</button>
+    <button id="btnDiscount" class="btn btn-primary me-2">Chương trình khuyến mãi</button>
+    <button id="btnOrder" class="btn btn-primary me-2">Đơn hàng</button>
+</div>
 
 <h2>Danh sách sản phẩm</h2>
 
@@ -59,6 +62,9 @@
 
             $("#btnCoupon").click(function () {
                 window.location.href = '@Url.Action("Index", "DiscountManager")';
+            });
+            $("#btnOrder").click(function () {
+                window.location.href = '@Url.Action("Index", "OrderManager")';
             });
         });
     </script>

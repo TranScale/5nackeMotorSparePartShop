@@ -115,8 +115,58 @@ namespace ProjectApplication.Service
                 Quantity = viewModel.ProductQuantity, 
                 ProductDescription = viewModel.ProductDescription
             };
+        }
+        //Nhập hàng 
+        public static void AddItem(int id, int quantity, ShopDbContext db)
+        {
+            var product = db.Products.Find(id);
+            if (product == null)
+                throw new Exception("Không tìm thấy sản phẩm.");
 
+            var order = new Order
+            {
+                CustomerName = "Admin",
+                OrderDate = DateTime.Now,
+                TotalAmount = -(product.Price * quantity),
+                Status = "Pending" // hoặc Pending nếu bạn muốn duyệt trước
+            };
+            db.Orders.Add(order);
+            db.SaveChanges();
 
+            var orderDetail = new OrderDetail
+            {
+                OrderId = order.OrderId,
+                ProductId = product.ProductId,
+                ProductName = product.ProductName,
+                Quantity = quantity,
+                Price = product.Price
+            };
+
+            db.OrderDetails.Add(orderDetail);
+
+            db.SaveChanges();
+        }
+
+        //Đánh dấu là đã giao hàng 
+        public static void Restock(int id, ShopDbContext db)
+        {
+            var order = db.Orders.Find(id);
+            if (order == null)
+                throw new Exception("Không thấy đơn hàng nha bro !!!");
+
+            if(order.CustomerName == "Admin" && order.Status == "Delivered")
+            {
+                var items = db.OrderDetails.Where(i => i.OrderId == order.OrderId).ToList();
+                foreach (var item in items)
+                {
+                    var product = db.Products.Find(item.ProductId);
+                    if (product != null)
+                    {
+                        product.Quantity += item.Quantity; // ✅ Cộng số lượng vào kho
+                    }
+                }
+                db.SaveChanges();
+            }
         }
 
         

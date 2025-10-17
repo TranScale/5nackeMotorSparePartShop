@@ -46,25 +46,68 @@ namespace ProjectApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductId,BrandId,ProductName,ProductType,ProductPrice,ProductQuantity,ProductDescription,Engine,VehicleType,FuelCapacity,Color")] ProductViewDetail viewModel)
         {
+            int productId; // Giữ ProductId sau khi thêm
+
             if (viewModel.ProductType == "Vehicle")
             {
                 var vehicle = ProductManagerService.GetVehicle(viewModel);
+                vehicle.Quantity = 0;
                 db.Vehicles.Add(vehicle);
+                db.SaveChanges(); // ⚡ Lưu trước để có ProductId
+                productId = vehicle.ProductId;
             }
             else if (viewModel.ProductType == "SparePart")
             {
                 var sparePart = ProductManagerService.GetSparePart(viewModel);
+                sparePart.Quantity = 0;
                 db.SpareParts.Add(sparePart);
+                db.SaveChanges();
+                productId = sparePart.ProductId;
             }
             else
             {
                 var product = ProductManagerService.GetProduct(viewModel);
+                product.Quantity = 0;
                 db.Products.Add(product);
+                db.SaveChanges();
+                productId = product.ProductId;
             }
 
+            // ✅ 2. Tạo Order "Admin nhập hàng"
+            var order = OrderManageService.AdminOrder(viewModel);
+
+            db.Orders.Add(order);
             db.SaveChanges();
+
+            // ✅ 3. Tạo OrderDetail liên kết đúng ProductId
+            var orderDetail = new OrderDetail();
+            orderDetail = OrderManageService.GetOrderDetail(viewModel, order.OrderId, productId);
+
+            db.OrderDetails.Add(orderDetail);
+            db.SaveChanges();
+
             return RedirectToAction("Index");
         }
+
+
+        //Cập nhật thêm sản phẩm.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddItem(int productId, int quantity)
+        {
+            try
+            {
+                ProductManagerService.AddItem(productId, quantity, db);
+                TempData["SuccessMessage"] = $"Đã thêm {quantity} sản phẩm và tạo đơn hàng thành công!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Lỗi: {ex.Message}";
+            }
+
+            return RedirectToAction("Details", new { id = productId });
+        }
+
 
         // GET: ProductManager/Edit/5
         public ActionResult Edit(int? id)
@@ -134,6 +177,8 @@ namespace ProjectApplication.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
 
         protected override void Dispose(bool disposing)
         {

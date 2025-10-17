@@ -47,6 +47,10 @@
                     {
                         <span class="badge bg-success">Đã giao</span>
                     }
+                    else if (order.OrderStatus == "Cancelled")
+                    {
+                        <span class="badge bg-danger">Đã hủy</span>
+                    }
                 </td>
 
                 <!-- Tổng tiền -->
@@ -59,14 +63,19 @@
                         <form action="@Url.Action("MarkAsProcessing", "OrderManager", new { id = order.Id })" method="post" style="display:inline;">
                             <button type="submit" class="btn btn-success btn-sm">Xác nhận</button>
                         </form>
+                        @Html.ActionLink("Chi tiết", "Details", "OrderManager", new { id = order.Id }, new { @class = "btn btn-outline-info btn-sm me-2" })
                     }
                     else if (order.OrderStatus == "Processing")
                     {
                         <form action="@Url.Action("MarkAsDelivered", "OrderManager", new { id = order.Id })" method="post" style="display:inline;">
                             <button type="submit" class="btn btn-primary btn-sm">Đã giao</button>
                         </form>
+                        @Html.ActionLink("Chi tiết", "Details", "OrderManager", new { id = order.Id }, new { @class = "btn btn-outline-info btn-sm me-2" })
                     }
-                    @Html.ActionLink("Chi tiết", "Details", "OrderManager", new { id = order.Id }, new { @class = "btn btn-outline-info btn-sm me-2" })
+                    else if (order.OrderStatus == "Cancelled")
+                    {
+                        @Html.ActionLink("Chi tiết", "Details", "OrderManager", new { id = order.Id }, new { @class = "btn btn-outline-info btn-sm me-2" })
+                    }
                 </td>
             </tr>
         }
