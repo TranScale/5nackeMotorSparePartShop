@@ -5,6 +5,7 @@ using System.Web;
 using ProjectApplication.Models;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.IO;
 
 
 namespace ProjectApplication.Service
@@ -65,6 +66,7 @@ namespace ProjectApplication.Service
             part.BrandId = viewModel.BrandId;
             part.Quantity = viewModel.ProductQuantity;
             part.ProductDescription = viewModel.ProductDescription;
+            part.ImagePath = viewModel.ImagePath;
 
             return part;
         }
@@ -79,6 +81,7 @@ namespace ProjectApplication.Service
             part.BrandId = viewModel.BrandId;
             part.Quantity = viewModel.ProductQuantity;
             part.ProductDescription = viewModel.ProductDescription;
+            part.ImagePath = viewModel.ImagePath;
 
         }
 
@@ -96,7 +99,7 @@ namespace ProjectApplication.Service
             vehicle.VehicleType = viewModel.VehicleType;
             vehicle.FuelCapacity = viewModel.FuelCapacity;
             vehicle.Color = viewModel.Color;
-
+            vehicle.ImagePath = viewModel.ImagePath;
             return vehicle;
         }
 
@@ -114,6 +117,7 @@ namespace ProjectApplication.Service
             vehicle.VehicleType = viewModel.VehicleType;
             vehicle.FuelCapacity = viewModel.FuelCapacity;
             vehicle.Color = viewModel.Color;
+            vehicle.ImagePath = viewModel.ImagePath; // thêm vào luôn nếu muốn
 
         }
 
@@ -184,7 +188,44 @@ namespace ProjectApplication.Service
             }
         }
 
-        
+        public static string saveProductsImage(HttpPostedFileBase image)
+        {
+            if (image == null || image.ContentLength == 0)
+                return null;
+
+            try
+            {
+                string fileName = Path.GetFileNameWithoutExtension(image.FileName);
+                string extension = Path.GetExtension(image.FileName);
+                string uniqueFileName = fileName + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + extension;
+
+                string folderPath = HttpContext.Current.Server.MapPath("~/Images/");
+
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
+
+                string filePath = Path.Combine(folderPath, uniqueFileName);
+
+                // ⚡ In ra console hoặc log
+                System.Diagnostics.Debug.WriteLine("📂 Save path: " + filePath);
+
+                // ⚡ Thử ghi file
+                image.SaveAs(filePath);
+
+                System.Diagnostics.Debug.WriteLine("✅ Saved file successfully!");
+
+                return "/Images/" + uniqueFileName;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("❌ ERROR saving image: " + ex.Message);
+                return null;
+            }
+        }
+
+
+
+
 
     }
 }

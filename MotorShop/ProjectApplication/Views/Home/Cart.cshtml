@@ -1,0 +1,344 @@
+﻿@model List<ProjectApplication.Models.CartItemModel>
+@{
+    ViewBag.Title = "Giỏ Hàng Của Bạn";
+    decimal cartTotal = Model?.Sum(item => item.SubTotal) ?? 0;
+
+    // KIỂM TRA SESSION CỜ
+    bool hasDiscountedItem = (Session["HasDiscountedItem"] as bool?) ?? false;
+}
+               <div class="container mt-4">
+                   <h2><i class="fas fa-shopping-cart"></i> Giỏ Hàng</h2>
+                   <hr />
+
+
+                   @if (Model == null || Model.Count == 0)
+                   {
+                   <div class="alert alert-warning text-center" role="alert">
+                       Giỏ hàng của bạn hiện đang trống! 🛒
+                   </div>
+                   <p class="text-center">
+                       @Html.ActionLink("Quay lại mua sắm", "Index", "Home", null, new { @class = "btn btn-info" })
+                   </p>
+                   }
+                   else
+                   {
+                   <table class="table table-bordered table-hover">
+                       <thead class="thead-light">
+                           <tr>
+                               <th>Sản phẩm</th>
+                               <th class="text-right">Giá (VNĐ)</th>
+                               <th class="text-center">Số lượng</th>
+                               <th class="text-right">Tổng cộng (VNĐ)</th>
+                               <th></th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           @foreach (var item in Model)
+                           {
+                           <tr>
+                               <td>
+                                   @Html.ActionLink(item.ProductName, "Details", "Home", new { id = item.ProductId }, null)
+                               </td>
+                               <td class="text-right">@string.Format("{0:N0}", item.Price)</td>
+
+
+                               <td class="text-center">
+                                   @using (Html.BeginForm("UpdateCartItem", "Home", FormMethod.Post, new { @class = "d-inline-flex" }))
+                                   {
+                                   @Html.AntiForgeryToken()
+                                   <input type="hidden" name="productId" value="@item.ProductId" />
+
+                                   <div class="input-group input-group-sm" style="width: 100px;">
+                                       <input type="number"
+                                              name="newQuantity"
+                                              value="@item.Quantity"
+                                              min="1"
+                                              class="form-control text-center"
+                                              onchange="this.form.submit()" />
+                                   </div>
+                                   }
+                               </td>
+
+                               <td class="text-right">@string.Format("{0:N0}", item.SubTotal)</td>
+
+                               <td>
+                                   <a href="@Url.Action("RemoveFromCart", "Home" , new { productId=item.ProductId })" class="btn btn-danger btn-sm">
+                                       <i class="fas fa-trash-alt"></i> Xóa
+                                   </a>
+                               </td>
+                           </tr>
+                           }
+                       </tbody>
+                       <tfoot>
+                           <tr>
+                               <td colspan="3" class="text-right">
+                                   <strong>Tổng tiền giỏ hàng:</strong>
+                               </td>
+                               <td class="text-right">
+                                   <strong id="cartTotal">@string.Format("{0:N0}", cartTotal) VNĐ</strong>
+                               </td>
+                               <td></td>
+                           </tr>
+
+                           <!-- Hàng hiển thị giảm giá (ẩn mặc định) -->
+                           <tr id="discountRow" style="display:none;">
+                               <td colspan="3" class="text-right text-success">
+                                   <strong>Giảm giá:</strong>
+                               </td>
+                               <td class="text-right text-success">
+                                   <strong id="discountAmount">-0 VNĐ</strong>
+                               </td>
+                               <td></td>
+                           </tr>
+
+                           <!-- Hàng hiển thị tổng tiền sau khi giảm -->
+                           <tr id="finalTotalRow" style="display:none;">
+                               <td colspan="3" class="text-right text-primary">
+                                   <strong>Tổng sau giảm:</strong>
+                               </td>
+                               <td class="text-right text-primary">
+                                   <strong id="finalTotalAmount">0 VNĐ</strong>
+                               </td>
+                               <td></td>
+                           </tr>
+                       </tfoot>
+
+                   </table>
+
+                   <div class="card p-3 mb-4 border-info">
+                       <h5 class="card-title text-info mb-3"><i class="fas fa-tag"></i> Mã giảm giá (Coupon)</h5>
+
+                       @if (hasDiscountedItem)
+                       {
+                       <div class="alert alert-warning">
+                           Sản phẩm trong giỏ đã có giá khuyến mãi, không áp dụng thêm Mã giảm giá.
+                       </div>
+                       }
+
+                       <div class="input-group">
+                           <input type="text"
+                                  id="couponCode"
+                                  class="form-control"
+                                  placeholder="Nhập mã giảm giá"
+                                  @if (hasDiscountedItem) { <text> disabled</text> } /> <div class="input-group-append">
+                               <button class="btn btn-primary"
+                                       type="button"
+                                       id="applyCouponBtn"
+                                       @if (hasDiscountedItem) { <text> disabled</text> }>
+                        Kiểm tra & Áp dụng
+                    </button>
+                           </div>
+                       </div>
+                       <div id="couponMessage" class="mt-2" style="font-size: 0.9rem;">
+                       </div>
+                   </div>
+
+                   using (Html.BeginForm("PlaceOrder", "Home", FormMethod.Post, new { @class = "form-checkout mt-5" }))
+                   {
+                   @Html.AntiForgeryToken()
+
+                   <h4 class="mb-4" style="color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px;">
+                       THÔNG TIN GIAO HÀNG
+                   </h4>
+
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Họ và tên <span class="text-danger">*</span></label>
+                       <div class="col-sm-9">
+                           <input type="text" name="customerName" class="form-control" placeholder="Nguyễn Văn A" required />
+                       </div>
+                   </div>
+
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Số điện thoại <span class="text-danger">*</span></label>
+                       <div class="col-sm-9">
+                           <input type="tel" name="phone" class="form-control"
+                                  placeholder="0901 234 567"
+                                  pattern="[0-9]{10,12}"
+                                  title="Số điện thoại phải chứa 10-12 chữ số"
+                                  required />
+                       </div>
+                   </div>
+
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Tỉnh/Thành Phố<span class="text-danger">*</span></label>
+                       <div class="col-sm-9">
+                           <select name="province" class="form-control" required>
+                               <option value="">Vui lòng chọn Tỉnh/Thành Phố</option>
+                           </select>
+                       </div>
+                   </div>
+
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Quận/Huyện <span class="text-danger">*</span></label>
+                       <div class="col-sm-9">
+                           <input type="text" name="district" class="form-control" placeholder="Nhập tên Quận/Huyện" required />
+                       </div>
+                   </div>
+
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Phường/Xã <span class="text-danger">*</span></label>
+                       <div class="col-sm-9">
+                           <input type="text" name="ward" class="form-control" placeholder="Nhập tên Phường/Xã" required />
+                       </div>
+                   </div>
+
+
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Địa chỉ (số nhà, đường) <span class="text-danger">*</span></label>
+                       <div class="col-sm-9">
+                           <input type="text" name="addressDetail" class="form-control" placeholder="(số nhà, tên đường/ngõ...)" required />
+                       </div>
+                   </div>
+
+                   <div class="form-group row">
+                       <label class="col-sm-3 col-form-label">Ghi chú</label>
+                       <div class="col-sm-9">
+                           <textarea name="notes" class="form-control" rows="3" placeholder="Ghi chú thêm nếu có"></textarea>
+                       </div>
+                   </div>
+
+                   <div class="form-group row mt-4">
+                       <div class="col-sm-9 offset-sm-3">
+                           <button type="submit" class="btn btn-info">
+                               GỬI ĐƠN HÀNG
+                           </button>
+                           @Html.ActionLink("Tiếp tục mua sắm", "Index", "Home", null, new { @class = "btn btn-info" })
+                       </div>
+                   </div>
+                   }
+                   }
+               </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // --- TOAST ---
+            var successMessage = '@TempData["SuccessMessage"]';
+            if (successMessage && successMessage.length > 0) {
+                successMessage = successMessage.replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+                var toastHtml = `
+            <div class="toast bg-success text-white text-center" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1500">
+                <div class="toast-body">
+                    <strong>Thành công!</strong> ${successMessage}
+                </div>
+            </div>`;
+                $('#toast-container').append(toastHtml);
+                var newToast = $('#toast-container').find('.toast:last');
+                newToast.toast({ delay: 1500 }).toast('show');
+            }
+
+            // --- AJAX ĐỊA CHỈ ---
+            var provinceSelect = $('select[name="province"]');
+
+            function loadData(url, targetSelect, defaultOptionText) {
+                targetSelect.empty().append('<option value="">' + defaultOptionText + '</option>').prop('disabled', true);
+
+                if (url.includes('GetProvinces')) {
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data && data.length > 0) {
+                                if (data[0].Id === "Error") {
+                                    targetSelect.append($('<option></option>').attr('value', data[0].Id).text(data[0].Name));
+                                } else {
+                                    $.each(data, function (key, entry) {
+                                        targetSelect.append($('<option></option>').attr('value', entry.Id).text(entry.Name));
+                                    });
+                                }
+                            }
+                            targetSelect.prop('disabled', false);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Không thể tải dữ liệu Tỉnh/Thành: " + url, error);
+                            targetSelect.prop('disabled', false);
+                        }
+                    });
+                }
+            }
+            loadData('@Url.Action("GetProvinces", "Home")', provinceSelect, 'Vui lòng chọn Tỉnh/Thành');
+
+             // --- LOGIC MÃ GIẢM GIÁ ---
+            $('#applyCouponBtn').click(function () {
+                var couponCode = $('#couponCode').val();
+                var btn = $(this);
+
+                if (couponCode.length === 0) {
+                    $('#couponMessage').html('<span class="text-danger">Vui lòng nhập mã giảm giá.</span>');
+                    updateDisplay(0); // Đảm bảo xóa giảm giá nếu ô trống
+                    return;
+                }
+
+                btn.prop('disabled', true).text('Đang kiểm tra...');
+
+                $.ajax({
+                    url: '@Url.Action("ApplyCoupon", "Home")',
+                    type: 'POST',
+                    data: { code: couponCode },
+                    dataType: 'json',
+                    headers: {
+                        '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() // Thêm token CSRF
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $('#couponMessage').html('<span class="text-success">' + response.message + '</span>');
+                        } else {
+                            $('#couponMessage').html('<span class="text-danger">' + response.message + '</span>');
+                        }
+                        // Cập nhật giao diện dù thành công hay thất bại
+                        updateDisplay(response.discount);
+                    },
+                    error: function () {
+                        $('#couponMessage').html('<span class="text-danger">Có lỗi xảy ra khi kiểm tra mã.</span>');
+                        updateDisplay(0);
+                    },
+                    complete: function () {
+                        btn.prop('disabled', false).text('Kiểm tra & Áp dụng');
+                    }
+                });
+            });
+
+            // Hàm định dạng số tiền (Ví dụ: 120000 -> 120.000)
+            function formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+
+            // Hàm cập nhật hiển thị Tổng tiền và Giảm giá
+            function updateDisplay(discountValue) {
+                var cartTotal = parseFloat('@cartTotal'); // Lấy tổng tiền ban đầu từ Razor
+
+                // Nếu không có giảm giá (hoặc giảm giá = 0)
+                if (discountValue <= 0) {
+                    $('#discountRow').hide();
+                    $('#finalTotalRow').hide();
+                } else {
+                    var finalTotal = cartTotal - discountValue;
+
+                    $('#discountAmount').text('-' + formatNumber(discountValue) + ' VNĐ');
+                    $('#finalTotalAmount').text(formatNumber(finalTotal) + ' VNĐ');
+
+                    $('#discountRow').show();
+                    $('#finalTotalRow').show();
+                }
+            }
+            function updateDisplay(discountValue) {
+                var cartTotal = parseFloat('@cartTotal'); // tổng tiền gốc
+
+                if (discountValue <= 0) {
+                    $('#discountRow').hide();
+                    $('#finalTotalRow').hide();
+                    $('#cartTotal').text(formatNumber(cartTotal) + ' VNĐ');
+                } else {
+                    var finalTotal = cartTotal - discountValue;
+                    $('#discountAmount').text('-' + formatNumber(discountValue) + ' VNĐ');
+                    $('#finalTotalAmount').text(formatNumber(finalTotal) + ' VNĐ');
+
+                    $('#discountRow').show();
+                    $('#finalTotalRow').show();
+                }
+            }
+
+        });
+    </script>
+}
