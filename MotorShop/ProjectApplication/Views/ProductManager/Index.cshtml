@@ -43,7 +43,14 @@
         {
             <tr>
                 <td>
-                    <img src="@(string.IsNullOrEmpty(item.ImagePath) ? Url.Content("~/Images/default.png") : item.ImagePath)" alt="Product Image" width="150" />
+                    @{
+                        var imagePath = string.IsNullOrEmpty(item.ImagePath)
+                            ? Url.Content("~/Content/Images/default.png")
+                            : Url.Content(item.ImagePath);
+                    }
+                    <img src="@imagePath" alt="Product Image" width="150" />
+
+
                 </td>
                 <!-- Tên sản phẩm là link đến trang Details -->
                 <td>

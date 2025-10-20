@@ -178,35 +178,31 @@ namespace ProjectApplication.Service
             if (image == null || image.ContentLength == 0)
                 return null;
 
-            try
-            {
-                string fileName = Path.GetFileNameWithoutExtension(image.FileName);
-                string extension = Path.GetExtension(image.FileName);
-                string uniqueFileName = fileName + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + extension;
+            string fileName = Path.GetFileNameWithoutExtension(image.FileName);
+            string extension = Path.GetExtension(image.FileName);
 
-                string folderPath = HttpContext.Current.Server.MapPath("~/Images/");
+            // 👉 Đổi đuôi trước khi tạo tên file
+            if (extension.Equals(".webp", StringComparison.OrdinalIgnoreCase))
+                extension = ".png";
 
-                if (!Directory.Exists(folderPath))
-                    Directory.CreateDirectory(folderPath);
+            string uniqueFileName = fileName + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + extension;
 
-                string filePath = Path.Combine(folderPath, uniqueFileName);
+            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "Images");
 
-                // ⚡ In ra console hoặc log
-                System.Diagnostics.Debug.WriteLine("📂 Save path: " + filePath);
+            Debug.WriteLine(">>> [BaseDir] " + AppDomain.CurrentDomain.BaseDirectory);
+            Debug.WriteLine(">>> [Save path] " + folderPath);
+            Debug.WriteLine(">>> [Return path] /Content/Images/" + uniqueFileName);
 
-                // ⚡ Thử ghi file
-                image.SaveAs(filePath);
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
 
-                System.Diagnostics.Debug.WriteLine("✅ Saved file successfully!");
+            string filePath = Path.Combine(folderPath, uniqueFileName);
+            image.SaveAs(filePath);
 
-                return "/Images/" + uniqueFileName;
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("❌ ERROR saving image: " + ex.Message);
-                return null;
-            }
+            return "/Content/Images/" + uniqueFileName;
         }
+
+
 
 
 
