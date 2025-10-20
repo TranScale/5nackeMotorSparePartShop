@@ -54,6 +54,9 @@ namespace ProjectApplication.Models
 
         [Display(Name = "Màu xe")]
         public vehicleColor Color { get; set; }
+        public decimal? OriginalPrice { get; set; } // chỉ hiển thị nếu có giảm
+
+        public bool HasDiscount { get; set; } // có đang được khuyến mãi không
 
         // Thuộc tính để upload file
         public HttpPostedFileBase ImageFile { get; set; }

@@ -1,4 +1,4 @@
-﻿@model List<ProjectApplication.Models.ProductViewIndex>  
+﻿@model List<ProjectApplication.Models.ProductViewIndex>
 @{
     ViewBag.Title = "Cửa Hàng";
 }
@@ -29,6 +29,7 @@
     <table class="table table-striped table-hover mt-3">
         <thead class="thead-dark">
             <tr>
+                <th>IMAGE</th>
                 <th>Tên</th>
                 <th>Giá</th>
                 <th>Còn lại</th>
@@ -41,6 +42,25 @@
                 foreach (var item in Model)
                 {
                     <tr>
+                        <td>
+                            @* --- KHỐI ĐƯỜNG DẪN ẢNH --- *@
+                            @{
+                                string path = item.ImagePath;
+
+                                // 1. Nếu đường dẫn rỗng, dùng ảnh mặc định
+                                if (string.IsNullOrEmpty(path))
+                                {
+                                    path = "Content/Images/default.png";
+                                }
+
+                                path = path.TrimStart('/', '~');
+                                path = "~/" + path;
+
+                                var imagePath = Url.Content(path);
+                            }
+                            <img src="@imagePath" alt="Product Image" width="150" />
+                            @* ---------------------------------------------------------------- *@
+                        </td>
                         <td>
                             @Html.ActionLink(item.ProductName, "Details", "Home", new { id = item.ProductId }, null)
                         </td>
@@ -75,7 +95,7 @@
             else
             {
                 <tr>
-                    <td colspan="4" class="text-center">Không tìm thấy sản phẩm nào.</td>
+                    <td colspan="5" class="text-center">Không tìm thấy sản phẩm nào.</td>
                 </tr>
             }
         </tbody>

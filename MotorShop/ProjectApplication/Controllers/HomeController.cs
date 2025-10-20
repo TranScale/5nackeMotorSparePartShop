@@ -253,6 +253,7 @@ public class HomeController : Controller
 
             return new ProductViewIndex
             {
+                ImagePath = p.ImagePath,
                 ProductId = p.ProductId,
                 ProductName = p.ProductName,
                 ProductPrice = finalPrice,
@@ -276,7 +277,7 @@ public class HomeController : Controller
             productList = ProductViewService.GetListIndex(products);
         }
 
-        // 6️⃣ Dropdown lọc loại sản phẩm
+        // 6️⃣ Dropdown lọc loại sản phẩm 
         ViewBag.ProductType = new SelectList(new List<SelectListItem>
     {
         new SelectListItem { Text = "Tất cả", Value = "All" },
@@ -293,22 +294,73 @@ public class HomeController : Controller
     // ---------------- GET: Home/Details/? ----------------
     //----------------------------------------------------------------
     public ActionResult Details(int? id)
+{
+    if (id == null)
     {
-        if (id == null)
-        {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        }
-
-        var product = db.Products.Find(id);
-        if (product == null)
-        {
-            return HttpNotFound();
-        }
-
-        ProductViewDetail vm = ProductViewService.GetDetail(product);
-
-        return View(vm);
+        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
     }
+
+    var product = db.Products.Find(id);
+    if (product == null)
+    {
+        return HttpNotFound();
+    }
+
+    // Lấy View Model từ Service (hoặc tự ánh xạ)
+    ProductViewDetail vm = ProductViewService.GetDetail(product);
+    
+    // Đảm bảo ImagePath được gán (vì Service có thể chưa gán)
+    if (vm != null)
+    {
+        vm.ImagePath = product.ImagePath;
+    }
+    
+    // ⭐ LOGIC TÍNH GIÁ KHUYẾN MÃI (BỔ SUNG) ⭐
+    var today = DateTime.Now.Date;
+    decimal finalPrice = product.Price;
+    decimal? originalPrice = null;
+    bool hasDiscount = false;
+
+    // Lấy tất cả Promotion đang active áp dụng cho sản phẩm này
+    var applicablePromotions = db.Promotions
+        .Where(p => p.isActive && 
+                    today >= p.DateStart && 
+                    today <= p.DateEnd && 
+                    (p.Condition == product.ProductType || p.Condition == "All"))
+        .ToList();
+
+    if (applicablePromotions.Any())
+    {
+        hasDiscount = true;
+        originalPrice = product.Price;
+
+        // Chọn khuyến mãi mạnh nhất
+        var bestPromotion = applicablePromotions
+            .OrderByDescending(promo => promo.DiscountValue)
+            .First();
+
+        if (bestPromotion.DiscountValueType == DiscountValueType.Percent)
+        {
+            finalPrice = product.Price - (product.Price * bestPromotion.DiscountValue / 100);
+        }
+        else // Giảm theo số tiền (Amount)
+        {
+            finalPrice = product.Price - bestPromotion.DiscountValue;
+        }
+
+        if (finalPrice < 0) finalPrice = 0; // tránh âm giá
+    }
+    
+    // Gán giá và thông tin giảm giá vào View Model
+    if (vm != null)
+    {
+        vm.ProductPrice = finalPrice;       // Giá sau cùng (đã giảm nếu có)
+        vm.OriginalPrice = originalPrice;   // Giá gốc
+        vm.HasDiscount = hasDiscount;       // Có giảm giá hay không
+    }
+
+    return View(vm);
+}
     //----------------------------------------------------------------
     // ---------------- GET: Home/Cart ----------------
     //----------------------------------------------------------------
