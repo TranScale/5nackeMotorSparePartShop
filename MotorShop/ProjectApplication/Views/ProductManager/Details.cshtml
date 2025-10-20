@@ -4,63 +4,78 @@
     ViewBag.Title = "Chi tiết sản phẩm";
 }
 
-<h2 class="mb-3">Chi tiết sản phẩm</h2>
+<h2 class="mb-3 text-primary fw-bold">Chi tiết sản phẩm</h2>
 
 <div class="card shadow-sm p-4">
-    <dl class="row mb-0">
-        <dt class="col-sm-3 fw-bold">Mã sản phẩm</dt>
-        <dd class="col-sm-9">@Model.ProductId</dd>
+    <div class="row">
+        <!-- 🖼️ Ảnh sản phẩm -->
+        <div class="col-md-5 text-center mb-3 mb-md-0">
+            <img src="@Url.Content(string.IsNullOrEmpty(Model.ImagePath)
+            ? "~/Content/Images/default.png"
+            : (Model.ImagePath.StartsWith("/") ? Model.ImagePath : "/" + Model.ImagePath))"
+                 alt="@Model.ProductName"
+                 class="img-fluid rounded-3 border shadow-sm product-image"
+                 style="max-height: 350px; object-fit: contain; transition: transform .3s;" />
 
-        <dt class="col-sm-3 fw-bold">Tên sản phẩm</dt>
-        <dd class="col-sm-9">@Model.ProductName</dd>
+        </div>
 
-        <dt class="col-sm-3 fw-bold">Hãng</dt>
-        <dd class="col-sm-9">@Model.BrandName</dd>
+        <!-- 📋 Thông tin sản phẩm -->
+        <div class="col-md-7">
+            <h4 class="fw-bold text-dark mb-3">@Model.ProductName</h4>
 
-        <dt class="col-sm-3 fw-bold">Giá</dt>
-        <dd class="col-sm-9">@($"{Model.ProductPrice:N0} ₫")</dd>
+            <dl class="row mb-0">
+                <dt class="col-sm-4 fw-bold">Mã sản phẩm</dt>
+                <dd class="col-sm-8">@Model.ProductId</dd>
 
-        <dt class="col-sm-3 fw-bold">Loại sản phẩm</dt>
-        <dd class="col-sm-9">
-            <span class="badge bg-info text-dark">@Model.ProductType</span>
-        </dd>
+                <dt class="col-sm-4 fw-bold">Hãng</dt>
+                <dd class="col-sm-8">@Model.BrandName</dd>
 
-        <dt class="col-sm-3 fw-bold">Mô tả sản phẩm</dt>
-        <dd class="col-sm-9">@Model.ProductDescription</dd>
+                <dt class="col-sm-4 fw-bold">Giá</dt>
+                <dd class="col-sm-8 text-danger fw-semibold">@($"{Model.ProductPrice:N0} ₫")</dd>
 
-        <dt class="col-sm-3 fw-bold">Số lượng còn lại</dt>
-        <dd class="col-sm-9">@Model.ProductQuantity</dd>
+                <dt class="col-sm-4 fw-bold">Loại</dt>
+                <dd class="col-sm-8">
+                    <span class="badge bg-info text-dark">@Model.ProductType</span>
+                </dd>
 
-        @if (Model.ProductType == "Vehicle" || Model.VehicleType != null)
-        {
-            <hr class="my-3" />
-            <h5 class="text-primary fw-bold">Thông tin xe</h5>
+                <dt class="col-sm-4 fw-bold">Số lượng còn</dt>
+                <dd class="col-sm-8">@Model.ProductQuantity</dd>
 
-            <dt class="col-sm-3 fw-bold">Loại xe</dt>
-            <dd class="col-sm-9">@Model.VehicleType</dd>
+                @if (!string.IsNullOrEmpty(Model.ProductDescription))
+                {
+                    <dt class="col-sm-4 fw-bold">Mô tả</dt>
+                    <dd class="col-sm-8">@Model.ProductDescription</dd>
+                }
 
-            <dt class="col-sm-3 fw-bold">Động cơ</dt>
-            <dd class="col-sm-9">@($"{Model.Engine} cc")</dd>
+                @if (Model.ProductType == "Vehicle" || Model.VehicleType != null)
+                {
+                    <hr class="my-3" />
+                    <h5 class="text-primary fw-bold">Thông tin xe</h5>
 
-            <dt class="col-sm-3 fw-bold">Dung tích xăng</dt>
-            <dd class="col-sm-9">@($"{Model.FuelCapacity}l")</dd>
+                    <dt class="col-sm-4 fw-bold">Loại xe</dt>
+                    <dd class="col-sm-8">@Model.VehicleType</dd>
 
-            <dt class="col-sm-3 fw-bold">Màu xe</dt>
-            <dd class="col-sm-9">@Model.Color</dd>
-        }
-        @if (Model.ProductType == "SparePart")
-        { }
-    </dl>
+                    <dt class="col-sm-4 fw-bold">Động cơ</dt>
+                    <dd class="col-sm-8">@($"{Model.Engine} cc")</dd>
+
+                    <dt class="col-sm-4 fw-bold">Dung tích xăng</dt>
+                    <dd class="col-sm-8">@($"{Model.FuelCapacity} lít")</dd>
+
+                    <dt class="col-sm-4 fw-bold">Màu xe</dt>
+                    <dd class="col-sm-8">@Model.Color</dd>
+                }
+            </dl>
+        </div>
+    </div>
 </div>
 
-<div class="mt-3">
+<!-- ⚙️ Nút thao tác -->
+<div class="mt-4 d-flex flex-wrap gap-2">
     @using (Html.BeginForm("DeleteConfirmed", "ProductManager", FormMethod.Post, new { id = "deleteForm" }))
     {
         @Html.AntiForgeryToken()
         @Html.Hidden("id", Model.ProductId)
-        <button type="button" class="btn btn-danger" onclick="confirmDelete()">
-            🗑️ Xóa
-        </button>
+        <button type="button" class="btn btn-danger" onclick="confirmDelete()">🗑️ Xóa</button>
     }
 
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addItemModal">
@@ -69,10 +84,10 @@
 
     @Html.ActionLink("✏️ Chỉnh sửa", "Edit", new { id = Model.ProductId }, new { @class = "btn btn-warning" })
 
-    @Html.ActionLink("⬅️ Quay lại", "Index", null, new { @class = "btn btn-secondary ms-2" })
+    @Html.ActionLink("⬅️ Quay lại", "Index", null, new { @class = "btn btn-secondary" })
 </div>
 
-<!-- Modal Thêm hàng -->
+<!-- 🧾 Modal Thêm hàng -->
 <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -109,14 +124,16 @@
     </div>
 </div>
 
-
 @section Scripts {
     <script>
+        // 🗑️ Xác nhận xóa
         function confirmDelete() {
             if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
                 document.getElementById("deleteForm").submit();
             }
         }
+
+        // 💰 Tính tổng giá trong modal
         const price = @Model.ProductPrice;
         const qtyInput = document.getElementById('quantityInput');
         const totalPrice = document.getElementById('totalPrice');
@@ -125,5 +142,10 @@
             const qty = parseInt(qtyInput.value) || 0;
             totalPrice.textContent = (price * qty).toLocaleString('vi-VN') + ' ₫';
         });
+
+        // 🎨 Hiệu ứng zoom ảnh
+        const productImage = document.querySelector('.product-image');
+        productImage.addEventListener('mouseenter', () => productImage.style.transform = 'scale(1.05)');
+        productImage.addEventListener('mouseleave', () => productImage.style.transform = 'scale(1)');
     </script>
 }
