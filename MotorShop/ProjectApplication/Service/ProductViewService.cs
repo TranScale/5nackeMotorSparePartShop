@@ -70,7 +70,8 @@ namespace ProjectApplication.Service
                 ProductDescription = product.ProductDescription,
                 ProductType = product.ProductType,
                 BrandId = product.BrandId,
-                BrandName = product.brand != null ? product.brand.BrandName : "Unknown"
+                BrandName = product.brand != null ? product.brand.BrandName : "Unknown",
+                ImagePath = product.ImagePath,
 
             };
             if (product is Vehicle vehicle)
