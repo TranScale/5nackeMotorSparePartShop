@@ -40,7 +40,21 @@ namespace ProjectApplication.Service
             }
             return list;
         }
-
+        // Tìm kiếm kết hợp thể loại product & string
+        public static List<Product> SearchProduct(string type, string key)
+        {
+            ShopDbContext db = new ShopDbContext();
+            var query = db.Products.AsQueryable();
+            if (!string.IsNullOrEmpty(type) && type != "All")
+            {
+                query = query.Where(p => p.ProductType == type);
+            }
+            if (!string.IsNullOrEmpty(key))
+            {
+                query = query.Where(p => p.ProductName.ToLower().Contains(key.ToLower()));
+            }
+            return query.ToList();
+        }
         public static SparePart GetSparePart(ProductViewDetail viewModel)
         {
             var part = new SparePart();
