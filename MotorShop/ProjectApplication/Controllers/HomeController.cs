@@ -307,7 +307,7 @@ public class HomeController : Controller
         // Dropdown lọc loại sản phẩm
         ViewBag.ProductType = new SelectList(new List<SelectListItem>
     {
-        new SelectListItem { Text = "Tất cả", Value = "All" },
+        //new SelectListItem { Text = "Tất cả", Value = "All" },
         new SelectListItem { Text = "Xe máy", Value = "Vehicle" },
         new SelectListItem { Text = "Phụ tùng", Value = "SparePart" }
     }, "Value", "Text", productType);

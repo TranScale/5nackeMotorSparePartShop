@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<ProjectApplication.Models.OrderViewIndex>
 
 @{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "Quản lý đơn hàng";
 }
 
-<h2>Quản lý đơn hàng</h2>
+@*<h2>Quản lý đơn hàng</h2>*@
 
 <!-- 🔘 Nút chuyển nhanh -->
-<div class="mb-3">
+@*<div class="mb-3">
     <button id="btnManagerProduct" class="btn btn-primary me-2">Quản lý sản phẩm</button>
     <button id="btnDiscount" class="btn btn-primary me-2">Chương trình khuyến mãi</button>
     <button id="btnOrder" class="btn btn-primary me-2">Đơn hàng</button>
     <button id="btnFeedback" class="btn btn-primary me-2"> Đánh giá</button>
-</div>
+</div>*@
 
 <!-- 🧾 Danh sách đơn hàng -->
 <table class="table table-bordered table-striped align-middle">

@@ -2,23 +2,67 @@
     ViewBag.Title = "Admin Login";
 }
 
-<h2>Đăng nhập Admin</h2>
+<style>
+    .login-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 80vh;
+        padding-top: 60px; /* tránh dính navbar */
+        background-color: #f8f9fa;
+    }
 
-@if (ViewBag.Error != null)
-{
-    <div class="alert alert-danger">@ViewBag.Error</div>
-}
+    .login-card {
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
 
-@using (Html.BeginForm("Login", "Login", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    <div class="mb-3">
-        <label class="form-label">Username</label>
-        <input type="text" name="username" class="form-control" required />
+        .login-card img {
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .login-card h2 {
+            margin-bottom: 1.5rem;
+            color: #343a40;
+        }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .alert {
+        margin-top: 1rem;
+    }
+</style>
+
+<div class="login-wrapper">
+    <div class="login-card">
+        <img src="~/Content/images/logo.png" alt="5nakes Shop Logo" />
+        <h2>Đăng nhập Admin</h2>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Error</div>
+        }
+
+        @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="mb-3 text-start">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" placeholder="Nhập username" required />
+            </div>
+            <div class="mb-3 text-start">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Đăng nhập</button>
+        }
     </div>
-    <div class="mb-3">
-        <label class="form-label">Password</label>
-        <input type="password" name="password" class="form-control" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Đăng nhập</button>
-}
+</div>

@@ -1,6 +1,7 @@
 ﻿@model ProjectApplication.Models.ProductViewDetail
 
 @{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "Chi tiết sản phẩm";
 }
 
@@ -52,18 +53,21 @@
                     <hr class="my-3" />
                     <h5 class="text-primary fw-bold">Thông tin xe</h5>
 
-                    <dt class="col-sm-4 fw-bold">Loại xe</dt>
-                    <dd class="col-sm-8">@Model.VehicleType</dd>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4 fw-bold">Loại xe</dt>
+                        <dd class="col-sm-8">@Model.VehicleType</dd>
 
-                    <dt class="col-sm-4 fw-bold">Động cơ</dt>
-                    <dd class="col-sm-8">@($"{Model.Engine} cc")</dd>
+                        <dt class="col-sm-4 fw-bold">Động cơ</dt>
+                        <dd class="col-sm-8">@($"{Model.Engine} cc")</dd>
 
-                    <dt class="col-sm-4 fw-bold">Dung tích xăng</dt>
-                    <dd class="col-sm-8">@($"{Model.FuelCapacity} lít")</dd>
+                        <dt class="col-sm-4 fw-bold">Dung tích xăng</dt>
+                        <dd class="col-sm-8">@($"{Model.FuelCapacity} lít")</dd>
 
-                    <dt class="col-sm-4 fw-bold">Màu xe</dt>
-                    <dd class="col-sm-8">@Model.Color</dd>
+                        <dt class="col-sm-4 fw-bold">Màu xe</dt>
+                        <dd class="col-sm-8">@Model.Color</dd>
+                    </dl>
                 }
+
             </dl>
         </div>
     </div>
