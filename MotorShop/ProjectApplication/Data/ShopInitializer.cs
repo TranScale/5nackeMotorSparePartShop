@@ -1,14 +1,38 @@
-﻿using System;
+﻿using ProjectApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using ProjectApplication.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ProjectApplication.Data
 {
     public class ShopInitializer : DropCreateDatabaseIfModelChanges<ShopDbContext>
     {
+        private string ComputeSha256Hash(string rawData)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+                StringBuilder builder = new StringBuilder();
+                foreach (var b in bytes)
+                    builder.Append(b.ToString("x2"));
+                return builder.ToString();
+            }
+        }
         protected override void Seed(ShopDbContext context)
         {
+            var admin = new Admin
+            {
+                AdminName = "admin",
+                // Mã hóa password "123456" bằng SHA256
+                PasswordHash = ComputeSha256Hash("123456"),
+                AdminEmail = "admin@example.com",
+                AdminPhone = "0123456789",
+                AdminAddress = "Hà Nội"
+            };
+            context.Admins.Add(admin);
+            context.SaveChanges();
             //2 hãng (Brand)
             var brand = new List<Brand>
             {

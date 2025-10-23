@@ -63,5 +63,7 @@ namespace ProjectApplication.Models
 
         // Thuộc tính để lưu đường dẫn trong DB
         public string ImagePath { get; set; }
+
+        public List<Feedback> Feedbacks { get; set; }
     }
 }

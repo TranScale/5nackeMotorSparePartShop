@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace ProjectApplication.Controllers
 {
+    [AdminAuthorize]
     public class ProductManagerController : Controller
     {
         private ShopDbContext db = new ShopDbContext();

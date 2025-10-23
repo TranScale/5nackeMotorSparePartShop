@@ -63,6 +63,7 @@ namespace ProjectApplication.Service
             promotion.PromotionDescription = viewModel.PromotionDescription;
             promotion.Condition = viewModel.DiscountCondition;
             promotion.isActive = DiscountManagerService.IsActive(promotion.DateStart, promotion.DateEnd);
+            promotion.ImagePath = viewModel.ImagePath;
             return promotion;
         }
 

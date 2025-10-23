@@ -9,6 +9,7 @@
     <button id="btnManagerProduct" class="btn btn-primary me-2">Quản lý sản phẩm</button>
     <button id="btnDiscount" class="btn btn-primary me-2">Chương trình khuyến mãi</button>
     <button id="btnOrder" class="btn btn-primary me-2">Đơn hàng</button>
+    <button id="btnFeedback" class="btn btn-primary me-2"> Đánh giá</button>
 </div>
 
 
@@ -31,6 +32,7 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
+            <th>@Html.DisplayNameFor(model => model.ImagePath) </th>
             <th>@Html.DisplayNameFor(model => model.Name)</th>
             <th>@Html.DisplayNameFor(model => model.DateStart)</th>
             <th>@Html.DisplayNameFor(model => model.DateEnd)</th>
@@ -42,53 +44,64 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <!-- Tên giảm giá là link đến trang Details -->
-                <td>
-                    @Html.ActionLink(item.Name, "Details", "DiscountManager", new { id = item.Id }, new { @class = "text-decoration-none fw-bold" })
-                </td>
 
-                <td>@item.DateStart.ToString("dd/MM/yyyy")</td>
-                <td>@item.DateEnd.ToString("dd/MM/yyyy")</td>
-                <td>@item.DiscountType</td>
+        <tr>
+            <!-- hình ảnh-->
+            <td>
+                @{
+                    var imagePath = string.IsNullOrEmpty(item.ImagePath)
+                        ? Url.Content("~/Content/Images/default.png")
+                        : Url.Content(item.ImagePath);
+                }
+                <img src="@imagePath" alt="Product Image" width="150" />
+            </td>
 
-                <!-- Giá trị giảm hiển thị rõ loại -->
-                <td>
-                    @if (item.DiscountValueType == ProjectApplication.Models.DiscountValueType.Percent)
-                    {
-                        @($"{item.DiscountValue}%")
-                    }
-                    else
-                    {
-                        @($"{item.DiscountValue:N0} ₫")
-                    }
-                </td>
+            <!-- Tên giảm giá là link đến trang Details -->
+            <td>
+                @Html.ActionLink(item.Name, "Details", "DiscountManager", new { id = item.Id }, new { @class = "text-decoration-none fw-bold" })
+            </td>
 
-                <td>
-                    @if (item.DiscountType == "Coupon")
-                    {
-                        <span class="badge bg-info text-dark">Mã giảm giá</span>
-                    }
-                    else if (item.DiscountType == "Promotion")
-                    {
-                        <span class="badge bg-success">Khuyến mãi</span>
-                    }
-                </td>
-                <!-- Trạng thái -->
-                <td>
-                    @if (item.IsActive)
-                    {
-                        <span class="badge bg-success">Đang hoạt động</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-secondary">Ngừng hoạt động</span>
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+            <td>@item.DateStart.ToString("dd/MM/yyyy")</td>
+            <td>@item.DateEnd.ToString("dd/MM/yyyy")</td>
+            <td>@item.DiscountType</td>
+
+            <!-- Giá trị giảm hiển thị rõ loại -->
+            <td>
+                @if (item.DiscountValueType == ProjectApplication.Models.DiscountValueType.Percent)
+                {
+                    @($"{item.DiscountValue}%")
+                }
+                else
+                {
+                    @($"{item.DiscountValue:N0} ₫")
+                }
+            </td>
+
+            <td>
+                @if (item.DiscountType == "Coupon")
+                {
+                    <span class="badge bg-info text-dark">Mã giảm giá</span>
+                }
+                else if (item.DiscountType == "Promotion")
+                {
+                    <span class="badge bg-success">Khuyến mãi</span>
+                }
+            </td>
+            <!-- Trạng thái -->
+            <td>
+                @if (item.IsActive)
+                {
+                    <span class="badge bg-success">Đang hoạt động</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">Ngừng hoạt động</span>
+                }
+            </td>
+        </tr>
+    }
+        </tbody>
+    </table>
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -105,6 +118,9 @@
             });
             $("#btnCoupon").click(function () { window.location.href = '@Url.Action("Index","DiscountManager")'; });
             $("#btnOrder").click(function () { window.location.href = '@Url.Action("Index", "OrderManager")'; });
+            $("#btnFeedback").click(function () {
+                window.location.href = '@Url.Action("Index", "FeedbackManager")';
+            });
         });
     </script>
 }

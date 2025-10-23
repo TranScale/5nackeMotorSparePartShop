@@ -18,6 +18,8 @@ namespace ProjectApplication.Models
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<SparePart> SpareParts { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+
 
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<Coupon> Coupons {  get; set; }
@@ -26,11 +28,14 @@ namespace ProjectApplication.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
 
-        
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Admin>()
+                .Ignore(a => a.AdminPassword); // <-- đây là cách thay cho [NotMapped]
 
+            base.OnModelCreating(modelBuilder);
         }
 
     }

@@ -206,6 +206,14 @@ public class HomeController : Controller
     //----------------------------------------------------------------
     public ActionResult Index(string searchString, string productType, string sortBy, string priceRange)
     {
+        // 👉 Lấy danh sách promotion có hình
+        var promotions = db.Promotions
+            .Where(p => p.ImagePath != null && p.ImagePath != "")
+            .ToList();
+
+        // Gửi sang View bằng ViewBag
+        ViewBag.Promotions = promotions;
+
         var today = DateTime.Now.Date;
 
         // Lấy tất cả Promotion đang active
@@ -328,10 +336,53 @@ public class HomeController : Controller
             return HttpNotFound();
         }
 
+        // --- ⭐ Thêm đoạn này để tính giảm giá giống Index ⭐ ---
+        var today = DateTime.Now.Date;
+        var activePromotions = db.Promotions
+            .Where(p => p.isActive &&
+                        today >= p.DateStart &&
+                        today <= p.DateEnd)
+            .ToList();
+
+        decimal finalPrice = product.Price;
+        bool hasDiscount = false;
+        decimal? originalPrice = null;
+
+        var applicablePromotions = activePromotions
+            .Where(promo => promo.Condition == product.ProductType || promo.Condition == "All")
+            .ToList();
+
+        if (applicablePromotions.Any())
+        {
+            hasDiscount = true;
+            originalPrice = product.Price;
+
+            var bestPromotion = applicablePromotions
+                .OrderByDescending(promo => promo.DiscountValue)
+                .First();
+
+            if (bestPromotion.DiscountValueType == DiscountValueType.Percent)
+            {
+                finalPrice = product.Price - (product.Price * bestPromotion.DiscountValue / 100);
+            }
+            else
+            {
+                finalPrice = product.Price - bestPromotion.DiscountValue;
+            }
+
+            if (finalPrice < 0) finalPrice = 0;
+        }
+
+        // --- ⭐ Gọi sang ViewModel như bình thường, nhưng gán thêm giá khuyến mãi ⭐ ---
         ProductViewDetail vm = ProductViewService.GetDetail(product);
+        vm.ProductPrice = finalPrice;
+        vm.OriginalPrice = originalPrice;
+        vm.HasDiscount = hasDiscount;
+        // --- 🔚 Kết thúc thêm ---
 
         return View(vm);
     }
+
     //----------------------------------------------------------------
     // ---------------- GET: Home/Cart ----------------
     //----------------------------------------------------------------
@@ -592,6 +643,32 @@ public class HomeController : Controller
             });
         }
     }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult AddFeedback(int productId, string comment, int rating)
+    {
+        if (string.IsNullOrWhiteSpace(comment))
+        {
+            TempData["ErrorMessage"] = "Vui lòng nhập nội dung đánh giá.";
+            return RedirectToAction("Details", new { id = productId });
+        }
+
+        var feedback = new Feedback
+        {
+            ProductId = productId,
+            Comment = comment,
+            Rating = rating,
+            CustomerName = "Khách hàng ẩn danh", // hoặc lấy từ User.Identity.Name nếu có đăng nhập
+            CreatedDate = DateTime.Now
+        };
+
+        db.Feedbacks.Add(feedback);
+        db.SaveChanges();
+
+        TempData["SuccessMessage"] = "Cảm ơn bạn đã đánh giá sản phẩm!";
+        return RedirectToAction("Details", new { id = productId });
+    }
+
 
     // Phương thức dọn dẹp
 

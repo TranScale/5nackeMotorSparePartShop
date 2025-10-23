@@ -1,0 +1,60 @@
+﻿@model List<ProjectApplication.Models.DiscountViewIndex>
+@{
+    ViewBag.Title = "Khuyến mãi";
+}
+
+@if (Model != null && Model.Any())
+{
+    var carouselItems = Model
+        .Where(p => !string.IsNullOrEmpty(p.ImagePath))
+        .ToList();
+
+    if (carouselItems.Any())
+    {
+        <section class="hero mb-5">
+            <div id="promotionCarousel" class="carousel slide carousel-fade w-100" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    @for (int i = 0; i < carouselItems.Count; i++)
+                    {
+                        <button type="button" data-bs-target="#promotionCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></button>
+                    }
+                </div>
+
+                <div class="carousel-inner">
+                    @for (int i = 0; i < carouselItems.Count; i++)
+                    {
+                        var item = carouselItems[i];
+                        var path = string.IsNullOrEmpty(item.ImagePath)
+                            ? Url.Content("~/Content/Images/default.png")
+                            : Url.Content("~/" + item.ImagePath.TrimStart('/', '~'));
+
+                        <div class="carousel-item @(i == 0 ? "active" : "")">
+                            <img src="@path" class="d-block w-100" alt="@item.Name" style="object-fit: cover; height: 500px;">
+                            <div class="carousel-caption d-flex flex-column justify-content-center align-items-center bg-dark bg-opacity-50 rounded p-3">
+                                <span class="badge bg-warning mb-2">@item.DiscountType</span>
+                                <h2 class="fw-bold text-white">@item.Name</h2>
+                                <p class="text-white-50">
+                                    Giảm @item.DiscountValue @(item.DiscountValueType == ProjectApplication.Models.DiscountValueType.Percent ? "%" : "₫")
+                                </p>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#promotionCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#promotionCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </section>
+    }
+}
+else
+{
+    <!-- 🔹 Nếu không có Promotion nào cả -->
+    <div class="text-center my-4">
+        <img src="~/Content/Images/default-banner.jpg" class="img-fluid rounded" style="max-height:500px; object-fit:cover;" alt="Default banner" />
+    </div>
+}

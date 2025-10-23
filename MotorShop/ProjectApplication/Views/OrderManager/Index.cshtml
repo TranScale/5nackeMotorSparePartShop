@@ -11,6 +11,7 @@
     <button id="btnManagerProduct" class="btn btn-primary me-2">Quản lý sản phẩm</button>
     <button id="btnDiscount" class="btn btn-primary me-2">Chương trình khuyến mãi</button>
     <button id="btnOrder" class="btn btn-primary me-2">Đơn hàng</button>
+    <button id="btnFeedback" class="btn btn-primary me-2"> Đánh giá</button>
 </div>
 
 <!-- 🧾 Danh sách đơn hàng -->
@@ -96,6 +97,9 @@
             });
             $("#btnOrder").click(function () {
                 window.location.href = '@Url.Action("Index", "OrderManager")';
+            });
+            $("#btnFeedback").click(function () {
+                window.location.href = '@Url.Action("Index", "FeedbackManager")';
             });
         });
     </script>

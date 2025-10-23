@@ -18,6 +18,7 @@ namespace ProjectApplication.Service
 
         public static DiscountViewDetails returnPromotion(Promotion promotion, DiscountViewDetails viewModel)
         {
+            viewModel.ImagePath = promotion.ImagePath;
             viewModel.PromotionDescription = promotion.PromotionDescription;
             viewModel.DiscountCondition = promotion.Condition;
             return viewModel;
@@ -28,6 +29,7 @@ namespace ProjectApplication.Service
         {
             return new DiscountViewIndex
             {
+                ImagePath = (discount is Promotion promo) ? promo.ImagePath : null,
                 Id = discount.DiscountId,
                 Name = discount.DiscountName,
                 DateStart = discount.DateStart,
@@ -47,6 +49,7 @@ namespace ProjectApplication.Service
             {
                 list.Add(new DiscountViewIndex
                 {
+                    ImagePath = (item is Promotion promo) ? promo.ImagePath : null,
                     Id = item.DiscountId,
                     Name = item.DiscountName,
                     DateStart = item.DateStart,

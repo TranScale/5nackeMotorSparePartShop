@@ -11,6 +11,7 @@ using ProjectApplication.Service;
 
 namespace ProjectApplication.Controllers
 {
+    [AdminAuthorize]
     public class OrderManagerController : Controller
     {
         private ShopDbContext db = new ShopDbContext();

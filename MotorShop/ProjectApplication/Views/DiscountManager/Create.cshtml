@@ -5,7 +5,7 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "DiscountManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -80,6 +80,14 @@
             @Html.ValidationMessageFor(model => model.CouponCode, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <!-- Upload ảnh Promotion -->
+    <div id="uploadImage" class="form-group mb-3">
+        <label class="control-label fw-bold">Ảnh sản phẩm</label>
+        <input type="file" name="ImageFile" class="form-control" accept="image/*" />
+    </div>
+
+
     <!-- Field DiscountCondition -->
     <div id="promotionField1" class="form-group">
         @Html.LabelFor(model => model.DiscountCondition, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -122,10 +130,12 @@
                 $("#couponField").show();
                 $("#promotionField1").hide();
                 $("#promotionField2").hide();
+                $("#uploadImage").hide();
             } else {
                 $("#couponField").hide();
                 $("#promotionField1").show();
                 $("#promotionField2").show();
+                $("#uploadImage").show();
             }
         }
 

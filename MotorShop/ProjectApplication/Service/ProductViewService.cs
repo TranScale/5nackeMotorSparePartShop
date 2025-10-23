@@ -71,22 +71,31 @@ namespace ProjectApplication.Service
                 ProductType = product.ProductType,
                 BrandId = product.BrandId,
                 BrandName = product.brand != null ? product.brand.BrandName : "Unknown",
-                ImagePath = product.ImagePath,
-
+                ImagePath = product.ImagePath
             };
+
+            // ✅ Nếu là Vehicle hoặc SparePart, xử lý riêng
             if (product is Vehicle vehicle)
             {
                 ReturnVehicle(vehicle, viewModel);
-                return viewModel;
             }
             else if (product is SparePart sparepart)
             {
                 ReturnSparePart(sparepart, viewModel);
-                return viewModel;
             }
-            else
-                throw new Exception("Product not found");
+
+            // ✅ Tải danh sách Feedbacks từ database
+            using (var db = new ShopDbContext())
+            {
+                viewModel.Feedbacks = db.Feedbacks
+                    .Where(f => f.ProductId == product.ProductId)
+                    .OrderByDescending(f => f.CreatedDate)
+                    .ToList();
+            }
+
+            return viewModel;
         }
+
 
     }
 }

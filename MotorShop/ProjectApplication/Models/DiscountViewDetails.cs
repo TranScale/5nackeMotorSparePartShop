@@ -28,6 +28,9 @@ namespace ProjectApplication.Models
         public string CouponCode { get; set; } //Mã Coupon 
 
         //Của Promotion
+        public HttpPostedFileBase ImageFile { get; set; }
+
+        public string ImagePath { get; set; } //Đường dẫn ảnh
         public string PromotionDescription { get; set; } //Mô tả của Promotion
         public string DiscountCondition { get; set; } //Điều kiện giảm giá (Vehicle, SparePart)
     }

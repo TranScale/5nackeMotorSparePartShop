@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ProjectApplication.Models.FeedbackViewModel>
+
+<h2 class="mb-4 text-primary fw-bold">Quản lý Feedback</h2>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @foreach (var fb in Model.OrderByDescending(f => f.CreatedDate))
+    {
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between mb-2">
+                        <h5 class="card-title mb-0">@fb.CustomerName</h5>
+                        <small class="text-muted">@fb.CreatedDate.ToString("dd/MM/yyyy HH:mm")</small>
+                    </div>
+
+                    <div class="mb-2 text-warning">
+                        @Html.Raw(new string('★', fb.Rating))
+                        @Html.Raw(new string('☆', 5 - fb.Rating))
+                    </div>
+
+                    <p class="card-text flex-grow-1">@fb.Comment</p>
+
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <span class="badge @(fb.IsApproved ? "bg-success" : "bg-secondary")">
+                            @(fb.IsApproved ? "Đã duyệt" : "Chưa duyệt")
+                        </span>
+
+                        <div class="btn-group" role="group">
+                            @if (!fb.IsApproved)
+                            {
+                                <a class="btn btn-success btn-sm" title="Duyệt" href="@Url.Action("Approve", "FeedbackManager", new { id = fb.FeedbackId })">
+                                    <i class="fas fa-check"></i>
+                                </a>
+                            }
+                            <a class="btn btn-danger btn-sm" title="Xóa" href="@Url.Action("Delete", "FeedbackManager", new { id = fb.FeedbackId })">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer text-muted small">
+                    Sản phẩm: @fb.ProductName
+                </div>
+            </div>
+        </div>
+    }
+</div>

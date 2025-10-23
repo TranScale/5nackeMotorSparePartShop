@@ -12,6 +12,7 @@ namespace ProjectApplication.Models
         public string Condition { get; set; } //Điều kiện sản phẩm 
         //[Required]
         public string PromotionDescription { get; set; } // Mô tả của Promotion
+        public string ImagePath { get; set; } // Hình ảnh của promotion
 
     }
 }

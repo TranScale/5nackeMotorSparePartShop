@@ -128,11 +128,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DiscountManagerController.cs" />
+    <Compile Include="Controllers\FeedbackManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrderManagerController.cs" />
     <Compile Include="Controllers\ProductManagerController.cs" />
     <Compile Include="Data\DBMotorShop.cs" />
     <Compile Include="Data\ShopInitializer.cs" />
+    <Compile Include="Filters\AdminAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -145,6 +148,8 @@
     <Compile Include="Models\DiscountViewDetails.cs" />
     <Compile Include="Models\DiscountViewIndex.cs" />
     <Compile Include="Models\CartItemModel.cs" />
+    <Compile Include="Models\Feedback.cs" />
+    <Compile Include="Models\FeedbackViewModel.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\OrderViewDetails.cs" />
@@ -183,6 +188,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -262,6 +268,7 @@
     <Content Include="packages\EntityFramework.6.5.1\tools\net45\win-x86\ef6.pdb" />
     <Content Include="packages\EntityFramework.6.5.1\tools\net6.0\any\ef6.dll" />
     <Content Include="packages\EntityFramework.6.5.1\tools\net6.0\any\ef6.pdb" />
+    <Content Include="Content\bootstrap.min" />
     <None Include="packages\jQuery.3.7.0\Content\Scripts\jquery-3.7.0-vsdoc.js" />
     <Content Include="packages\jQuery.3.7.0\Content\Scripts\jquery-3.7.0.js" />
     <Content Include="packages\jQuery.3.7.0\Content\Scripts\jquery-3.7.0.min.js" />
@@ -561,6 +568,11 @@
     <Content Include="Views\OrderManager\Details.cshtml" />
     <Content Include="Views\OrderManager\Edit.cshtml" />
     <Content Include="Views\OrderManager\Index.cshtml" />
+    <Content Include="Views\Home\Cart.cshtml" />
+    <Content Include="Views\Home\CartSummary.cshtml" />
+    <Content Include="Views\DiscountManager\PromotionBanners.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\FeedbackManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -22,5 +22,11 @@ namespace ProjectApplication.Models
         public decimal DiscountValue { get; set; } //Giá trị discount: DiscountValue 
         [Display(Name = "Trạng thái")]
         public bool IsActive { get; set; } // Trạng thái discount: isActive
+
+        // Thuộc tính để upload file
+        public HttpPostedFileBase ImageFile { get; set; }
+
+        // Thuộc tính để lưu đường dẫn trong DB
+        public string ImagePath { get; set; }
     }
 }
