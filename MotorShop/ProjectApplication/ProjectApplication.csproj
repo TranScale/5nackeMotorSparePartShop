@@ -127,6 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminManagerController.cs" />
     <Compile Include="Controllers\DiscountManagerController.cs" />
     <Compile Include="Controllers\FeedbackManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -577,6 +578,11 @@
     <Content Include="Views\FeedbackManager\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\_Adminlayout.cshtml" />
+    <Content Include="Views\AdminManager\Create.cshtml" />
+    <Content Include="Views\AdminManager\Delete.cshtml" />
+    <Content Include="Views\AdminManager\Details.cshtml" />
+    <Content Include="Views\AdminManager\Edit.cshtml" />
+    <Content Include="Views\AdminManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

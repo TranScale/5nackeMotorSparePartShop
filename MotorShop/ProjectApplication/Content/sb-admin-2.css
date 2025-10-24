@@ -11279,3 +11279,21 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+/* Làm menu con trông rõ ràng trong sidebar t?i */
+.collapse-inner {
+    background-color: #2d323e; /* n?n t?i h?n sidebar */
+}
+
+.collapse-item {
+    color: #cfd2d6;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    transition: background 0.2s ease;
+}
+
+    .collapse-item:hover {
+        background-color: #404754;
+        color: #ffffff;
+        text-decoration: none;
+    }
+

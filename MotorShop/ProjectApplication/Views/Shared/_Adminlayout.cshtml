@@ -29,17 +29,17 @@
         <!-- Sidebar -->
         @* Bạn có thể chỉnh sửa sidebar để link tới các action/admin controller của mình *@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@Url.Action("Index", "Dashboard")">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@Url.Action("Index", "Login")">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Admin</div>
             </a>
 
             <hr class="sidebar-divider my-0" />
 
             <li class="nav-item active">
-                <a class="nav-link" href="@Url.Action("Index", "Dashboard")">
+                <a class="nav-link" href="@Url.Action("Index", "Login")">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -56,11 +56,35 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "DiscountManager")">
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDiscount"
+                   aria-expanded="false" aria-controls="collapseDiscount">
                     <i class="fas fa-fw fa-shopping-cart"></i>
                     <span>Chương trình khuyến mãi</span>
                 </a>
+
+                <div id="collapseDiscount" class="collapse" data-bs-parent="#accordionSidebar">
+                    <div class="bg-dark py-2 collapse-inner rounded">
+                        <a class="collapse-item text-white-50 ps-4 d-block"
+                           href="@Url.Action("Index", "DiscountManager", new { discountType = "Coupon" })">
+                            <i class="fas fa-percent me-2"></i> Mã giảm giá
+                        </a>
+                        <a class="collapse-item text-white-50 ps-4 d-block"
+                           href="@Url.Action("Index", "DiscountManager", new { discountType = "Promotion" })">
+                            <i class="fas fa-gift me-2"></i> Chương trình khuyến mãi
+                        </a>
+                    </div>
+                </div>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "AdminManager")">
+                    <i class="fas fa-fw fa-box"></i>
+                    <span>Quản trị viên</span>
+                </a>
+            </li>
+
+
+
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index", "OrderManager")">
                     <i class="fas fa-fw fa-shopping-cart"></i>
@@ -89,22 +113,17 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="@Url.Action("Logout", "Login")" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Logout</span>
                                 <img class="img-profile rounded-circle" src="~/img/undraw_profile.svg" />
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="@Url.Action("Profile", "Account")">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="@Url.Action("Logout", "Account")">
+                                @*<div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("Logout", "Login")">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
-                            </div>
+                            </div>*@
                         </li>
                     </ul>
                 </nav>
@@ -148,6 +167,17 @@
     <!-- Custom scripts for all pages-->
     <script src="~/js/sb-admin-2.min.js"></script>
     @RenderSection("Scripts", required: false)
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fix cho dropdown trong topbar
+            const dropdownToggleList = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+            dropdownToggleList.forEach(function (dropdownToggleEl) {
+                new bootstrap.Dropdown(dropdownToggleEl);
+            });
+        });
+    </script>
+
+
 </body>
 
 </html>

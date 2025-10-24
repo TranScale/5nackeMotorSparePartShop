@@ -20,6 +20,7 @@ namespace ProjectApplication.Controllers
                 .Where(o =>
                     o.CustomerName != null &&
                     !o.CustomerName.Equals("Admin", StringComparison.OrdinalIgnoreCase) &&
+                    o.Status == "Delivered" &&
                     string.Equals(o.Status, "Delivered", StringComparison.OrdinalIgnoreCase)
                 )
                 .Sum(o => o.TotalAmount);
@@ -28,6 +29,7 @@ namespace ProjectApplication.Controllers
             decimal totalCost = orders
                 .Where(o =>
                     o.CustomerName != null &&
+                    o.Status == "Delivered" &&
                     o.CustomerName.Equals("Admin", StringComparison.OrdinalIgnoreCase)
                 )
                 .Sum(o => o.TotalAmount);
@@ -60,7 +62,7 @@ namespace ProjectApplication.Controllers
             {
                 Session["AdminId"] = admin.AdminId;
                 Session["AdminName"] = admin.AdminName;
-                return RedirectToAction("Index", "ProductManager");
+                return RedirectToAction("Index", "Login");
             }
 
             ViewBag.Error = "Sai username hoặc password";

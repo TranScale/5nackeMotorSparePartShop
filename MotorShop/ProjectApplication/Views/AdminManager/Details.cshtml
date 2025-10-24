@@ -1,0 +1,75 @@
+﻿@model Admin
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Chi tiết quản trị viên";
+}
+
+<h2 class="mb-3 text-primary fw-bold">Chi tiết quản trị viên</h2>
+
+<div class="card shadow-sm p-4">
+    <div class="row">
+        <!-- 🖼️ Ảnh đại diện Admin -->
+        @*<div class="col-md-5 text-center mb-3 mb-md-0">
+            <img src="@Url.Content(string.IsNullOrEmpty(Model.AvatarPath)
+                ? "~/Content/Images/default-avatar.png"
+                : (Model.AvatarPath.StartsWith("/") ? Model.AvatarPath : "/" + Model.AvatarPath))"
+                 alt="@Model.AdminName"
+                 class="img-fluid rounded-circle border shadow-sm admin-avatar"
+                 style="max-height: 250px; width: 250px; object-fit: cover; transition: transform .3s;" />
+        </div>*@
+
+        <!-- 📋 Thông tin quản trị viên -->
+        <div class="col-md-7">
+            <h4 class="fw-bold text-dark mb-3">@Model.AdminName</h4>
+
+            <dl class="row mb-0">
+                <dt class="col-sm-4 fw-bold">Mã Admin</dt>
+                <dd class="col-sm-8">@Model.AdminId</dd>
+
+                <dt class="col-sm-4 fw-bold">Email</dt>
+                <dd class="col-sm-8">@Model.AdminEmail</dd>
+
+                <dt class="col-sm-4 fw-bold">Số điện thoại</dt>
+                <dd class="col-sm-8">@Model.AdminPhone</dd>
+
+                <dt class="col-sm-4 fw-bold">Địa chỉ</dt>
+                <dd class="col-sm-8">@Model.AdminAddress</dd>
+
+                <dt class="col-sm-4 fw-bold">Mật khẩu (mã hóa)</dt>
+                <dd class="col-sm-8 text-muted">@Model.PasswordHash</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<!-- ⚙️ Nút thao tác -->
+<div class="mt-4 d-flex flex-wrap gap-2">
+    @using (Html.BeginForm("DeleteConfirmed", "AdminManager", FormMethod.Post, new { id = "deleteForm" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("id", Model.AdminId)
+        <button type="button" class="btn btn-danger" onclick="confirmDelete()">🗑️ Xóa</button>
+    }
+
+    @Html.ActionLink("✏️ Chỉnh sửa", "Edit", new { id = Model.AdminId }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("⬅️ Quay lại", "Index", null, new { @class = "btn btn-secondary" })
+</div>
+
+@section Scripts {
+    <script>
+        // 🗑️ Xác nhận xóa
+        function confirmDelete() {
+            if (confirm("Bạn có chắc chắn muốn xóa quản trị viên này không?")) {
+                document.getElementById("deleteForm").submit();
+            }
+        }
+
+        // 🎨 Hiệu ứng zoom ảnh đại diện
+        const avatar = document.querySelector('.admin-avatar');
+        avatar.addEventListener('mouseenter', () => avatar.style.transform = 'scale(1.05)');
+        avatar.addEventListener('mouseleave', () => avatar.style.transform = 'scale(1)');
+
+
+    </script>
+}

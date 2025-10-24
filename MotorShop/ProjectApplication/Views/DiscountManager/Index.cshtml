@@ -21,14 +21,14 @@
 </p>
 
 <!-- 🔽 Combo box lọc theo loại giảm giá -->
-<form method="get" action="@Url.Action("Index", "DiscountManager")" class="mb-3">
+<!--<form method="get" action="@Url.Action("Index", "DiscountManager")" class="mb-3">
     <label for="discountTypeFilter" class="form-label fw-bold">Lọc theo loại khuyến mãi:</label>
     <select id="discountTypeFilter" name="discountType" onchange="this.form.submit()" class="form-select" style="width:250px; display:inline-block;">
         <option value="All" @(Request["discountType"] == "All" || string.IsNullOrEmpty(Request["discountType"]) ? "selected" : "")>Tất cả</option>
         <option value="Coupon" @(Request["discountType"] == "Coupon" ? "selected" : "")>Mã giảm giá</option>
         <option value="Promotion" @(Request["discountType"] == "Promotion" ? "selected" : "")>Khuyến mãi</option>
     </select>
-</form>
+</form>-->
 
 <table class="table table-bordered table-striped">
     <thead>

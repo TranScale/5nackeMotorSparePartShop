@@ -7,7 +7,7 @@
 
 <div class="container mt-5 mb-5">
     <div class="row g-4">
-        <!-- Hình ảnh sản phẩm -->
+        <!-- 🖼️ KHỐI 1: Hình ảnh + Thông tin + Nút mua -->
         <div class="col-md-5 text-center">
             @{
                 string path = Model.ImagePath;
@@ -27,7 +27,6 @@
             </div>
         </div>
 
-        <!-- Thông tin sản phẩm -->
         <div class="col-md-7">
             <div class="card shadow-sm p-4 h-100">
                 <h3 class="fw-bold mb-3 text-dark">@Model.ProductName</h3>
@@ -43,8 +42,8 @@
                 <hr />
 
                 <dl class="row mb-0">
-                    <dt class="col-sm-4 fw-semibold">Mã sản phẩm</dt>
-                    <dd class="col-sm-8">@Model.ProductId</dd>
+                    @*<dt class="col-sm-4 fw-semibold">Mã sản phẩm</dt>
+                    <dd class="col-sm-8">@Model.ProductId</dd>*@
 
                     <dt class="col-sm-4 fw-semibold">Hãng</dt>
                     <dd class="col-sm-8">@Model.BrandName</dd>
@@ -70,32 +69,8 @@
                             <span class="fw-semibold fs-5">@string.Format("{0:N0} ₫", Model.ProductPrice)</span>
                         }
                     </dd>
-
                     <dt class="col-sm-4 fw-semibold">Số lượng còn</dt>
                     <dd class="col-sm-8">@Model.ProductQuantity</dd>
-
-                    @if (!string.IsNullOrEmpty(Model.ProductDescription))
-                    {
-                        <dt class="col-sm-4 fw-semibold">Mô tả</dt>
-                        <dd class="col-sm-8">@Model.ProductDescription</dd>
-                    }
-
-                    @if (Model.ProductType == "Vehicle")
-                    {
-                        <hr class="my-3" />
-                        <h5 class="fw-bold text-primary mb-2">Thông tin xe</h5>
-                        <dt class="col-sm-4 fw-semibold">Loại xe</dt>
-                        <dd class="col-sm-8">@Model.VehicleType</dd>
-
-                        <dt class="col-sm-4 fw-semibold">Động cơ</dt>
-                        <dd class="col-sm-8">@($"{Model.Engine} cc")</dd>
-
-                        <dt class="col-sm-4 fw-semibold">Dung tích xăng</dt>
-                        <dd class="col-sm-8">@($"{Model.FuelCapacity} lít")</dd>
-
-                        <dt class="col-sm-4 fw-semibold">Màu xe</dt>
-                        <dd class="col-sm-8">@Model.Color</dd>
-                    }
                 </dl>
 
                 <hr class="my-4" />
@@ -124,72 +99,105 @@
                         </button>
                     }
                 </div>
-                <hr class="my-4" />
-                <h4 class="text-primary fw-bold mb-3">Đánh giá sản phẩm</h4>
-
-                <!-- Form gửi đánh giá -->
-                @using (Html.BeginForm("AddFeedback", "Home", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" name="productId" value="@Model.ProductId" />
-
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Số sao:</label>
-                        <select name="rating" class="form-select w-auto d-inline-block">
-                            <option value="5">⭐️⭐️⭐️⭐️⭐️ - Tuyệt vời</option>
-                            <option value="4">⭐️⭐️⭐️⭐️ - Tốt</option>
-                            <option value="3">⭐️⭐️⭐️ - Bình thường</option>
-                            <option value="2">⭐️⭐️ - Kém</option>
-                            <option value="1">⭐️ - Tệ</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Nội dung đánh giá:</label>
-                        <textarea name="comment" class="form-control" rows="3" placeholder="Nhập cảm nhận của bạn..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-outline-primary">
-                        <i class="fas fa-paper-plane"></i> Gửi đánh giá
-                    </button>
-                }
-
-                <!-- Danh sách đánh giá -->
-                @if (Model.Feedbacks != null && Model.Feedbacks.Any(f => f.IsApproved))
-                {
-                    <div class="mt-4">
-                        @foreach (var fb in Model.Feedbacks.Where(f => f.IsApproved).OrderByDescending(f => f.CreatedDate))
-                        {
-                            <div class="border rounded p-3 mb-3 bg-light">
-                                <div class="d-flex justify-content-between">
-                                    <strong>@fb.CustomerName</strong>
-                                    <small class="text-muted">@fb.CreatedDate.ToString("dd/MM/yyyy HH:mm")</small>
-                                </div>
-                                <div class="text-warning">
-                                    @Html.Raw(new string('★', fb.Rating))
-                                    @Html.Raw(new string('☆', 5 - fb.Rating))
-                                </div>
-                                <p class="mb-0">@fb.Comment</p>
-                            </div>
-                        }
-                    </div>
-                }
-
-                else
-                {
-                    <p class="text-muted fst-italic mt-3">Chưa có đánh giá nào cho sản phẩm này.</p>
-                }
-
-
-                <div class="mt-4">
-                    <a href="javascript:history.back()" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Quay lại
-                    </a>
-                </div>
             </div>
         </div>
     </div>
+
+    <!-- 🧾 KHỐI 2: Mô tả & Thông số kỹ thuật -->
+    <div class="card shadow-sm p-4 mt-5">
+        <h4 class="fw-bold text-dark mb-3">Mô tả chi tiết</h4>
+        <p class="text-muted">@Model.ProductDescription</p>
+        @if (Model.ProductType == "Vehicle")
+        {
+            <hr class="my-3" />
+            <h5 class="fw-bold text-primary mb-2">Thông tin xe</h5>
+
+            <table class="table table-bordered align-middle mb-0">
+                <tbody>
+                    <tr>
+                        <th class="w-25">Loại xe</th>
+                        <td>@Model.VehicleType</td>
+                    </tr>
+                    <tr>
+                        <th>Động cơ</th>
+                        <td>@($"{Model.Engine} cc")</td>
+                    </tr>
+                    <tr>
+                        <th>Dung tích xăng</th>
+                        <td>@($"{Model.FuelCapacity} lít")</td>
+                    </tr>
+                    <tr>
+                        <th>Màu xe</th>
+                        <td>@Model.Color</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        }
+    </div>
+
+    <!-- 💬 KHỐI 3: Đánh giá & Bình luận -->
+    <div class="card shadow-sm p-4 mt-5">
+        <h4 class="text-primary fw-bold mb-3">Đánh giá sản phẩm</h4>
+
+        @using (Html.BeginForm("AddFeedback", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="productId" value="@Model.ProductId" />
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Số sao:</label>
+                <select name="rating" class="form-select w-auto d-inline-block">
+                    <option value="5">⭐️⭐️⭐️⭐️⭐️ - Tuyệt vời</option>
+                    <option value="4">⭐️⭐️⭐️⭐️ - Tốt</option>
+                    <option value="3">⭐️⭐️⭐️ - Bình thường</option>
+                    <option value="2">⭐️⭐️ - Kém</option>
+                    <option value="1">⭐️ - Tệ</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Nội dung đánh giá:</label>
+                <textarea name="comment" class="form-control" rows="3" placeholder="Nhập cảm nhận của bạn..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="fas fa-paper-plane"></i> Gửi đánh giá
+            </button>
+        }
+
+        @if (Model.Feedbacks != null && Model.Feedbacks.Any(f => f.IsApproved))
+        {
+            <div class="mt-4">
+                @foreach (var fb in Model.Feedbacks.Where(f => f.IsApproved).OrderByDescending(f => f.CreatedDate))
+                {
+                    <div class="border rounded p-3 mb-3 bg-light">
+                        <div class="d-flex justify-content-between">
+                            <strong>@fb.CustomerName</strong>
+                            <small class="text-muted">@fb.CreatedDate.ToString("dd/MM/yyyy HH:mm")</small>
+                        </div>
+                        <div class="text-warning">
+                            @Html.Raw(new string('★', fb.Rating))
+                            @Html.Raw(new string('☆', 5 - fb.Rating))
+                        </div>
+                        <p class="mb-0">@fb.Comment</p>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="text-muted fst-italic mt-3">Chưa có đánh giá nào cho sản phẩm này.</p>
+        }
+
+        <div class="mt-4">
+            <a href="javascript:history.back()" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </a>
+        </div>
+    </div>
 </div>
+
 
 <!-- Toast thông báo -->
 <div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index:1055;"></div>
@@ -205,7 +213,7 @@
                         <div class="toast-body">
                             <strong>Thành công!</strong> ${successMessage}
                         </div>
-                    </div>`;
+                    </div>`
                 $('#toast-container').append(toastHtml);
                 $('#toast-container .toast:last').toast('show');
             }

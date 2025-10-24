@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Admin>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Admin List";
+}
+
+<h2>Danh sách quản trị viên</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create", "AdminManager", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.AdminName)</th>
+            <th>@Html.DisplayNameFor(model => model.AdminEmail)</th>
+            <th>@Html.DisplayNameFor(model => model.AdminPhone)</th>
+            <th>@Html.DisplayNameFor(model => model.AdminAddress)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(item.AdminName, "Details", "AdminManager", new { id = item.AdminId }, new { @class = "text-decoration-none fw-bold" })</td>
+                <td>@Html.DisplayFor(modelItem => item.AdminEmail)</td>
+                <td>@Html.DisplayFor(modelItem => item.AdminPhone)</td>
+                <td>@Html.DisplayFor(modelItem => item.AdminAddress)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Có thể thêm điều hướng hoặc logic giống DiscountManager nếu bạn muốn sau này
+        });
+    </script>
+}

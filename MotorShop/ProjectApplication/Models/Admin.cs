@@ -9,7 +9,6 @@ public class Admin
     [StringLength(50)]
     public string AdminName { get; set; }
 
-    [Required]
     [StringLength(100)]
     public string PasswordHash { get; set; } // dùng SHA256 hash
 
