@@ -11,20 +11,26 @@ namespace ProjectApplication.Service
         //Tìm kiếm loại discount 
         public static List<Discount> SearchDiscountTypeList(string type)
         {
+            // Nếu type null hoặc rỗng => trả về danh sách rỗng luôn
+            if (string.IsNullOrWhiteSpace(type))
+                return new List<Discount>();
 
-            ShopDbContext db = new ShopDbContext();
-            var discounts = db.Discounts.ToList();
-            var list = new List<Discount>();
-            foreach(var discount in discounts)
+            using (var db = new ShopDbContext())
             {
-                if(discount.DiscountType == type)
-                    list.Add(discount);
+                var discounts = db.Discounts.ToList();
+                var list = new List<Discount>();
+
+                foreach (var discount in discounts)
+                {
+                    if (discount.DiscountType == type)
+                        list.Add(discount);
+                }
+
+                // Nếu không tìm thấy => trả về danh sách rỗng
+                return list;
             }
-            if (list.Count == 0)
-                return discounts;
-            
-            return list;
         }
+
 
         //Trạng thái của Discount 
         public static bool IsActive(DateTime dateStart, DateTime dateEnd)

@@ -9,11 +9,26 @@
 
 <!-- 🔘 Nút chuyển nhanh -->
 @*<div class="mb-3">
-    <button id="btnManagerProduct" class="btn btn-primary me-2">Quản lý sản phẩm</button>
-    <button id="btnDiscount" class="btn btn-primary me-2">Chương trình khuyến mãi</button>
-    <button id="btnOrder" class="btn btn-primary me-2">Đơn hàng</button>
-    <button id="btnFeedback" class="btn btn-primary me-2"> Đánh giá</button>
-</div>*@
+        <button id="btnManagerProduct" class="btn btn-primary me-2">Quản lý sản phẩm</button>
+        <button id="btnDiscount" class="btn btn-primary me-2">Chương trình khuyến mãi</button>
+        <button id="btnOrder" class="btn btn-primary me-2">Đơn hàng</button>
+        <button id="btnFeedback" class="btn btn-primary me-2"> Đánh giá</button>
+    </div>*@
+
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-3">
+        <label for="startDate" class="form-label">Từ ngày</label>
+        <input type="date" name="startDate" id="startDate" value="@ViewBag.StartDate" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <label for="endDate" class="form-label">Đến ngày</label>
+        <input type="date" name="endDate" id="endDate" value="@ViewBag.EndDate" class="form-control" />
+    </div>
+    <div class="col-md-3 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary me-2">Lọc</button>
+        <a href="@Url.Action("Index", "OrderManager")" class="btn btn-secondary">Làm mới</a>
+    </div>
+</form>
 
 <!-- 🧾 Danh sách đơn hàng -->
 <table class="table table-bordered table-striped align-middle">
@@ -83,6 +98,32 @@
         }
     </tbody>
 </table>
+<!-- 📄 Phân trang -->
+@if (ViewBag.TotalPages > 1)
+{
+    <nav class="d-flex justify-content-center mt-3">
+        <ul class="pagination">
+            <!-- Nút Trước -->
+            <li class="page-item @(ViewBag.Page <= 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.Page - 1, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })">Trước</a>
+            </li>
+
+            <!-- Các số trang -->
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.Page ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = i, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })">@i</a>
+                </li>
+            }
+
+            <!-- Nút Sau -->
+            <li class="page-item @(ViewBag.Page >= ViewBag.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.Page + 1, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })">Sau</a>
+            </li>
+        </ul>
+    </nav>
+}
+
 
 <!-- 🔗 Liên kết JS -->
 @section Scripts {

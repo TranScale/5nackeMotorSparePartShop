@@ -142,6 +142,7 @@
     </Compile>
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\CompareViewModel.cs" />
     <Compile Include="Models\Coupon.cs" />
     <Compile Include="Models\Discount.cs" />
     <Compile Include="Models\DiscountType.cs" />
@@ -583,6 +584,9 @@
     <Content Include="Views\AdminManager\Details.cshtml" />
     <Content Include="Views\AdminManager\Edit.cshtml" />
     <Content Include="Views\AdminManager\Index.cshtml" />
+    <Content Include="Views\Home\_CompareProductList.cshtml" />
+    <Content Include="Views\Home\_CompareResult.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

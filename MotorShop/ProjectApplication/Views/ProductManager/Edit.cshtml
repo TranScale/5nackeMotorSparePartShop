@@ -7,135 +7,142 @@
 
 <h2>Edit Product</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "ProductManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ProductId)
 
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ProductId)
+<div class="form-horizontal">
 
-        <!-- BrandId ComboBox -->
+    <!-- Ảnh sản phẩm -->
+    <div class="form-group mb-3">
+        <label class="control-label fw-bold">Ảnh sản phẩm</label>
+        <input type="file" name="ImageFile" class="form-control" accept="image/*" />
+    </div>
+
+    <!-- Brand -->
+    <div class="form-group">
+        @Html.LabelFor(m => m.BrandId, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.BrandId,
+                new SelectList(new List<object>
+                {
+                    new { Value = 1, Text = "Yamaha" },
+                    new { Value = 2, Text = "Honda" }
+                }, "Value", "Text", Model.BrandId),
+                "-- Chọn hãng --",
+                new { @class = "form-control" })
+        </div>
+    </div>
+
+    <!-- Product Name -->
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProductName, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <!-- Product Type -->
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProductType, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.ProductType,
+                new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "Vehicle", Value = "Vehicle", Selected = Model.ProductType=="Vehicle" },
+                    new SelectListItem { Text = "SparePart", Value = "SparePart", Selected = Model.ProductType=="SparePart" }
+                },
+                "-- Chọn loại sản phẩm --",
+                new { @class = "form-control", id = "productType" })
+        </div>
+    </div>
+
+    <!-- Product Price -->
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProductPrice, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.ProductPrice, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <!-- Product Description -->
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProductDescription, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.ProductDescription, new { @class = "form-control", rows = 3 })
+        </div>
+    </div>
+
+    <!-- Vehicle Fields -->
+    <div id="vehicleFields">
+        <!-- Engine -->
         <div class="form-group">
-            @Html.LabelFor(model => model.BrandId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.Engine, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.BrandId,
-                    new SelectList(new List<object>
-                    {
-                        new { Value = 1, Text = "Yamaha" },
-                        new { Value = 2, Text = "Honda" }
-                    }, "Value", "Text", Model.BrandId),
-                    "-- Chọn hãng --",
+                @Html.DropDownListFor(m => m.Engine,
+                    new SelectList(new List<int> { 100, 110, 125, 150, 300 }, Model.Engine),
+                    "-- Chọn dung tích động cơ --",
                     new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.BrandId, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <!-- Product Name -->
+        <!-- VehicleType -->
         <div class="form-group">
-            @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.VehicleType, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(m => m.VehicleType,
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem { Text="Xe số", Value="Manual", Selected = Model.VehicleType=="Manual" },
+                        new SelectListItem { Text="Xe côn tay", Value="Clutch", Selected = Model.VehicleType=="Clutch" },
+                        new SelectListItem { Text="Xe tay ga", Value="Scooter", Selected = Model.VehicleType=="Scooter" }
+                    },
+                    "-- Chọn loại xe --",
+                    new { @class = "form-control" })
             </div>
         </div>
 
-        <!-- Product Type ComboBox -->
+        <!-- Fuel Capacity -->
         <div class="form-group">
-            @Html.LabelFor(model => model.ProductType, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.FuelCapacity, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ProductType,
-                    new SelectList(new List<string> { "Vehicle", "SparePart" }, Model.ProductType),
-                    "-- Chọn loại sản phẩm --",
-                    new { @class = "form-control", id = "productType" })
-                @Html.ValidationMessageFor(model => model.ProductType, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <!-- Product Price -->
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProductPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductPrice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductPrice, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <!-- Quantity -->
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.ProductQuantity, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductQuantity, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductQuantity, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-        <!-- Product Description -->
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProductDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.ProductDescription, new { @class = "form-control", rows = 3 })
-                @Html.ValidationMessageFor(model => model.ProductDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <!-- Vehicle Fields -->
-        <div id="vehicleFields">
-            <!-- Engine ComboBox -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.Engine, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Engine,
-                        new SelectList(new List<int> { 100, 110, 125, 150, 300 }, Model.Engine),
-                        "-- Chọn dung tích động cơ --",
-                        new { @class = "form-control" })
-                </div>
-            </div>
-
-            <!-- VehicleType ComboBox -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.VehicleType, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.VehicleType,
-                        new SelectList(new List<string> { "Xe số", "Xe côn tay", "Xe tay ga" }, Model.VehicleType),
-                        "-- Chọn loại xe --",
-                        new { @class = "form-control" })
-                </div>
-            </div>
-
-            <!-- FuelCapacity ComboBox -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.FuelCapacity, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.FuelCapacity,
-                        new SelectList(new List<float> { 4.5f, 5f, 5.5f, 6f }, Model.FuelCapacity),
-                        "-- Chọn dung tích xăng --",
-                        new { @class = "form-control" })
-                </div>
-            </div>
-        </div>
-
-        <!-- Color (textbox, hoặc combo nếu bạn muốn) -->
-        <div class="form-group">
-            @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-
-        <!-- Submit -->
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.DropDownListFor(m => m.FuelCapacity,
+                    new SelectList(new List<float> { 4.5f, 5f, 5.5f, 6f }, Model.FuelCapacity),
+                    "-- Chọn dung tích xăng --",
+                    new { @class = "form-control" })
             </div>
         </div>
     </div>
+
+    <!-- Color -->
+    <div class="form-group">
+        <label class="control-label col-md-2">Màu xe:</label>
+        <div class="col-md-10">
+            <select id="Color" name="Color" class="form-control">
+                <option value="Blue" @(Model.Color == ProjectApplication.Models.vehicleColor.Blue ? "selected" : "")>Xanh</option>
+                <option value="Red" @(Model.Color == ProjectApplication.Models.vehicleColor.Red ? "selected" : "")>Đỏ</option>
+                <option value="Black" @(Model.Color == ProjectApplication.Models.vehicleColor.Black ? "selected" : "")>Đen</option>
+                <option value="White" @(Model.Color == ProjectApplication.Models.vehicleColor.White ? "selected" : "")>Trắng</option>
+                <option value="Gray" @(Model.Color == ProjectApplication.Models.vehicleColor.Gray ? "selected" : "")>Xám</option>
+            </select>
+        </div>
+    </div>
+
+
+
+    <!-- Submit -->
+    <div class="form-group mt-3">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
 }
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // Ẩn/hiện vehicle fields dựa vào ProductType
         $(document).ready(function () {
             function toggleVehicleFields() {
                 if ($('#productType').val() === 'Vehicle') {
@@ -144,7 +151,6 @@
                     $('#vehicleFields').hide();
                 }
             }
-
             toggleVehicleFields();
             $('#productType').change(toggleVehicleFields);
         });

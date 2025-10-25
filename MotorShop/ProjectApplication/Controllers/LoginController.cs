@@ -1,5 +1,6 @@
 ﻿using ProjectApplication.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -11,39 +12,53 @@ namespace ProjectApplication.Controllers
     {
         private ShopDbContext db = new ShopDbContext();
 
-        public ActionResult Index()
+        [AdminAuthorize]
+        public ActionResult Index(string startDate, string endDate)
         {
+            // Lấy toàn bộ đơn hàng
             var orders = db.Orders.ToList();
 
-            // ✅ Tổng doanh thu: chỉ tính đơn KHÔNG phải Admin và đã giao (Delivered)
-            decimal totalRevenue = orders
-                .Where(o =>
-                    o.CustomerName != null &&
-                    !o.CustomerName.Equals("Admin", StringComparison.OrdinalIgnoreCase) &&
-                    o.Status == "Delivered" &&
-                    string.Equals(o.Status, "Delivered", StringComparison.OrdinalIgnoreCase)
-                )
+            // Chuyển đổi ngày sang DateTime, an toàn với TryParse
+            DateTime start;
+            bool hasStart = DateTime.TryParse(startDate, out start);
+
+            DateTime end;
+            bool hasEnd = DateTime.TryParse(endDate, out end);
+
+            // Lọc đơn hàng theo ngày
+            var filteredOrders = orders
+                .Where(o => (!hasStart || o.OrderDate >= start) &&
+                            (!hasEnd || o.OrderDate <= end))
+                .ToList();
+
+            // Tính tổng doanh thu (khách hàng không phải Admin & đã giao)
+            decimal totalRevenue = filteredOrders
+                .Where(o => !string.IsNullOrEmpty(o.CustomerName) &&
+                            !o.CustomerName.Equals("Admin", StringComparison.OrdinalIgnoreCase) &&
+                            o.Status?.Equals("Delivered", StringComparison.OrdinalIgnoreCase) == true)
                 .Sum(o => o.TotalAmount);
 
-            // ✅ Tổng chi phí: các đơn của Admin (Admin nhập hàng)
-            decimal totalCost = orders
-                .Where(o =>
-                    o.CustomerName != null &&
-                    o.Status == "Delivered" &&
-                    o.CustomerName.Equals("Admin", StringComparison.OrdinalIgnoreCase)
-                )
+            // Tính tổng chi phí (Admin & đã giao)
+            decimal totalCost = filteredOrders
+                .Where(o => !string.IsNullOrEmpty(o.CustomerName) &&
+                            o.CustomerName.Equals("Admin", StringComparison.OrdinalIgnoreCase) &&
+                            o.Status?.Equals("Delivered", StringComparison.OrdinalIgnoreCase) == true)
                 .Sum(o => o.TotalAmount);
 
-            // ✅ Lợi nhuận = Doanh thu - Chi phí
-            decimal profit = totalRevenue - totalCost;
+            // Lợi nhuận
+            decimal profit = totalRevenue + totalCost;
 
-            // ✅ Gửi sang View (giữ số gốc, format bên View cho đẹp)
+            // Gửi dữ liệu ra View
             ViewBag.TotalRevenue = totalRevenue;
             ViewBag.TotalCost = totalCost;
             ViewBag.Profit = profit;
+            ViewBag.StartDate = startDate;
+            ViewBag.EndDate = endDate;
 
             return View();
         }
+
+
 
 
         public ActionResult Login()

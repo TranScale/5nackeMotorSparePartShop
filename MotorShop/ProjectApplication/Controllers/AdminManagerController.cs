@@ -9,11 +9,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace ProjectApplication.Controllers
 {
+    [AdminAuthorize]
     public class AdminManagerController : Controller
     {
         private ShopDbContext db = new ShopDbContext();

@@ -17,12 +17,47 @@ namespace ProjectApplication.Controllers
         private ShopDbContext db = new ShopDbContext();
 
         // GET: OrderManager
-        public ActionResult Index()
+        public ActionResult Index(DateTime? startDate, DateTime? endDate, int page = 1, int pageSize = 10)
         {
-            var orders = db.Orders.ToList();
+            // Bắt đầu query dữ liệu
+            var query = db.Orders.AsQueryable();
+
+            // 🔍 Lọc theo thời gian
+            if (startDate.HasValue)
+            {
+                query = query.Where(o => o.OrderDate >= startDate.Value);
+            }
+            if (endDate.HasValue)
+            {
+                // Lấy đến hết ngày cuối cùng (23:59:59)
+                var end = endDate.Value.AddDays(1).AddTicks(-1);
+                query = query.Where(o => o.OrderDate <= end);
+            }
+
+            // Sắp xếp mới nhất trước
+            query = query.OrderByDescending(o => o.OrderDate);
+
+            // Tổng số đơn hàng
+            int totalOrders = query.Count();
+
+            // Tính tổng số trang
+            int totalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+
+            // Giới hạn dữ liệu hiển thị theo trang
+            var orders = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            // Convert sang ViewModel
             var viewModel = OrderViewService.GetListIndexView(orders);
+
+            // Truyền dữ liệu sang View
+            ViewBag.Page = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.StartDate = startDate?.ToString("yyyy-MM-dd");
+            ViewBag.EndDate = endDate?.ToString("yyyy-MM-dd");
+
             return View(viewModel);
         }
+
 
         // 🚚 Xác nhận đã giao hàng (Processing → Delivered)
         [HttpPost]
@@ -57,21 +92,43 @@ namespace ProjectApplication.Controllers
             return RedirectToAction("Index");
         }
 
+
         [HttpPost]
         public ActionResult CancelOrder(int id)
         {
-            var order = db.Orders.Find(id);
-            if (order != null)
+            // ✅ Phải Include để load đầy đủ OrderDetails
+            var order = db.Orders
+                        .Include(o => o.OrderDetails)
+                        .FirstOrDefault(o => o.OrderId == id);
+
+            if (order == null)
+                return HttpNotFound();
+
+            if (order.Status == "Pending")
             {
-                order.Status = "Cancelled";
-                db.SaveChanges();
-                TempData["Message"] = "Đơn hàng đã được hủy thành công.";
+                foreach (var detail in order.OrderDetails)
+                {
+                    var product = db.Products.Find(detail.ProductId);
+                    if (product != null)
+                    {
+                        product.Quantity += detail.Quantity;
+                        db.Entry(product).State = EntityState.Modified;
+                    }
+                }
             }
+
+            order.Status = "Cancelled";
+            db.Entry(order).State = EntityState.Modified;
+            db.SaveChanges();
+
+            TempData["Message"] = $"Đơn hàng #{order.OrderId} đã được hủy và hàng đã cộng lại kho.";
             return RedirectToAction("Index");
         }
 
-        // GET: OrderManager/Details/5
-        public ActionResult Details(int? id)
+
+
+    // GET: OrderManager/Details/5
+    public ActionResult Details(int? id)
         {
             if (id == null)
                 return HttpNotFound();

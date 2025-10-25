@@ -1,6 +1,7 @@
 ﻿using ProjectApplication.Data;
 using ProjectApplication.Models;
 using ProjectApplication.Service;
+using ProjectApplication.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
@@ -24,6 +25,10 @@ public class GeoModel
 }
 public class HomeController : Controller
 {
+     public ActionResult About()
+    {
+        return View();
+    }
     private static dynamic _geoDataCache;
 
     //----------------------------------------------------------------
@@ -122,9 +127,20 @@ public class HomeController : Controller
         }
 
         var today = DateTime.Now.Date;
+
+        // 💰 Biến cộng thêm theo loại sản phẩm
+        decimal addVehicle = 4000000m; // 4 triệu
+        decimal addSparePart = 1000000m; // 1 triệu
+
         decimal priceToUse = product.Price;
         bool itemHasDiscount = false;
         string productName = product.ProductName;
+
+        // 👉 Cộng thêm phụ phí theo loại sản phẩm
+        if (product.ProductType == "Vehicle")
+            priceToUse += addVehicle;
+        else if (product.ProductType == "SparePart")
+            priceToUse += addSparePart;
 
         // ✅ 1. Kiểm tra Promotion đang active
         var activePromotion = db.Promotions
@@ -140,21 +156,47 @@ public class HomeController : Controller
 
             if (activePromotion.DiscountValueType == DiscountValueType.Percent)
             {
-                priceToUse = product.Price - (product.Price * activePromotion.DiscountValue / 100);
+                priceToUse -= priceToUse * activePromotion.DiscountValue / 100;
             }
-            else // trực tiếp trừ tiền
+            else // trừ trực tiếp
             {
-                priceToUse = product.Price - activePromotion.DiscountValue;
+                priceToUse -= activePromotion.DiscountValue;
             }
 
             if (priceToUse < 0) priceToUse = 0;
         }
 
-        // ✅ 3. Lấy giỏ hàng hiện tại từ Session
+        // ✅ 3. Lấy giỏ hàng từ Session
         var cart = GetCart();
         var cartItem = cart.FirstOrDefault(i => i.ProductId == productId);
 
-        // ✅ 4. Cập nhật hoặc thêm mới sản phẩm trong giỏ
+        // ✅ 4. Kiểm tra tồn kho
+        int currentInCart = cartItem != null ? cartItem.Quantity : 0;
+        int totalAfterAdd = currentInCart + quantity;
+
+        if (product.Quantity <= 0)
+        {
+            TempData["ErrorMessage"] = $"Sản phẩm '{product.ProductName}' hiện đã hết hàng.";
+            return RedirectToAction("Index");
+        }
+
+        if (totalAfterAdd > product.Quantity)
+        {
+            int maxCanAdd = product.Quantity - currentInCart;
+
+            if (maxCanAdd <= 0)
+            {
+                TempData["ErrorMessage"] = $"Bạn đã thêm tối đa {product.Quantity} sản phẩm '{product.ProductName}' vào giỏ.";
+                return RedirectToAction("Cart");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = $"Chỉ còn {product.Quantity} sản phẩm '{product.ProductName}' trong kho. Bạn chỉ có thể thêm tối đa {maxCanAdd} sản phẩm nữa.";
+                quantity = maxCanAdd;
+            }
+        }
+
+        // ✅ 5. Cập nhật hoặc thêm mới sản phẩm trong giỏ
         if (cartItem != null)
         {
             cartItem.Quantity += quantity;
@@ -172,10 +214,8 @@ public class HomeController : Controller
             TempData["SuccessMessage"] = $"Đã thêm sản phẩm '{productName}' vào giỏ hàng.";
         }
 
-        // ✅ 5. Lưu giỏ hàng vào Session
+        // ✅ 6. Lưu giỏ hàng vào Session
         Session["Cart"] = cart;
-
-        // ✅ 6. Ghi cờ giảm giá (nếu cần dùng cho view Cart)
         Session["HasDiscount"] = itemHasDiscount;
 
         // ✅ 7. Điều hướng
@@ -191,6 +231,8 @@ public class HomeController : Controller
         }
     }
 
+
+
     //----------------------------------------------------------------
     // ---------------- ACTION: CART SUMMARY ----------------
     //----------------------------------------------------------------
@@ -204,47 +246,42 @@ public class HomeController : Controller
     //----------------------------------------------------------------
     // ---------------- GET: Home/Index ----------------
     //----------------------------------------------------------------
-    public ActionResult Index(string searchString, string productType, string sortBy, string priceRange)
+    public ActionResult Index(string searchString, string productType, string sortBy, string priceRange, int page = 1)
     {
+        int pageSize = 12;
+
+        // 👉 Biến cố định
+        decimal a = 4000000; // 4 triệu
+        decimal b = 1000000; // 1 triệu
+
         // 👉 Lấy danh sách promotion có hình
         var promotions = db.Promotions
             .Where(p => p.ImagePath != null && p.ImagePath != "")
             .ToList();
-
-        // Gửi sang View bằng ViewBag
         ViewBag.Promotions = promotions;
 
         var today = DateTime.Now.Date;
 
-        // Lấy tất cả Promotion đang active
         var activePromotions = db.Promotions
             .Where(p => p.isActive &&
                         today >= p.DateStart &&
                         today <= p.DateEnd)
             .ToList();
 
-        // ⭐ LẤY SẢN PHẨM ĐÃ LỌC KẾT HỢP TỪ SERVICE ⭐
         var products = ProductManagerService.SearchProduct(productType, searchString);
+
+        // 👉 Lọc theo khoảng giá
         if (!string.IsNullOrEmpty(priceRange))
         {
-            // Dưới 20tr
             if (priceRange == "30M")
-            {
                 products = products.Where(p => p.Price < 30000000).ToList();
-            }
-            // Từ 30tr đến 40tr
             else if (priceRange == "40M")
-            {
                 products = products.Where(p => p.Price >= 30000000 && p.Price <= 40000000).ToList();
-            }
-            // >40: Trên 40tr
             else if (priceRange == "40M_UP")
-            {
                 products = products.Where(p => p.Price > 40000000).ToList();
-            }
         }
 
-        // Tính giá sau giảm (Ánh xạ sang ViewModel)
+        // ⭐ Ánh xạ sang ViewModel + cộng giá theo loại sản phẩm ⭐
         var productList = products.Select(p =>
         {
             decimal finalPrice = p.Price;
@@ -252,6 +289,13 @@ public class HomeController : Controller
             decimal? originalPrice = null;
             string typeProduct = p.ProductType;
 
+            // 👉 Cộng thêm theo loại sản phẩm
+            if (typeProduct == "Vehicle")
+                finalPrice += a;
+            else if (typeProduct == "SparePart")
+                finalPrice += b;
+
+            // 👉 Áp dụng khuyến mãi nếu có
             var applicablePromotions = activePromotions
                 .Where(promo => promo.Condition == typeProduct || promo.Condition == "All")
                 .ToList();
@@ -259,20 +303,16 @@ public class HomeController : Controller
             if (applicablePromotions.Any())
             {
                 hasDiscount = true;
-                originalPrice = p.Price;
+                originalPrice = finalPrice;
 
                 var bestPromotion = applicablePromotions
                     .OrderByDescending(promo => promo.DiscountValue)
                     .First();
 
                 if (bestPromotion.DiscountValueType == DiscountValueType.Percent)
-                {
-                    finalPrice = p.Price - (p.Price * bestPromotion.DiscountValue / 100);
-                }
+                    finalPrice -= finalPrice * bestPromotion.DiscountValue / 100;
                 else
-                {
-                    finalPrice = p.Price - bestPromotion.DiscountValue;
-                }
+                    finalPrice -= bestPromotion.DiscountValue;
 
                 if (finalPrice < 0) finalPrice = 0;
             }
@@ -282,42 +322,48 @@ public class HomeController : Controller
                 ImagePath = p.ImagePath,
                 ProductId = p.ProductId,
                 ProductName = p.ProductName,
-                ProductPrice = finalPrice, // Giá đã tính khuyến mãi
+                ProductPrice = finalPrice,
                 ProductQuantity = p.Quantity,
                 OriginalPrice = originalPrice,
                 HasDiscount = hasDiscount
             };
         }).ToList();
 
-        // LỌC THEO GIÁ (SORTING)
+        // 👉 Sắp xếp
         switch (sortBy)
         {
             case "price_desc":
-                // Sắp xếp từ cao đến thấp
                 productList = productList.OrderByDescending(p => p.ProductPrice).ToList();
                 break;
             case "price_asc":
-                // Sắp xếp từ thấp đến cao
                 productList = productList.OrderBy(p => p.ProductPrice).ToList();
-                break;
-            default:
                 break;
         }
 
-        // Dropdown lọc loại sản phẩm
+        // Dropdown loại sản phẩm
         ViewBag.ProductType = new SelectList(new List<SelectListItem>
     {
-        //new SelectListItem { Text = "Tất cả", Value = "All" },
         new SelectListItem { Text = "Xe máy", Value = "Vehicle" },
         new SelectListItem { Text = "Phụ tùng", Value = "SparePart" }
     }, "Value", "Text", productType);
 
-        // Lưu chuỗi tìm kiếm và trạng thái sắp xếp
         ViewBag.SearchString = searchString;
         ViewBag.CurrentSort = sortBy;
 
-        return View(productList);
+        // ✅ PHÂN TRANG
+        int totalItems = productList.Count;
+        var pagedProducts = productList
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        ViewBag.CurrentPage = page;
+        ViewBag.TotalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
+        return View(pagedProducts);
     }
+
+
 
 
     //----------------------------------------------------------------
@@ -336,7 +382,11 @@ public class HomeController : Controller
             return HttpNotFound();
         }
 
-        // --- ⭐ Thêm đoạn này để tính giảm giá giống Index ⭐ ---
+        // 👉 Biến cố định
+        decimal a = 4000000; // +4 triệu cho xe
+        decimal b = 1000000; // +1 triệu cho phụ tùng
+
+        // 👉 Lấy khuyến mãi đang hoạt động
         var today = DateTime.Now.Date;
         var activePromotions = db.Promotions
             .Where(p => p.isActive &&
@@ -344,44 +394,49 @@ public class HomeController : Controller
                         today <= p.DateEnd)
             .ToList();
 
+        // 👉 Tính giá có thêm cố định
         decimal finalPrice = product.Price;
+        string typeProduct = product.ProductType;
+
+        if (typeProduct == "Vehicle")
+            finalPrice += a;
+        else if (typeProduct == "SparePart")
+            finalPrice += b;
+
+        // 👉 Áp dụng khuyến mãi (nếu có)
         bool hasDiscount = false;
         decimal? originalPrice = null;
 
         var applicablePromotions = activePromotions
-            .Where(promo => promo.Condition == product.ProductType || promo.Condition == "All")
+            .Where(promo => promo.Condition == typeProduct || promo.Condition == "All")
             .ToList();
 
         if (applicablePromotions.Any())
         {
             hasDiscount = true;
-            originalPrice = product.Price;
+            originalPrice = finalPrice;
 
             var bestPromotion = applicablePromotions
                 .OrderByDescending(promo => promo.DiscountValue)
                 .First();
 
             if (bestPromotion.DiscountValueType == DiscountValueType.Percent)
-            {
-                finalPrice = product.Price - (product.Price * bestPromotion.DiscountValue / 100);
-            }
+                finalPrice -= finalPrice * bestPromotion.DiscountValue / 100;
             else
-            {
-                finalPrice = product.Price - bestPromotion.DiscountValue;
-            }
+                finalPrice -= bestPromotion.DiscountValue;
 
             if (finalPrice < 0) finalPrice = 0;
         }
 
-        // --- ⭐ Gọi sang ViewModel như bình thường, nhưng gán thêm giá khuyến mãi ⭐ ---
-        ProductViewDetail vm = ProductViewService.GetDetail(product);
+        // 👉 Truyền sang ViewModel
+        var vm = ProductViewService.GetDetail(product);
         vm.ProductPrice = finalPrice;
         vm.OriginalPrice = originalPrice;
         vm.HasDiscount = hasDiscount;
-        // --- 🔚 Kết thúc thêm ---
 
         return View(vm);
     }
+
 
     //----------------------------------------------------------------
     // ---------------- GET: Home/Cart ----------------
@@ -669,9 +724,47 @@ public class HomeController : Controller
         return RedirectToAction("Details", new { id = productId });
     }
 
+    // Trả danh sách sản phẩm để hiển thị trong modal
+    public ActionResult GetProductListForCompare(string search)
+    {
+        var products = db.Products.AsQueryable();
+
+        if (!string.IsNullOrEmpty(search))
+            products = products.Where(p => p.ProductName.Contains(search));
+
+
+        return PartialView("_CompareProductList", products.ToList());
+    }
+
+
+    // Trả bảng so sánh 2 sản phẩm
+    public ActionResult CompareProduct(int currentId, int compareId)
+    {
+        var p1 = db.Products.Find(currentId);
+        var p2 = db.Products.Find(compareId);
+
+        // ✅ Kiểm tra loại sản phẩm
+        if (!string.Equals(p1.ProductType, p2.ProductType, StringComparison.OrdinalIgnoreCase))
+        {
+            return Json(new
+            {
+                error = true,
+                message = "Chỉ có thể so sánh các sản phẩm cùng loại (VD: Vehicle với Vehicle, SparePart với SparePart)."
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        var vm = new CompareViewModel
+        {
+            Product1 = p1,
+            Product2 = p2
+        };
+
+        return PartialView("_CompareResult", vm);
+    }
+
+
 
     // Phương thức dọn dẹp
-
     protected override void Dispose(bool disposing)
     {
         if (disposing)

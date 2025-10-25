@@ -25,6 +25,8 @@ namespace ProjectApplication.Models
         public HttpPostedFileBase ImageFile { get; set; }
 
         // Thuộc tính để lưu đường dẫn trong DB
+        [StringLength(255)]
+        [Display(Name = "Đường dẫn hình ảnh")]
         public string ImagePath { get; set; }
         public string DiscountImagePath { get; set; }
 

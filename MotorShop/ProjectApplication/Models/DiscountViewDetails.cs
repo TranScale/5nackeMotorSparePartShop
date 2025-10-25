@@ -29,7 +29,8 @@ namespace ProjectApplication.Models
 
         //Của Promotion
         public HttpPostedFileBase ImageFile { get; set; }
-
+        [StringLength(255)]
+        [Display(Name = "Đường dẫn hình ảnh")]
         public string ImagePath { get; set; } //Đường dẫn ảnh
         public string PromotionDescription { get; set; } //Mô tả của Promotion
         public string DiscountCondition { get; set; } //Điều kiện giảm giá (Vehicle, SparePart)

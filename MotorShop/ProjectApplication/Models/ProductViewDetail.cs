@@ -31,7 +31,6 @@ namespace ProjectApplication.Models
         [Display(Name = "Loại sản phẩm")]
         public string ProductType { get; set; }
 
-        [StringLength(500, ErrorMessage = "Mô tả không được vượt quá 500 ký tự.")]
         [Display(Name = "Mô tả sản phẩm")]
         public string ProductDescription { get; set; }
 
@@ -62,6 +61,8 @@ namespace ProjectApplication.Models
         public HttpPostedFileBase ImageFile { get; set; }
 
         // Thuộc tính để lưu đường dẫn trong DB
+        [StringLength(255)]
+        [Display(Name = "Đường dẫn hình ảnh")]
         public string ImagePath { get; set; }
 
         public List<Feedback> Feedbacks { get; set; }

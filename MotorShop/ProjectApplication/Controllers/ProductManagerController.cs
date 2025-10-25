@@ -18,12 +18,26 @@ namespace ProjectApplication.Controllers
         private ShopDbContext db = new ShopDbContext();
 
         // GET: ProductManager
-        public ActionResult Index(string productType)
+        public ActionResult Index(string productType, int page = 1, int pageSize = 10)
         {
             var products = ProductManagerService.SearchProductType(productType);
             var viewModel = ProductViewService.GetListIndex(products);
-            return View(viewModel);
+
+            // Phân trang thủ công
+            int totalItems = viewModel.Count();
+            var pagedData = viewModel
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            // Gửi dữ liệu cần thiết sang View
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+            ViewBag.ProductType = productType;
+
+            return View(pagedData);
         }
+
 
         // GET: ProductManager/Details/5
         public ActionResult Details(int? id)
@@ -48,23 +62,25 @@ namespace ProjectApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ImageFile,ImagePath,ProductId,BrandId,ProductName,ProductType,ProductPrice,ProductQuantity,ProductDescription,Engine,VehicleType,FuelCapacity,Color")] ProductViewDetail viewModel)
         {
-            int productId; // Giữ ProductId sau khi thêm
-            if (viewModel.ImageFile == null)
+            // ✅ Kiểm tra validation phía server
+            if (!ModelState.IsValid)
             {
-                Debug.WriteLine("⚠️ ImageFile bị null rồi!!!");
+                // Trả lại form + lỗi
+                return View(viewModel);
             }
-            else
-            {
-                Debug.WriteLine($"✅ Có file: {viewModel.ImageFile.FileName}, size = {viewModel.ImageFile.ContentLength}");
-            }
+
+            // ⚙️ Lưu ảnh
             viewModel.ImagePath = ProductManagerService.saveProductsImage(viewModel.ImageFile);
 
+            int productId;
+
+            // ⚙️ Thêm sản phẩm tùy loại
             if (viewModel.ProductType == "Vehicle")
             {
                 var vehicle = ProductManagerService.GetVehicle(viewModel);
                 vehicle.Quantity = 0;
                 db.Vehicles.Add(vehicle);
-                db.SaveChanges(); // ⚡ Lưu trước để có ProductId
+                db.SaveChanges();
                 productId = vehicle.ProductId;
             }
             else if (viewModel.ProductType == "SparePart")
@@ -84,21 +100,20 @@ namespace ProjectApplication.Controllers
                 productId = product.ProductId;
             }
 
-            // ✅ 2. Tạo Order "Admin nhập hàng"
+            // ✅ Tạo đơn nhập hàng
             var order = OrderManageService.AdminOrder(viewModel);
-
             db.Orders.Add(order);
             db.SaveChanges();
 
-            // ✅ 3. Tạo OrderDetail liên kết đúng ProductId
-            var orderDetail = new OrderDetail();
-            orderDetail = OrderManageService.GetOrderDetail(viewModel, order.OrderId, productId);
-
+            // ✅ Tạo chi tiết đơn hàng
+            var orderDetail = OrderManageService.GetOrderDetail(viewModel, order.OrderId, productId);
             db.OrderDetails.Add(orderDetail);
             db.SaveChanges();
 
+            TempData["SuccessMessage"] = "Đã thêm sản phẩm thành công!";
             return RedirectToAction("Index");
         }
+
 
 
         //Cập nhật thêm sản phẩm.
@@ -135,11 +150,20 @@ namespace ProjectApplication.Controllers
         // POST: ProductManager/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,BrandId,ProductName,ProductType,Price,Quantity,ProductDescription")] ProductViewDetail viewModel)
+        public ActionResult Edit(ProductViewDetail viewModel, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
                 var product = db.Products.Find(viewModel.ProductId);
+
+                // Xử lý file mới
+                if (ImageFile != null && ImageFile.ContentLength > 0)
+                {
+                    // Lưu file và lấy đường dẫn
+                    string imagePath = ProductManagerService.saveProductsImage(ImageFile);
+                    viewModel.ImagePath = imagePath;
+                }
+
                 if (product is Vehicle vehicle)
                 {
                     ProductManagerService.UpdateVehicle(viewModel, vehicle);
@@ -148,11 +172,13 @@ namespace ProjectApplication.Controllers
                 {
                     ProductManagerService.UpdateSparePart(viewModel, part);
                 }
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(viewModel);
         }
+
 
         // GET: ProductManager/Delete/5
         public ActionResult Delete(int? id)

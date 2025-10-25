@@ -152,23 +152,70 @@
         </div>
     </div>
 </div>
+<!-- Phân trang -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1, searchString = ViewBag.SearchString, sortBy = ViewBag.CurrentSort, productType = ViewBag.SelectedType, priceRange = ViewBag.SelectedPrice })">
+                    «
+                </a>
+            </li>
+        }
+
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { page = i, searchString = ViewBag.SearchString, sortBy = ViewBag.CurrentSort, productType = ViewBag.SelectedType, priceRange = ViewBag.SelectedPrice })">@i</a>
+            </li>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1, searchString = ViewBag.SearchString, sortBy = ViewBag.CurrentSort, productType = ViewBag.SelectedType, priceRange = ViewBag.SelectedPrice })">
+                    »
+                </a>
+            </li>
+        }
+    </ul>
+</nav>
+
 
 @section Scripts {
     <script>
         $(document).ready(function () {
+            // Hiển thị thông báo thành công
             var successMessage = '@TempData["SuccessMessage"]';
             if (successMessage && successMessage.length > 0) {
                 successMessage = successMessage.replace(/&quot;/g, '"').replace(/&#39;/g, "'");
                 var toastHtml = `
                     <div class="toast bg-success text-white text-center position-fixed bottom-0 end-0 m-3"
-                         role="alert" aria-live="assertive" aria-atomic="true" data-delay="1500">
+                         role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
                         <div class="toast-body">
                             <strong>Thành công!</strong> ${successMessage}
                         </div>
                     </div>`;
                 $('body').append(toastHtml);
-                $('.toast').toast({ delay: 1500 }).toast('show');
+                $('.toast').toast('show');
+            }
+
+            // Hiển thị thông báo lỗi
+            var errorMessage = '@TempData["ErrorMessage"]';
+            if (errorMessage && errorMessage.length > 0) {
+                errorMessage = errorMessage.replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+                var toastHtml = `
+                    <div class="toast bg-danger text-white text-center position-fixed bottom-0 end-0 m-3"
+                         role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+                        <div class="toast-body">
+                            <strong>Lỗi!</strong> ${errorMessage}
+                        </div>
+                    </div>`;
+                $('body').append(toastHtml);
+                $('.toast').toast('show');
             }
         });
     </script>
 }
+

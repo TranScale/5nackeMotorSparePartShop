@@ -1,0 +1,111 @@
+﻿@model ProjectApplication.ViewModels.CompareViewModel
+
+@if (Model?.Product1 != null && Model?.Product2 != null)
+{
+    <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white fw-bold">
+            So sánh sản phẩm
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Thuộc tính</th>
+                            <th>@Model.Product1.ProductName</th>
+                            <th>@Model.Product2.ProductName</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Loại sản phẩm</td>
+                            <td>@Model.Product1.ProductType</td>
+                            <td>@Model.Product2.ProductType</td>
+                        </tr>
+
+                        <tr>
+                            <td>Giá</td>
+                            <td class="text-danger fw-bold">@string.Format("{0:N0} ₫", Model.Product1.Price)</td>
+                            <td class="text-danger fw-bold">@string.Format("{0:N0} ₫", Model.Product2.Price)</td>
+                        </tr>
+
+                        <tr>
+                            <td>Số lượng tồn kho</td>
+                            <td>@Model.Product1.Quantity</td>
+                            <td>@Model.Product2.Quantity</td>
+                        </tr>
+
+                        <tr>
+                            <td>Hình ảnh</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(Model.Product1.ImagePath))
+                                {
+                                    <img src="@Url.Content(Model.Product1.ImagePath)" alt="Ảnh sản phẩm 1" width="120" class="img-thumbnail" />
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Không có ảnh</span>
+                                }
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(Model.Product2.ImagePath))
+                                {
+                                    <img src="@Url.Content(Model.Product2.ImagePath)" alt="Ảnh sản phẩm 2" width="120" class="img-thumbnail" />
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Không có ảnh</span>
+                                }
+                            </td>
+                        </tr>
+
+                        @* ✅ Nếu là xe Vehicle thì hiển thị thêm thuộc tính *@
+                        @if (Model.Product1 is ProjectApplication.Models.Vehicle || Model.Product2 is ProjectApplication.Models.Vehicle)
+                        {
+                            var vehicle1 = Model.Product1 as ProjectApplication.Models.Vehicle;
+                            var vehicle2 = Model.Product2 as ProjectApplication.Models.Vehicle;
+
+                            <tr>
+                                <td>Động cơ (cc)</td>
+                                <td>@(vehicle1?.Engine > 0 ? $"{vehicle1.Engine} cc" : "-")</td>
+                                <td>@(vehicle2?.Engine > 0 ? $"{vehicle2.Engine} cc" : "-")</td>
+                            </tr>
+
+                            <tr>
+                                <td>Loại xe</td>
+                                <td>@(string.IsNullOrEmpty(vehicle1?.VehicleType) ? "-" : vehicle1.VehicleType)</td>
+                                <td>@(string.IsNullOrEmpty(vehicle2?.VehicleType) ? "-" : vehicle2.VehicleType)</td>
+                            </tr>
+
+                            <tr>
+                                <td>Dung tích bình xăng</td>
+                                <td>@(vehicle1?.FuelCapacity > 0 ? $"{vehicle1.FuelCapacity} L" : "-")</td>
+                                <td>@(vehicle2?.FuelCapacity > 0 ? $"{vehicle2.FuelCapacity} L" : "-")</td>
+                            </tr>
+
+                            <tr>
+                                <td>Màu xe</td>
+                                <td>@(vehicle1?.Color.ToString() ?? "-")</td>
+                                <td>@(vehicle2?.Color.ToString() ?? "-")</td>
+                            </tr>
+                        }
+
+                        <tr>
+                            <td>Mô tả sản phẩm</td>
+                            <td class="text-start">@Model.Product1.ProductDescription</td>
+                            <td class="text-start">@Model.Product2.ProductDescription</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        Vui lòng chọn hai sản phẩm để so sánh.
+    </div>
+}

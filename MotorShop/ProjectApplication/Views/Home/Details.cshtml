@@ -42,9 +42,6 @@
                 <hr />
 
                 <dl class="row mb-0">
-                    @*<dt class="col-sm-4 fw-semibold">Mã sản phẩm</dt>
-                    <dd class="col-sm-8">@Model.ProductId</dd>*@
-
                     <dt class="col-sm-4 fw-semibold">Hãng</dt>
                     <dd class="col-sm-8">@Model.BrandName</dd>
 
@@ -69,6 +66,7 @@
                             <span class="fw-semibold fs-5">@string.Format("{0:N0} ₫", Model.ProductPrice)</span>
                         }
                     </dd>
+
                     <dt class="col-sm-4 fw-semibold">Số lượng còn</dt>
                     <dd class="col-sm-8">@Model.ProductQuantity</dd>
                 </dl>
@@ -98,6 +96,10 @@
                             <i class="fas fa-credit-card"></i> Mua ngay
                         </button>
                     }
+
+                    <button type="button" class="btn btn-outline-secondary btn-lg flex-grow-1" data-bs-toggle="modal" data-bs-target="#compareModal">
+                        <i class="fas fa-balance-scale"></i> So sánh
+                    </button>
                 </div>
             </div>
         </div>
@@ -107,6 +109,7 @@
     <div class="card shadow-sm p-4 mt-5">
         <h4 class="fw-bold text-dark mb-3">Mô tả chi tiết</h4>
         <p class="text-muted">@Model.ProductDescription</p>
+
         @if (Model.ProductType == "Vehicle")
         {
             <hr class="my-3" />
@@ -114,25 +117,12 @@
 
             <table class="table table-bordered align-middle mb-0">
                 <tbody>
-                    <tr>
-                        <th class="w-25">Loại xe</th>
-                        <td>@Model.VehicleType</td>
-                    </tr>
-                    <tr>
-                        <th>Động cơ</th>
-                        <td>@($"{Model.Engine} cc")</td>
-                    </tr>
-                    <tr>
-                        <th>Dung tích xăng</th>
-                        <td>@($"{Model.FuelCapacity} lít")</td>
-                    </tr>
-                    <tr>
-                        <th>Màu xe</th>
-                        <td>@Model.Color</td>
-                    </tr>
+                    <tr><th class="w-25">Loại xe</th><td>@Model.VehicleType</td></tr>
+                    <tr><th>Động cơ</th><td>@($"{Model.Engine} cc")</td></tr>
+                    <tr><th>Dung tích xăng</th><td>@($"{Model.FuelCapacity} lít")</td></tr>
+                    <tr><th>Màu xe</th><td>@Model.Color</td></tr>
                 </tbody>
             </table>
-
         }
     </div>
 
@@ -144,7 +134,6 @@
         {
             @Html.AntiForgeryToken()
             <input type="hidden" name="productId" value="@Model.ProductId" />
-
             <div class="mb-3">
                 <label class="form-label fw-semibold">Số sao:</label>
                 <select name="rating" class="form-select w-auto d-inline-block">
@@ -155,12 +144,10 @@
                     <option value="1">⭐️ - Tệ</option>
                 </select>
             </div>
-
             <div class="mb-3">
                 <label class="form-label fw-semibold">Nội dung đánh giá:</label>
                 <textarea name="comment" class="form-control" rows="3" placeholder="Nhập cảm nhận của bạn..."></textarea>
             </div>
-
             <button type="submit" class="btn btn-outline-primary">
                 <i class="fas fa-paper-plane"></i> Gửi đánh giá
             </button>
@@ -198,32 +185,130 @@
     </div>
 </div>
 
+<!-- Modal chọn sản phẩm để so sánh -->
+<div class="modal fade" id="compareModal" tabindex="-1" aria-labelledby="compareModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="compareModalLabel">Chọn sản phẩm để so sánh</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <input type="text" id="compareSearch" class="form-control" placeholder="Tìm sản phẩm..." />
+                    <button class="btn btn-outline-primary" id="btnSearchCompare"><i class="fas fa-search"></i></button>
+                </div>
+                <div id="compareProductList" class="row g-3">
+                    <div class="text-center text-muted">Đang tải danh sách...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- Toast thông báo -->
+<!-- Kết quả so sánh -->
+<div id="compareResult" class="mt-5"></div>
+<div class="text-center mt-3" id="compareBackWrapper" style="display:none;">
+    <button id="btnExitCompare" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i> Thoát chế độ so sánh
+    </button>
+</div>
+
+<!-- Toast -->
 <div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index:1055;"></div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
+
+            // 🟢 Hiển thị toast khi có thông báo
             var successMessage = '@TempData["SuccessMessage"]';
             if (successMessage && successMessage.length > 0) {
-                successMessage = successMessage.replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+                showToast(successMessage, "success");
+            }
+
+            // 🖼️ Zoom ảnh sản phẩm
+            const img = document.querySelector('.product-image');
+            if (img) {
+                img.addEventListener('mouseenter', () => img.style.transform = 'scale(1.05)');
+                img.addEventListener('mouseleave', () => img.style.transform = 'scale(1)');
+            }
+
+            // 🧩 Mở modal chọn sản phẩm so sánh
+            $('#compareModal').on('shown.bs.modal', function () {
+                loadCompareList();
+            });
+
+            // 🔍 Nút tìm kiếm trong modal
+            $('#btnSearchCompare').click(function () {
+                loadCompareList($('#compareSearch').val());
+            });
+
+            // ⚙️ Hàm load danh sách sản phẩm trong modal
+            function loadCompareList(search = "") {
+                $.get('@Url.Action("GetProductListForCompare", "Home")', { search: search }, function (data) {
+                    $('#compareProductList').html(data);
+                });
+            }
+
+            // 🟡 Xử lý chọn sản phẩm để so sánh
+            $(document).on('click', '.btn-compare-select', function () {
+                var productId = $(this).data('id');
+                var currentId = '@Model.ProductId';
+
+                $.get('@Url.Action("CompareProduct", "Home")', { currentId: currentId, compareId: productId }, function (response) {
+                    if (response.error) {
+                        showToast(response.message, "danger");
+                        return;
+                    }
+
+                    $('#compareResult').html(response);
+                    $('#compareBackWrapper').show();
+
+                    // Đóng modal đúng cách
+                    $('#compareModal').modal('hide');
+
+                    // Cuộn xuống vùng hiển thị kết quả
+                    $('html, body').animate({ scrollTop: $('#compareResult').offset().top }, 500);
+                });
+            });
+
+            // ✅ Khi modal ẩn hoàn toàn → mở lại scroll, xóa backdrop
+            $('#compareModal').on('hidden.bs.modal', function () {
+                $('body').removeClass('modal-open').css({
+                    'overflow': 'auto',
+                    'padding-right': ''
+                });
+                $('.modal-backdrop').remove();
+            });
+
+            // 🔴 Thoát chế độ so sánh
+            $(document).on('click', '#btnExitCompare', function () {
+                $('#compareResult').empty();
+                $('#compareBackWrapper').hide();
+
+                // Reset scroll + cleanup đảm bảo
+                $('body').removeClass('modal-open').css({
+                    'overflow': 'auto',
+                    'padding-right': ''
+                });
+                $('.modal-backdrop').remove();
+
+                $('html, body').animate({ scrollTop: 0 }, 400);
+            });
+
+            // 🔔 Hàm hiển thị toast thông báo
+            function showToast(message, type = "success") {
                 var toastHtml = `
-                    <div class="toast bg-success text-white text-center" role="alert" data-delay="1500">
-                        <div class="toast-body">
-                            <strong>Thành công!</strong> ${successMessage}
-                        </div>
-                    </div>`
+                    <div class="toast bg-${type} text-white text-center" role="alert" data-bs-delay="2500">
+                        <div class="toast-body">${message}</div>
+                    </div>`;
                 $('#toast-container').append(toastHtml);
-                $('#toast-container .toast:last').toast('show');
+                var toastEl = $('#toast-container .toast:last');
+                var bsToast = new bootstrap.Toast(toastEl[0]);
+                bsToast.show();
             }
         });
-
-        // Hiệu ứng zoom ảnh
-        const productImage = document.querySelector('.product-image');
-        if (productImage) {
-            productImage.addEventListener('mouseenter', () => productImage.style.transform = 'scale(1.05)');
-            productImage.addEventListener('mouseleave', () => productImage.style.transform = 'scale(1)');
-        }
     </script>
 }
+

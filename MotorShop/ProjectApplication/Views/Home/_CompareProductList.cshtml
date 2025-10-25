@@ -1,0 +1,18 @@
+﻿@model IEnumerable<dynamic>
+
+@foreach (var item in Model)
+{
+    <div class="col-md-3">
+        <div class="card h-100 text-center">
+            <img src="@Url.Content(item.ImagePath ?? "~/Content/Images/default.png")"
+                 class="card-img-top p-2" style="height:180px; object-fit:contain;" />
+            <div class="card-body">
+                <h6 class="card-title">@item.ProductName</h6>
+                <p class="text-danger fw-bold">@string.Format("{0:N0} ₫", item.Price)</p>
+                <button class="btn btn-outline-primary btn-sm btn-compare-select" data-id="@item.ProductId">
+                    <i class="fas fa-check"></i> Chọn
+                </button>
+            </div>
+        </div>
+    </div>
+}
