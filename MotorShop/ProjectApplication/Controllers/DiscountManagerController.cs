@@ -55,6 +55,14 @@ namespace ProjectApplication.Controllers
         [AdminAuthorize]
         public ActionResult Create(DiscountViewDetails viewModel)
         {
+            // 🧩 Nếu model null -> quay lại trang Create
+            if (viewModel == null)
+            {
+                Debug.WriteLine("⚠️ viewModel bị null!");
+                return View("Create");
+            }
+
+            // 🧩 Nếu có ảnh thì lưu, còn không thì bỏ qua
             if (viewModel.ImageFile == null)
             {
                 Debug.WriteLine("⚠️ ImageFile bị null rồi!!!");
@@ -62,25 +70,32 @@ namespace ProjectApplication.Controllers
             else
             {
                 Debug.WriteLine($"✅ Có file: {viewModel.ImageFile.FileName}, size = {viewModel.ImageFile.ContentLength}");
+                viewModel.ImagePath = ProductManagerService.saveProductsImage(viewModel.ImageFile);
             }
-            viewModel.ImagePath = ProductManagerService.saveProductsImage(viewModel.ImageFile);
 
-            if (ModelState.IsValid)
+            // 🧩 Nếu model không hợp lệ thì trả lại view cùng dữ liệu nhập
+            if (!ModelState.IsValid)
             {
-                if(viewModel.DiscountType == "Coupon")
-                {
-                    var coupon = DiscountManagerService.GetCoupon(viewModel);
-                    db.Coupons.Add(coupon);
-                }
-                else if (viewModel.DiscountType == "Promotion")
-                {
-                    var promotion = DiscountManagerService.GetPromotion(viewModel);
-                    db.Promotions.Add(promotion);
-                }
+                Debug.WriteLine("⚠️ ModelState không hợp lệ!");
+                return View(viewModel);
             }
-                db.SaveChanges();
+
+            // 🧩 Xử lý thêm dữ liệu
+            if (viewModel.DiscountType == "Coupon")
+            {
+                var coupon = DiscountManagerService.GetCoupon(viewModel);
+                db.Coupons.Add(coupon);
+            }
+            else if (viewModel.DiscountType == "Promotion")
+            {
+                var promotion = DiscountManagerService.GetPromotion(viewModel);
+                db.Promotions.Add(promotion);
+            }
+
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
+
 
         // GET: DiscountManager/Edit/5
         [AdminAuthorize]

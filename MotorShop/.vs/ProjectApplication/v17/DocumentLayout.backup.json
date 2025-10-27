@@ -3,14 +3,15 @@
   "WorkspaceRootPath": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ShopDB/True/SqlTable/dbo.Products.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|d:\\github\\5nackemotorsparepartshop\\motorshop\\projectapplication\\models\\promotion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\promotion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|d:\\github\\5nackemotorsparepartshop\\motorshop\\projectapplication\\models\\discount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\discount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\ordermanager\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|d:\\github\\5nackemotorsparepartshop\\motorshop\\projectapplication\\views\\ordermanager\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\ordermanager\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
@@ -18,24 +19,95 @@
       "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\controllers\\ordermanagercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|d:\\github\\5nackemotorsparepartshop\\motorshop\\projectapplication\\service\\orderviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\service\\orderviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\content\\viewsimages\\tranthanhson.jpg||{58961B49-13E0-48C0-9258-13CBC4D40279}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\content\\viewsimages\\tranthanhson.jpg||{58961B49-13E0-48C0-9258-13CBC4D40279}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|d:\\github\\5nackemotorsparepartshop\\motorshop\\projectapplication\\views\\productmanager\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\productmanager\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\home\\_productlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\home\\_productlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ShopDB/True/SqlTable/dbo.Products.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\controllers\\discountmanagercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\controllers\\discountmanagercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\discountmanager\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\discountmanager\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\discountviewdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\discountviewdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\discountviewindex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\discountviewindex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\discounttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\discounttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\productviewdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\productviewdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\login\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\login\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\home\\relatedproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\home\\relatedproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\home\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\home\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\controllers\\productmanagercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\controllers\\productmanagercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\productviewdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\productviewdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\service\\productviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\service\\productviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\service\\orderviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\service\\orderviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\productmanager\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\productmanager\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\productviewindex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,36 +118,12 @@
       "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\productmanager\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\discountmanager\\promotionbanners.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\discountmanager\\promotionbanners.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|d:\\github\\5nackemotorsparepartshop\\motorshop\\projectapplication\\models\\orderviewindex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\orderviewindex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\orderviewindex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\discountviewindex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\discountviewindex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\discountviewdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\discountviewdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\orderviewdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -114,14 +162,6 @@
       "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\productmanager\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\discountmanager\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\discountmanager\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\models\\vehiclecolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\models\\vehiclecolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -132,10 +172,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\views\\discountmanager\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\views\\discountmanager\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\service\\productviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|solutionrelative:projectapplication\\service\\productviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1DE4E748-B1C3-4AB3-A418-CF7FEAADB32D}|ProjectApplication\\ProjectApplication.csproj|D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\projectapplication\\content\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
@@ -154,38 +190,97 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "dbo.Products [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ShopDB/True/SqlTable/dbo.Products.sql",
-              "ToolTip": "dbo.Products [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-10-25T04:42:37.042Z",
+              "Title": "Promotion.cs",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\Promotion.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Models\\Promotion.cs",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\Promotion.cs",
+              "RelativeToolTip": "ProjectApplication\\Models\\Promotion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T04:38:18.86Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ProductManagerController.cs",
-              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Controllers\\ProductManagerController.cs",
-              "RelativeDocumentMoniker": "ProjectApplication\\Controllers\\ProductManagerController.cs",
-              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Controllers\\ProductManagerController.cs",
-              "RelativeToolTip": "ProjectApplication\\Controllers\\ProductManagerController.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAowBsAAAAlAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Discount.cs",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\Discount.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Models\\Discount.cs",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\Discount.cs",
+              "RelativeToolTip": "ProjectApplication\\Models\\Discount.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAswAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T07:44:23.565Z",
+              "WhenOpened": "2025-10-27T04:35:19.445Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "_ProductList.cshtml",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\_ProductList.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\Home\\_ProductList.cshtml",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\_ProductList.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\Home\\_ProductList.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T01:55:05.786Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Models\\Product.cs",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\Product.cs",
+              "RelativeToolTip": "ProjectApplication\\Models\\Product.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAUwC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T02:09:32.398Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "dbo.Products.sql",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ShopDB/True/SqlTable/dbo.Products.sql",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ShopDB/True/SqlTable/dbo.Products.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-10-27T02:21:37.05Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "ProjectApplication\\Views\\Home\\Index.cshtml",
-              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "ProjectApplication\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAKoAAAAAAAAAAAAAwNwAAAAAAAAAAAAAAA==",
+              "Title": "About.cshtml",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\About.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\Home\\About.cshtml",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\About.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\Home\\About.cshtml",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAiwFoAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-24T06:57:05.009Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-24T06:49:45.094Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "ProjectApplication\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAHcBAAAAAAAAAAAAwHABAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T06:52:29.71Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Login\\Login.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\Login\\Login.cshtml",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Login\\Login.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\Login\\Login.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAC0AAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T01:24:55.682Z"
             },
             {
               "$type": "Document",
@@ -195,10 +290,9 @@
               "RelativeDocumentMoniker": "ProjectApplication\\Controllers\\OrderManagerController.cs",
               "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Controllers\\OrderManagerController.cs",
               "RelativeToolTip": "ProjectApplication\\Controllers\\OrderManagerController.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAmwDsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADUAAAAAAAAAAAAuwD4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T01:56:08.241Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T01:56:08.241Z"
             },
             {
               "$type": "Document",
@@ -208,40 +302,193 @@
               "RelativeDocumentMoniker": "ProjectApplication\\Views\\OrderManager\\Index.cshtml",
               "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\OrderManager\\Index.cshtml",
               "RelativeToolTip": "ProjectApplication\\Views\\OrderManager\\Index.cshtml",
-              "ViewState": "AgIAAHUAAAAAAAAAAAAkwH0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAiwJMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-24T08:00:47.873Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "ProjectApplication\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "ProjectApplication\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAKABAAAAAAAAAAAswK8BAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T06:52:29.71Z",
-              "EditorCaption": ""
+              "DocumentIndex": 8,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAkwJMAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T06:57:05.009Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 6,
+              "Title": "TranThanhSon.jpg",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Content\\ViewsImages\\TranThanhSon.jpg",
+              "RelativeDocumentMoniker": "ProjectApplication\\Content\\ViewsImages\\TranThanhSon.jpg",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Content\\ViewsImages\\TranThanhSon.jpg",
+              "RelativeToolTip": "ProjectApplication\\Content\\ViewsImages\\TranThanhSon.jpg",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2025-10-27T03:19:28.704Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "ProjectApplication\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "ProjectApplication\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAAAGMAAABKAAAAAAAAAA==",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAE4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-24T07:00:37.728Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-24T07:00:37.728Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 19,
+              "Title": "RelatedProduct.cshtml",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\RelatedProduct.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\Home\\RelatedProduct.cshtml",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\RelatedProduct.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\Home\\RelatedProduct.cshtml",
+              "ViewState": "AgIAAIkAAAAAAAAAAAAiwKAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T00:42:29.898Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Vehicle.cs",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\Vehicle.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Models\\Vehicle.cs",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\Vehicle.cs",
+              "RelativeToolTip": "ProjectApplication\\Models\\Vehicle.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvxUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T07:51:18.426Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "DiscountType.cs",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\DiscountType.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Models\\DiscountType.cs",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\DiscountType.cs",
+              "RelativeToolTip": "ProjectApplication\\Models\\DiscountType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T01:28:15.435Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "DiscountManagerController.cs",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Controllers\\DiscountManagerController.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Controllers\\DiscountManagerController.cs",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Controllers\\DiscountManagerController.cs",
+              "RelativeToolTip": "ProjectApplication\\Controllers\\DiscountManagerController.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwBUAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T01:32:38.202Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "DiscountViewDetails.cs",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\DiscountViewDetails.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Models\\DiscountViewDetails.cs",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\DiscountViewDetails.cs",
+              "RelativeToolTip": "ProjectApplication\\Models\\DiscountViewDetails.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAswCUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T02:34:40.977Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DiscountViewIndex.cs",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\DiscountViewIndex.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Models\\DiscountViewIndex.cs",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\DiscountViewIndex.cs",
+              "RelativeToolTip": "ProjectApplication\\Models\\DiscountViewIndex.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwB4AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T02:34:49.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\DiscountManager\\Create.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\DiscountManager\\Create.cshtml",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\DiscountManager\\Create.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\DiscountManager\\Create.cshtml",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAkwK0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T08:00:56.503Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ProductViewService.cs",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Service\\ProductViewService.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Service\\ProductViewService.cs",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Service\\ProductViewService.cs",
+              "RelativeToolTip": "ProjectApplication\\Service\\ProductViewService.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T07:23:36.988Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ProductViewDetail.cs",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\ProductViewDetail.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Models\\ProductViewDetail.cs",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\ProductViewDetail.cs",
+              "RelativeToolTip": "ProjectApplication\\Models\\ProductViewDetail.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAADwv0YAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T07:51:44.924Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "_Adminlayout.cshtml",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Shared\\_Adminlayout.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\Shared\\_Adminlayout.cshtml",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Shared\\_Adminlayout.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\Shared\\_Adminlayout.cshtml",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAAAHkAAABsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T07:20:27.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ProductManagerController.cs",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Controllers\\ProductManagerController.cs",
+              "RelativeDocumentMoniker": "ProjectApplication\\Controllers\\ProductManagerController.cs",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Controllers\\ProductManagerController.cs",
+              "RelativeToolTip": "ProjectApplication\\Controllers\\ProductManagerController.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAkwBsAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T07:44:23.565Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\Details.cshtml",
+              "RelativeDocumentMoniker": "ProjectApplication\\Views\\Home\\Details.cshtml",
+              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\Details.cshtml",
+              "RelativeToolTip": "ProjectApplication\\Views\\Home\\Details.cshtml",
+              "ViewState": "AgIAAGoAAAAAAAAAAAAiwIEAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T00:30:46.838Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
               "Title": "Create.cshtml",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\ProductManager\\Create.cshtml",
               "RelativeDocumentMoniker": "ProjectApplication\\Views\\ProductManager\\Create.cshtml",
@@ -249,12 +496,11 @@
               "RelativeToolTip": "ProjectApplication\\Views\\ProductManager\\Create.cshtml",
               "ViewState": "AgIAAHgAAAAAAAAAAAAiwI8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-24T07:54:41.695Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-24T07:54:41.695Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 26,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\ProductManager\\Index.cshtml",
               "RelativeDocumentMoniker": "ProjectApplication\\Views\\ProductManager\\Index.cshtml",
@@ -262,12 +508,11 @@
               "RelativeToolTip": "ProjectApplication\\Views\\ProductManager\\Index.cshtml",
               "ViewState": "AgIAAEwAAAAAAAAAAAAiwGMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-25T03:20:08.665Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T03:20:08.665Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 27,
               "Title": "ProductViewIndex.cs",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\ProductViewIndex.cs",
               "RelativeDocumentMoniker": "ProjectApplication\\Models\\ProductViewIndex.cs",
@@ -275,25 +520,11 @@
               "RelativeToolTip": "ProjectApplication\\Models\\ProductViewIndex.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAAwBcAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T02:34:04.174Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T02:34:04.174Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ProductViewDetail.cs",
-              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\ProductViewDetail.cs",
-              "RelativeDocumentMoniker": "ProjectApplication\\Models\\ProductViewDetail.cs",
-              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\ProductViewDetail.cs",
-              "RelativeToolTip": "ProjectApplication\\Models\\ProductViewDetail.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T07:51:44.924Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 25,
               "Title": "OrderViewService.cs",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Service\\OrderViewService.cs",
               "RelativeDocumentMoniker": "ProjectApplication\\Service\\OrderViewService.cs",
@@ -301,12 +532,11 @@
               "RelativeToolTip": "ProjectApplication\\Service\\OrderViewService.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T03:23:11.152Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T03:23:11.152Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 31,
               "Title": "OrderViewDetails.cs",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\OrderViewDetails.cs",
               "RelativeDocumentMoniker": "ProjectApplication\\Models\\OrderViewDetails.cs",
@@ -318,19 +548,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "DiscountViewIndex.cs",
-              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\DiscountViewIndex.cs",
-              "RelativeDocumentMoniker": "ProjectApplication\\Models\\DiscountViewIndex.cs",
-              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\DiscountViewIndex.cs",
-              "RelativeToolTip": "ProjectApplication\\Models\\DiscountViewIndex.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAA5wB4AAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T02:34:49.076Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 29,
               "Title": "PromotionBanners.cshtml",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\DiscountManager\\PromotionBanners.cshtml",
               "RelativeDocumentMoniker": "ProjectApplication\\Views\\DiscountManager\\PromotionBanners.cshtml",
@@ -338,50 +556,11 @@
               "RelativeToolTip": "ProjectApplication\\Views\\DiscountManager\\PromotionBanners.cshtml",
               "ViewState": "AgIAACoAAAAAAAAAAAAAADgAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-24T07:13:22.786Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-24T07:13:22.786Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "About.cshtml",
-              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\About.cshtml",
-              "RelativeDocumentMoniker": "ProjectApplication\\Views\\Home\\About.cshtml",
-              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Home\\About.cshtml",
-              "RelativeToolTip": "ProjectApplication\\Views\\Home\\About.cshtml",
-              "ViewState": "AgIAADwAAAAAAAAAAAAAAEUAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-24T06:49:45.094Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "_Adminlayout.cshtml",
-              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Shared\\_Adminlayout.cshtml",
-              "RelativeDocumentMoniker": "ProjectApplication\\Views\\Shared\\_Adminlayout.cshtml",
-              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Shared\\_Adminlayout.cshtml",
-              "RelativeToolTip": "ProjectApplication\\Views\\Shared\\_Adminlayout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-24T07:20:27.89Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\DiscountManager\\Create.cshtml",
-              "RelativeDocumentMoniker": "ProjectApplication\\Views\\DiscountManager\\Create.cshtml",
-              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\DiscountManager\\Create.cshtml",
-              "RelativeToolTip": "ProjectApplication\\Views\\DiscountManager\\Create.cshtml",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAADcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-24T08:00:56.503Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 30,
               "Title": "OrderViewIndex.cs",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\OrderViewIndex.cs",
               "RelativeDocumentMoniker": "ProjectApplication\\Models\\OrderViewIndex.cs",
@@ -389,36 +568,11 @@
               "RelativeToolTip": "ProjectApplication\\Models\\OrderViewIndex.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T02:34:34.894Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T02:34:34.894Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Product.cs",
-              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\Product.cs",
-              "RelativeDocumentMoniker": "ProjectApplication\\Models\\Product.cs",
-              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\Product.cs",
-              "RelativeToolTip": "ProjectApplication\\Models\\Product.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T02:09:32.398Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "DiscountViewDetails.cs",
-              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\DiscountViewDetails.cs",
-              "RelativeDocumentMoniker": "ProjectApplication\\Models\\DiscountViewDetails.cs",
-              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\DiscountViewDetails.cs",
-              "RelativeToolTip": "ProjectApplication\\Models\\DiscountViewDetails.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAswCAAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T02:34:40.977Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 34,
               "Title": "ShopInitializer.cs",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Data\\ShopInitializer.cs",
               "RelativeDocumentMoniker": "ProjectApplication\\Data\\ShopInitializer.cs",
@@ -430,7 +584,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 32,
               "Title": "OrderDetail.cs",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\OrderDetail.cs",
               "RelativeDocumentMoniker": "ProjectApplication\\Models\\OrderDetail.cs",
@@ -442,7 +596,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 33,
               "Title": "Order.cs",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\Order.cs",
               "RelativeDocumentMoniker": "ProjectApplication\\Models\\Order.cs",
@@ -454,19 +608,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "ProductViewService.cs",
-              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Service\\ProductViewService.cs",
-              "RelativeDocumentMoniker": "ProjectApplication\\Service\\ProductViewService.cs",
-              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Service\\ProductViewService.cs",
-              "RelativeToolTip": "ProjectApplication\\Service\\ProductViewService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T07:23:36.988Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 38,
               "Title": "ProductManagerService.cs",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Service\\ProductManagerService.cs",
               "RelativeDocumentMoniker": "ProjectApplication\\Service\\ProductManagerService.cs",
@@ -478,7 +620,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 37,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\Login\\Index.cshtml",
               "RelativeDocumentMoniker": "ProjectApplication\\Views\\Login\\Index.cshtml",
@@ -490,7 +632,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 36,
               "Title": "LoginController.cs",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "ProjectApplication\\Controllers\\LoginController.cs",
@@ -502,7 +644,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 35,
               "Title": "DBMotorShop.cs",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Data\\DBMotorShop.cs",
               "RelativeDocumentMoniker": "ProjectApplication\\Data\\DBMotorShop.cs",
@@ -514,7 +656,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 40,
               "Title": "vehicleColor.cs",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\vehicleColor.cs",
               "RelativeDocumentMoniker": "ProjectApplication\\Models\\vehicleColor.cs",
@@ -526,19 +668,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "Vehicle.cs",
-              "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\Vehicle.cs",
-              "RelativeDocumentMoniker": "ProjectApplication\\Models\\Vehicle.cs",
-              "ToolTip": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Models\\Vehicle.cs",
-              "RelativeToolTip": "ProjectApplication\\Models\\Vehicle.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T07:51:18.426Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 39,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\ProductManager\\Edit.cshtml",
               "RelativeDocumentMoniker": "ProjectApplication\\Views\\ProductManager\\Edit.cshtml",
@@ -550,7 +680,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 43,
               "Title": "Style.css",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Content\\Style.css",
               "RelativeDocumentMoniker": "ProjectApplication\\Content\\Style.css",
@@ -562,7 +692,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 42,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\DiscountManager\\Edit.cshtml",
               "RelativeDocumentMoniker": "ProjectApplication\\Views\\DiscountManager\\Edit.cshtml",
@@ -574,7 +704,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 41,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\GitHub\\5nackeMotorSparePartShop\\MotorShop\\ProjectApplication\\Views\\DiscountManager\\Index.cshtml",
               "RelativeDocumentMoniker": "ProjectApplication\\Views\\DiscountManager\\Index.cshtml",

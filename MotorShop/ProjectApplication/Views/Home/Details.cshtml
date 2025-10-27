@@ -124,6 +124,10 @@
                 </tbody>
             </table>
         }
+
+    <!-- 🛠️ SẢN PHẨM ĐỀ XUẤT -->
+    <div id="relatedProductsContainer">
+        @Html.Action("RelatedProduct", "Home", new { productId = Model.ProductId })
     </div>
 
     <!-- 💬 KHỐI 3: Đánh giá & Bình luận -->

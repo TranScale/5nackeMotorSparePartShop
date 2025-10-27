@@ -260,36 +260,24 @@ public class HomeController : Controller
             .ToList();
         ViewBag.Promotions = promotions;
 
+        // 👉 Xác định khuyến mãi đang hoạt động
         var today = DateTime.Now.Date;
-
         var activePromotions = db.Promotions
-            .Where(p => p.isActive &&
-                        today >= p.DateStart &&
-                        today <= p.DateEnd)
+            .Where(p => p.isActive && today >= p.DateStart && today <= p.DateEnd)
             .ToList();
 
+        // 👉 Lọc theo loại sản phẩm + từ khóa
         var products = ProductManagerService.SearchProduct(productType, searchString);
 
-        // 👉 Lọc theo khoảng giá
-        if (!string.IsNullOrEmpty(priceRange))
-        {
-            if (priceRange == "30M")
-                products = products.Where(p => p.Price < 30000000).ToList();
-            else if (priceRange == "40M")
-                products = products.Where(p => p.Price >= 30000000 && p.Price <= 40000000).ToList();
-            else if (priceRange == "40M_UP")
-                products = products.Where(p => p.Price > 40000000).ToList();
-        }
-
-        // ⭐ Ánh xạ sang ViewModel + cộng giá theo loại sản phẩm ⭐
+        // ⭐ Tính giá cuối cùng (có cộng thêm và khuyến mãi)
         var productList = products.Select(p =>
         {
             decimal finalPrice = p.Price;
-            bool hasDiscount = false;
             decimal? originalPrice = null;
+            bool hasDiscount = false;
             string typeProduct = p.ProductType;
 
-            // 👉 Cộng thêm theo loại sản phẩm
+            // 👉 Cộng thêm giá cố định
             if (typeProduct == "Vehicle")
                 finalPrice += a;
             else if (typeProduct == "SparePart")
@@ -325,9 +313,37 @@ public class HomeController : Controller
                 ProductPrice = finalPrice,
                 ProductQuantity = p.Quantity,
                 OriginalPrice = originalPrice,
-                HasDiscount = hasDiscount
+                HasDiscount = hasDiscount,
             };
         }).ToList();
+
+        // ✅ Lọc theo khoảng giá SAU KHI đã tính giá cuối cùng
+        // ✅ Lọc theo khoảng giá SAU KHI đã tính giá cuối cùng
+        if (!string.IsNullOrEmpty(priceRange))
+        {
+            switch (priceRange)
+            {
+                case "30M":
+                    productList = productList
+                        .Where(p => p.ProductPrice < 30000000M)
+                        .ToList();
+                    break;
+
+                case "40M":
+                    productList = productList
+                        .Where(p => p.ProductPrice >= 30000000M && p.ProductPrice <= 40000000M)
+                        .ToList();
+                    break;
+
+                case "40M_UP":
+                    productList = productList
+                        .Where(p => p.ProductPrice > 40000000M)
+                        .ToList();
+                    break;
+            }
+
+        }
+
 
         // 👉 Sắp xếp
         switch (sortBy)
@@ -349,8 +365,10 @@ public class HomeController : Controller
 
         ViewBag.SearchString = searchString;
         ViewBag.CurrentSort = sortBy;
+        ViewBag.SelectedType = productType;
+        ViewBag.SelectedPrice = priceRange;
 
-        // ✅ PHÂN TRANG
+        // ✅ Phân trang
         int totalItems = productList.Count;
         var pagedProducts = productList
             .Skip((page - 1) * pageSize)
@@ -360,8 +378,16 @@ public class HomeController : Controller
         ViewBag.CurrentPage = page;
         ViewBag.TotalPages = (int)Math.Ceiling((double)totalItems / pageSize);
 
+        // ✅ Nếu là AJAX thì chỉ render phần danh sách
+        if (Request.IsAjaxRequest())
+        {
+            return PartialView("_ProductList", pagedProducts);
+        }
+
+        // ✅ Nếu không thì load View đầy đủ
         return View(pagedProducts);
     }
+
 
 
 
@@ -761,6 +787,89 @@ public class HomeController : Controller
 
         return PartialView("_CompareResult", vm);
     }
+
+    public ActionResult RelatedProduct(int id)
+    {
+        var currentProduct = db.Products.Find(id);
+        if (currentProduct == null)
+            return HttpNotFound();
+
+        List<Product> list = new List<Product>();
+
+        if (currentProduct is Vehicle vehicle)
+        {
+            list = db.Vehicles
+                .Where(cp => cp.ProductId != vehicle.ProductId && cp.VehicleType == vehicle.VehicleType)
+                .Take(8)
+                .ToList<Product>();
+        }
+        else if (currentProduct is SparePart part)
+        {
+            list = db.SpareParts
+                .Where(cp => cp.ProductId != part.ProductId)
+                .Take(8)
+                .ToList<Product>();
+        }
+
+        // ✅ Dùng cùng logic tính giá giảm như trong Index
+        decimal a = 4000000; // 4 triệu
+        decimal b = 1000000; // 1 triệu
+        var today = DateTime.Now.Date;
+
+        var activePromotions = db.Promotions
+            .Where(p => p.isActive && today >= p.DateStart && today <= p.DateEnd)
+            .ToList();
+
+        var viewModel = list.Select(p =>
+        {
+            decimal finalPrice = p.Price;
+            bool hasDiscount = false;
+            decimal? originalPrice = null;
+            string typeProduct = p.ProductType;
+
+            // 👉 Cộng thêm theo loại sản phẩm
+            if (typeProduct == "Vehicle")
+                finalPrice += a;
+            else if (typeProduct == "SparePart")
+                finalPrice += b;
+
+            // 👉 Áp dụng khuyến mãi nếu có
+            var applicablePromotions = activePromotions
+                .Where(promo => promo.Condition == typeProduct || promo.Condition == "All")
+                .ToList();
+
+            if (applicablePromotions.Any())
+            {
+                hasDiscount = true;
+                originalPrice = finalPrice;
+
+                var bestPromotion = applicablePromotions
+                    .OrderByDescending(promo => promo.DiscountValue)
+                    .First();
+
+                if (bestPromotion.DiscountValueType == DiscountValueType.Percent)
+                    finalPrice -= finalPrice * bestPromotion.DiscountValue / 100;
+                else
+                    finalPrice -= bestPromotion.DiscountValue;
+
+                if (finalPrice < 0) finalPrice = 0;
+            }
+
+            return new ProductViewIndex
+            {
+                ImagePath = p.ImagePath,
+                ProductId = p.ProductId,
+                ProductName = p.ProductName,
+                ProductPrice = finalPrice,
+                ProductQuantity = p.Quantity,
+                OriginalPrice = originalPrice,
+                HasDiscount = hasDiscount
+            };
+        }).ToList();
+
+        return PartialView("RelatedProduct", viewModel);
+    }
+
 
 
 

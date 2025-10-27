@@ -1,0 +1,67 @@
+﻿@model List<ProjectApplication.Models.ProductViewIndex>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        @foreach (var item in Model)
+        {
+            var path = string.IsNullOrEmpty(item.ImagePath)
+                ? Url.Content("~/Content/Images/default.png")
+                : Url.Content("~/" + item.ImagePath.TrimStart('/', '~'));
+
+            <div class="col mb-5">
+                <div class="card h-100 shadow-sm product-card position-relative hover-shadow">
+                    @if (item.HasDiscount)
+                    {
+                        <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    }
+
+                    <a href="@Url.Action("Details", "Home", new { id = item.ProductId })" title="Xem chi tiết @item.ProductName">
+                        <img class="card-img-top" src="@path" alt="@item.ProductName" style="object-fit: cover; height: 200px;" />
+                    </a>
+
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h5 class="fw-bolder mb-2">
+                                <a href="@Url.Action("Details", "Home", new { id = item.ProductId })" class="text-decoration-none fw-bold">
+                                    @item.ProductName
+                                </a>
+                            </h5>
+
+                            @if (item.HasDiscount && item.OriginalPrice.HasValue)
+                            {
+                                <div>
+                                    <span class="text-muted text-decoration-line-through">
+                                        @string.Format("{0:N0}", item.OriginalPrice.Value) ₫
+                                    </span>
+                                </div>
+                                <div class="text-danger fw-bold my-1">@string.Format("{0:N0}", item.ProductPrice) ₫</div>
+                            }
+                            else
+                            {
+                                <div class="fw-semibold">@string.Format("{0:N0}", item.ProductPrice) ₫</div>
+                            }
+                            <small class="text-muted d-block mt-2">Còn lại: @item.ProductQuantity</small>
+                        </div>
+                    </div>
+
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            @using (Html.BeginForm("AddToCart", "Home", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <input type="hidden" name="quantity" value="1" />
+                                <button type="submit" class="btn btn-outline-success mt-auto">Thêm vào giỏ</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-info text-center">Không tìm thấy sản phẩm nào.</div>
+}

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProjectApplication.Models;
+using ProjectApplication.Service;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,8 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ProjectApplication.Models;
-using ProjectApplication.Service;
+using System.Web.UI;
 
 namespace ProjectApplication.Controllers
 {
@@ -61,7 +62,7 @@ namespace ProjectApplication.Controllers
 
         // 🚚 Xác nhận đã giao hàng (Processing → Delivered)
         [HttpPost]
-        public ActionResult MarkAsDelivered(int id)
+        public ActionResult MarkAsDelivered(int id, int page = 1)
         {
             var order = db.Orders.Find(id);
             if (order == null)
@@ -74,11 +75,11 @@ namespace ProjectApplication.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { page });
         }
         // 🚚 Xác nhận đơn hàng (Pending → Processing)
         [HttpPost]
-        public ActionResult MarkAsProcessing(int id)
+        public ActionResult MarkAsProcessing(int id, int page = 1)
         {
             var order = db.Orders.Find(id);
 
@@ -89,12 +90,12 @@ namespace ProjectApplication.Controllers
                 order.Status = "Processing";
                 db.SaveChanges();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { page });
         }
 
 
         [HttpPost]
-        public ActionResult CancelOrder(int id)
+        public ActionResult CancelOrder(int id, int page = 1)
         {
             // ✅ Phải Include để load đầy đủ OrderDetails
             var order = db.Orders
@@ -122,7 +123,7 @@ namespace ProjectApplication.Controllers
             db.SaveChanges();
 
             TempData["Message"] = $"Đơn hàng #{order.OrderId} đã được hủy và hàng đã cộng lại kho.";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { page });
         }
 
 

@@ -1,0 +1,160 @@
+﻿@model List<ProjectApplication.Models.ProductViewIndex>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const carousel = document.querySelector('#relatedProductsCarousel');
+        const bsCarousel = bootstrap.Carousel.getOrCreateInstance(carousel);
+        let startX = 0;
+        let isDragging = false;
+
+        // Khi bắt đầu kéo
+        carousel.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+        });
+
+        // Khi đang kéo
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault(); // tránh bôi đen hình
+        });
+
+        // Khi thả chuột ra
+        carousel.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            const endX = e.clientX;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > 50) { // Kéo đủ xa mới chuyển slide
+                if (diff > 0) {
+                    bsCarousel.next();
+                } else {
+                    bsCarousel.prev();
+                }
+            }
+        });
+
+        // Khi chuột rời khỏi carousel
+        carousel.addEventListener('mouseleave', () => {
+            isDragging = false;
+        });
+
+        // ✅ Cho phép vuốt cảm ứng trên điện thoại (Bootstrap có sẵn, nhưng thêm cho chắc)
+        let touchStartX = 0;
+        carousel.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+
+        carousel.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    bsCarousel.next();
+                } else {
+                    bsCarousel.prev();
+                }
+            }
+        });
+    });
+</script>
+
+@if (Model != null && Model.Any())
+{
+    <div class="mt-5">
+        <h4 class="fw-bold text-primary mb-3">Sản phẩm đề xuất</h4>
+
+        <div id="relatedProductsCarousel" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner">
+                @{
+                    int chunkSize = 4;
+                    int totalItems = Model.Count;
+                    int chunkCount = (int)Math.Ceiling((double)totalItems / chunkSize);
+                }
+
+                @for (int i = 0; i < chunkCount; i++)
+                {
+                    var chunk = Model.Skip(i * chunkSize).Take(chunkSize).ToList();
+                    var activeClass = i == 0 ? "active" : "";
+
+                    <div class="carousel-item @activeClass">
+                        <div class="row row-cols-1 row-cols-md-4 g-3">
+                            @foreach (var item in chunk)
+                            {
+                                var path = string.IsNullOrEmpty(item.ImagePath)
+                                    ? Url.Content("~/Content/Images/default.png")
+                                    : Url.Content("~/" + item.ImagePath.TrimStart('/', '~'));
+
+                                <div class="col">
+                                    <div class="card h-100 shadow-sm hover-shadow">
+                                        @if (item.HasDiscount)
+                                        {
+                                            <div class="badge bg-danger text-white position-absolute" style="top:0.5rem; right:0.5rem;">Sale</div>
+                                        }
+
+                                        <a href="@Url.Action("Details", "Home", new { id = item.ProductId })">
+                                            <img src="@path" alt="@item.ProductName"
+                                                 class="card-img-top" style="height:180px; object-fit:cover;" />
+                                        </a>
+
+                                        <div class="card-body text-center">
+                                            <h6 class="fw-semibold mb-2">
+                                                <a href="@Url.Action("Details", "Home", new { id = item.ProductId })" class="text-decoration-none text-dark">
+                                                    @item.ProductName
+                                                </a>
+                                            </h6>
+
+                                            @if (item.HasDiscount && item.OriginalPrice.HasValue)
+                                            {
+                                                <div>
+                                                    <span class="text-muted text-decoration-line-through small">
+                                                        @string.Format("{0:N0}", item.OriginalPrice.Value) ₫
+                                                    </span>
+                                                </div>
+                                                <div class="text-danger fw-bold my-1">
+                                                    @string.Format("{0:N0}", item.ProductPrice) ₫
+                                                </div>
+                                                <small class="text-success fw-semibold d-block">
+                                                    Tiết kiệm @((item.OriginalPrice.Value - item.ProductPrice).ToString("N0")) ₫
+                                                </small>
+                                            }
+                                            else
+                                            {
+                                                <div class="fw-semibold">@string.Format("{0:N0}", item.ProductPrice) ₫</div>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Nút điều hướng trái/phải -->
+            <!-- Nút điều hướng trái -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#relatedProductsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"
+                      style="background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 20px; filter: invert(1);"></span>
+                <span class="visually-hidden">Trước</span>
+            </button>
+
+            <!-- Nút điều hướng phải -->
+            <button class="carousel-control-next" type="button" data-bs-target="#relatedProductsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"
+                      style="background-color: rgba(0,0,0,0.6); border-radius: 50%; padding: 20px; filter: invert(1);"></span>
+                <span class="visually-hidden">Tiếp</span>
+            </button>
+
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-info text-center mt-3">Không có sản phẩm đề xuất.</div>
+}
+
+
